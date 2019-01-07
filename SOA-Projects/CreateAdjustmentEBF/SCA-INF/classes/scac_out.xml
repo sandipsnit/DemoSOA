@@ -1,0 +1,113 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Faults>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/ns:composite/ns:reference[@name='ProcessAccountBalanceAdjustmentAsapProvABCSImpl']</loc>
+      <line>22</line>
+      <col>220</col>
+      <file>C:\JDeveloper\mywork\Application-Test\CreateAdjustmentEBF\composite.xml</file>
+      <name>C:\JDeveloper\mywork\Application-Test\CreateAdjustmentEBF\composite.xml</name>
+      <fix/>
+      <msg>Failed to Find Binding "ProcessAccountBalanceAdjustmentAsapProvABCSImpl":"{http://xmlns.oracle.com/ABCSImpl/Asap/Industry/Telco/ProcessAccountBalanceAdjustmentAsapProvABCSImpl/V1}ProcessAccountBalanceAdjustmentAsapProvABCSImpl_pt" in WSDL Manager</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/ns:composite/ns:reference[@name='ProcessAccountBalanceAdjustmentAsapProvABCSImpl']</loc>
+      <line>22</line>
+      <col>220</col>
+      <file>C:\JDeveloper\mywork\Application-Test\CreateAdjustmentEBF\composite.xml</file>
+      <name>C:\JDeveloper\mywork\Application-Test\CreateAdjustmentEBF\composite.xml</name>
+      <fix/>
+      <msg>Failed to Find Binding "ProcessAccountBalanceAdjustmentAsapProvABCSImpl":"{http://xmlns.oracle.com/ABCSImpl/Asap/Industry/Telco/ProcessAccountBalanceAdjustmentAsapProvABCSImpl/V1}ProcessAccountBalanceAdjustmentAsapProvABCSImpl_pt" in WSDL Manager</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/ns:composite/ns:reference[@name='UpdateAccountBalanceAdjustmentRespSiebelCommsProvABCSImpl']</loc>
+      <line>35</line>
+      <col>258</col>
+      <file>C:\JDeveloper\mywork\Application-Test\CreateAdjustmentEBF\composite.xml</file>
+      <name>C:\JDeveloper\mywork\Application-Test\CreateAdjustmentEBF\composite.xml</name>
+      <fix/>
+      <msg>Failed to Find Binding "UpdateAccountBalanceAdjustmentRespSiebelCommsProvABCSImpl":"{http://xmlns.oracle.com/ABCSImpl/Siebel/Industry/Comms/UpdateAccountBalanceAdjustmentRespSiebelCommsProvABCSImpl}UpdateAccountBalanceAdjustmentRespSiebelCommsProvABCSImplService" in WSDL Manager</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/ns:composite/ns:reference[@name='UpdateAccountBalanceAdjustmentRespSiebelCommsProvABCSImpl']</loc>
+      <line>35</line>
+      <col>258</col>
+      <file>C:\JDeveloper\mywork\Application-Test\CreateAdjustmentEBF\composite.xml</file>
+      <name>C:\JDeveloper\mywork\Application-Test\CreateAdjustmentEBF\composite.xml</name>
+      <fix/>
+      <msg>Failed to Find Binding "UpdateAccountBalanceAdjustmentRespSiebelCommsProvABCSImpl":"{http://xmlns.oracle.com/ABCSImpl/Siebel/Industry/Comms/UpdateAccountBalanceAdjustmentRespSiebelCommsProvABCSImpl}UpdateAccountBalanceAdjustmentRespSiebelCommsProvABCSImplService" in WSDL Manager</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/ns:composite/ns:reference[@name='CreateAccountBalanceAdjustmentBRMCommsProvABCSImpl']</loc>
+      <line>42</line>
+      <col>241</col>
+      <file>C:\JDeveloper\mywork\Application-Test\CreateAdjustmentEBF\composite.xml</file>
+      <name>C:\JDeveloper\mywork\Application-Test\CreateAdjustmentEBF\composite.xml</name>
+      <fix/>
+      <msg>Failed to Find Binding "CreateAccountBalanceAdjustmentBRMCommsProvABCSImpl":"{http://xmlns.oracle.com/ABCSImpl/BRM/Industry/Comms/CreateAccountBalanceAdjustmentBRMCommsProvABCSImpl/V1}CreateAccountBalanceAdjustmentBRMCommsProvABCSImpl" in WSDL Manager</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/ns:composite/ns:reference[@name='CreateAccountBalanceAdjustmentBRMCommsProvABCSImpl']</loc>
+      <line>42</line>
+      <col>241</col>
+      <file>C:\JDeveloper\mywork\Application-Test\CreateAdjustmentEBF\composite.xml</file>
+      <name>C:\JDeveloper\mywork\Application-Test\CreateAdjustmentEBF\composite.xml</name>
+      <fix/>
+      <msg>Failed to Find Binding "CreateAccountBalanceAdjustmentBRMCommsProvABCSImpl":"{http://xmlns.oracle.com/ABCSImpl/BRM/Industry/Comms/CreateAccountBalanceAdjustmentBRMCommsProvABCSImpl/V1}CreateAccountBalanceAdjustmentBRMCommsProvABCSImpl" in WSDL Manager</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/ns:composite/ns:reference[@name='AIAAsyncErrorHandlingBPELProcess']</loc>
+      <line>48</line>
+      <col>188</col>
+      <file>C:\JDeveloper\mywork\Application-Test\CreateAdjustmentEBF\composite.xml</file>
+      <name>C:\JDeveloper\mywork\Application-Test\CreateAdjustmentEBF\composite.xml</name>
+      <fix/>
+      <msg>Failed to Find Binding "AIAAsyncErrorHandlingBPELProcess":"{http://xmlns.oracle.com/AIAAsyncErrorHandlingBPELProcess}AIAAsyncErrorHandlingBPELProcess" in WSDL Manager</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc>/ns:composite/ns:reference[@name='AIAAsyncErrorHandlingBPELProcess']</loc>
+      <line>48</line>
+      <col>188</col>
+      <file>C:\JDeveloper\mywork\Application-Test\CreateAdjustmentEBF\composite.xml</file>
+      <name>C:\JDeveloper\mywork\Application-Test\CreateAdjustmentEBF\composite.xml</name>
+      <fix/>
+      <msg>Failed to Find Binding "AIAAsyncErrorHandlingBPELProcess":"{http://xmlns.oracle.com/AIAAsyncErrorHandlingBPELProcess}AIAAsyncErrorHandlingBPELProcess" in WSDL Manager</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc/>
+      <line>230</line>
+      <col/>
+      <file>CreateAdjustmentEBF.bpel</file>
+      <name>CreateAdjustmentEBF.bpel</name>
+      <fix>Make sure that the return value of from-spec query is compatible with the to-spec query</fix>
+      <msg>&lt;from> value type "{http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2}StatusType" is not compatible with &lt;to> value type "{http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2}CodeType"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc/>
+      <line>354</line>
+      <col/>
+      <file>CreateAdjustmentEBF.bpel</file>
+      <name>CreateAdjustmentEBF.bpel</name>
+      <fix>Make sure that the return value of from-spec query is compatible with the to-spec query</fix>
+      <msg>&lt;from> value type "{http://xmlns.oracle.com/EnterpriseObjects/Core/EBO/AccountBalanceAdjustment/V2}CreateAccountBalanceAdjustmentListType" is not compatible with &lt;to> value type "{http://xmlns.oracle.com/EnterpriseObjects/Core/EBO/AccountBalanceAdjustment/V2}CreateAccountBalanceAdjustmentListResponseType"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc/>
+      <line>599</line>
+      <col/>
+      <file>CreateAdjustmentEBF.bpel</file>
+      <name>CreateAdjustmentEBF.bpel</name>
+      <fix>Make sure that the return value of from-spec query is compatible with the to-spec query</fix>
+      <msg>&lt;from> value type "{http://xmlns.oracle.com/EnterpriseObjects/Core/EBO/AccountBalanceAdjustment/V2}CreateAccountBalanceAdjustmentListType" is not compatible with &lt;to> value type "{http://xmlns.oracle.com/EnterpriseObjects/Core/EBO/AccountBalanceAdjustment/V2}CreateAccountBalanceAdjustmentListResponseType"</msg>
+   </Fault>
+</Faults>

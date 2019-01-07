@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions name="CreateAdjustmentEBF" targetNamespace="http://xmlns.oracle.com/VFQA_FL/CreateAdjustmentEBF/CreateAdjustmentEBF" xmlns:ns1="http://schemas.oracle.com/bpel/extension" xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:adjebo="http://xmlns.oracle.com/EnterpriseObjects/Core/EBO/AccountBalanceAdjustment/V2" xmlns:client="http://xmlns.oracle.com/VFQA_FL/CreateAdjustmentEBF/CreateAdjustmentEBF" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <plnk:partnerLinkType name="CreateAdjustmentEBF">
+      <plnk:role name="CreateAdjustmentEBFProvider">
+         <plnk:portType name="client:CreateAdjustmentEBF"/>
+      </plnk:role>
+   </plnk:partnerLinkType>
+   <wsdl:import namespace="http://schemas.oracle.com/bpel/extension" location="oramds:/apps/AIAMetaData/AIAComponents/UtilityArtifacts/RuntimeFault.wsdl"/>
+   <wsdl:types>
+      <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema">
+         <xsd:import namespace="http://xmlns.oracle.com/EnterpriseObjects/Core/EBO/AccountBalanceAdjustment/V2" schemaLocation="oramds:/apps/AIAMetaData/AIAComponents/EnterpriseObjectLibrary/Industry/Communications/EBO/AccountBalanceAdjustment/V2/AccountBalanceAdjustmentEBM.xsd"/>
+      </xsd:schema>
+   </wsdl:types>
+   <wsdl:message name="CreateAdjustmentEBFRequestMessage">
+      <wsdl:part name="CreateAccountBalanceAdjustmentListEBM" element="adjebo:CreateAccountBalanceAdjustmentListEBM"/>
+   </wsdl:message>
+   <wsdl:portType name="CreateAdjustmentEBF">
+      <wsdl:operation name="process">
+         <wsdl:input message="client:CreateAdjustmentEBFRequestMessage"/>
+      </wsdl:operation>
+   </wsdl:portType>
+</wsdl:definitions>

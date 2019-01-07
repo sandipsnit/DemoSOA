@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<project name="soaDeployAll" basedir="." default="help">
+  <property environment="env"/>
+  <property name="sca.location" value="${basedir}/"/>
+    <path id="classpath"> 
+        <!-- To refer the all the jars inside folder lib-->
+        <fileset dir="${basedir}/lib">
+            <include name="**/*.jar"/>
+        </fileset>
+    </path>
+ <taskdef resource="net/sf/antcontrib/antcontrib.properties" uri="http://ant-contrib.sourceforge.net">
+    <classpath>
+        <pathelement location="C:/Oracle/Middleware/modules/net.sf.antcontrib_1.1.0.0_1-0b2/lib/ant-contrib.jar"/>
+    </classpath>
+  </taskdef>
+  <taskdef resource="net/sf/antcontrib/antlib.xml">
+    <classpath>
+            <pathelement location="C:/Oracle/Middleware/modules/net.sf.antcontrib_1.1.0.0_1-0b2/lib/ant-contrib.jar"/>
+        </classpath>
+  </taskdef> 
+ 
+ 
+  <!-- ================================================================================ -->
+  <!-- TARGET: help                                                                     -->
+  <!-- ================================================================================ -->
+ 
+  <target name="help">
+    <echo>
+    Usable targets are:
+ 
+    help                   - This help
+    deployComposites       - Packages and deploys composites in 'ProcessList.txt'
+    undeployComposites     - Undeploys composites in 'ProcessList.txt'
+    listDeployedComposites - Lists deployed composites
+    ------------------------------------------------------
+    |   Usage example:                                  |
+    ------------------------------------------------------
+ 
+    export ORACLE_HOME=${oracle.home}
+    export ANT_HOME=${ORACLE_HOME}/modules/org.apache.ant_1.7.1
+    export PATH=${ANT_HOME}/bin:$PATH
+    export CURRENT_FOLDER=`pwd`
+  <!--  export JAVA_HOME=${ORACLE_HOME}/jdk1.6.0_21  -->
+	 export JAVA_HOME=D:/OSB/Program
+ 
+    ant help -verbose
+    ant deployComposites -verbose
+    ant undeployComposites -verbose
+    ant listDeployedComposites -verbose
+ 
+    </echo>
+ 
+  </target>  
+ 
+ 
+  <!-- ================================================================================ -->
+  <!-- Check for an load property files                                                 -->
+  <!-- ================================================================================ -->
+ 
+  <available file="build.properties" property="file.exists" value="true" />
+  <fail unless="file.exists" message="ERROR: Filename 'build.properties' does not exist." />
+  <property file="build.properties"/>  
+  <!-- ================================================================================ -->
+  <!-- TARGET: deployComposites                                                         -->
+  <!-- ================================================================================ -->
+ 
+  <target name="deployComposites">
+     
+    <available file="${project.file.name}" property="file.exists" value="true" />
+    <fail unless="file.exists" message="ERROR: Filename '${project.file.name}' does not exist."/>
+    <loadfile property="allprocesses" srcFile="${project.file.name}"/>
+ 
+ 
+	<echo>
+   printfilename="${project.file.name}"
+ 
+    </echo>
+	
+   <var name="errorCount" value="0"/>
+    <var name="processCount" value="0"/>
+    <var name="errorProcessNames" value="(none)"/>
+    <if>
+        <equals arg1="${replace.env.prop}" arg2="true"/>
+        <then>
+            <antcall target="replace"/>
+        </then>
+    </if>   
+     <echo>
+   replace env prop="${replace.env.prop}"
+ 
+    </echo>
+	
+    <trycatch property="tryName" reference="exception_ref">
+      <try>
+        <for list="${allprocesses}" param="processName" delimiter="${line.separator}">
+          <sequential>
+         <propertyregex property="composite.name"      input="@{processName}" regexp="([^,]+),([^,]+),([^,]+),([^,]+),([^,]+)" select="\1" override="true"/>
+            <propertyregex property="composite.partition" input="@{processName}" regexp="([^,]+),([^,]+),([^,]+),([^,]+),([^,]+)" select="\2" override="true"/>
+            <propertyregex property="composite.revision"  input="@{processName}" regexp="([^,]+),([^,]+),([^,]+),([^,]+),([^,]+)" select="\3" override="true"/>
+            <propertyregex property="default.composite"   input="@{processName}" regexp="([^,]+),([^,]+),([^,]+),([^,]+),([^,]+)" select="\4" override="true"/>
+            <propertyregex property="project.loctaion"         input="@{processName}" regexp="([^,]+),([^,]+),([^,]+),([^,]+),([^,]+)" select="\5" override="true"/>
+            <math result="processCount" operand1="${processCount}" operation="+" operand2="1" datatype="int"/>
+             
+            <echo>
+             ===================================================================================
+                PACKAGE COMPOSITE #${processCount}: ${composite.name} ${composite.revision}
+             ===================================================================================
+            </echo>
+			<echo>
+   allprocesses="${allprocesses}"
+ 
+    </echo>
+			<echo>
+             proj loc = "${project.loctaion}"
+            </echo>
+			<echo>
+             composite name = "${composite.name}"
+            </echo>
+			 <echo>
+             composite rev = "${composite.revision}"
+            </echo>
+			 <echo>
+             java home = "${java.home}"
+            </echo>
+			 <echo>
+             WL home = "${wl_home}"
+            </echo>
+			
+         <!--   <copy todir="${project.loctaion}/SCA-INF/classes/META-INF/" file="C:/Oracle/Middleware/oepe7/plugins/oracle.eclipse.tools.webtier.adf_3.2.0.201101271036/resources/facet/adf-config.xml" overwrite="true"/>  -->
+             
+            <ant antfile="ant-sca-package.xml" target="package" inheritall="false">
+              <property name="oracle.home" value="${oracle.home}"/>   
+              <property name="compositeDir" value="${project.loctaion}"/>
+			   
+              <property name="scac.application.home" value="${project.loctaion}"/>
+			  
+              <property name="scac.input" value="${project.loctaion}/composite.xml"/>
+			   
+              <property name="compositeName" value="${composite.name}"/>
+			  
+              <property name="revision" value="${composite.revision}"/>
+			  
+              <property name="java.passed.home" value="${java.home}"/>
+			   
+              <property name="wl_home" value="${wl_home}"/>
+			  
+            </ant>
+ 
+			
+			
+            <echo>
+             ================================================================================
+                 DEPLOY COMPOSITE #${processCount}: ${composite.name} 
+             ================================================================================
+            </echo>
+            <ant antfile="${oracle.home}/bin/ant-sca-deploy.xml" target="deploy" inheritall="false">
+              <property name="user"      value="${server.user}"/>
+              <property name="password"  value="${server.password}"/>
+              <property name="serverURL"     value="${serverURL}/soa-infra/deployer"/>
+              <property name="sarLocation"   value="${basedir}/${project.loctaion}/deploy/sca_${composite.name}_rev${composite.revision}.jar"/>
+              <property name="overwrite"     value="true"/>
+              <!--<property name="configplan"     value="${basedir}/${project.loctaion}/${composite.name}_cfgplan.xml"/>-->
+            </ant>
+ 
+            <sleep seconds="3" />
+          </sequential>
+        </for>
+      </try>
+      <catch>
+        <property name="exception" refid="exception_ref" />
+        <property name="message" value="ERROR IN TRYCATCH BLOCK:${line.separator}${exception}" />
+        <echo></echo>
+        <echo message="${message}" />
+        <math result="errorCount" operand1="${errorCount}" operation="+" operand2="1" datatype="int"/>
+        <var name="errorProcessNames" value="${composite.name}"/>
+      </catch>
+    </trycatch>
+ 
+    <echo>
+        **************************************************************
+        *  ANT TARGET NAME  : deployComposites
+        *  FAILED PROCESS   : ${errorProcessNames}
+        *
+        **************************************************************
+    </echo>
+  </target>
+ 
+ 
+  <!-- ================================================================================ -->
+  <!-- TARGET: undeployComposites                                                       -->
+  <!-- ================================================================================ -->
+ 
+ <!-- <target name="undeployComposites">
+ 
+    <available file="${project.file.name}" property="file.exists" value="true" />
+    <fail unless="file.exists" message="ERROR: Filename '${project.file.name}' does not exist." />
+    <loadfile property="allprocesses" srcFile="${project.file.name}"/>
+ 
+    <var name="errorCount" value="0"/>
+    <var name="processCount" value="0"/>
+    <var name="errorProcessNames" value="*"/>
+ 
+    <for list="${allprocesses}" param="processName" delimiter="${line.separator}">
+      <sequential>
+        <propertyregex property="composite.name"      input="@{processName}" regexp="([^,]+),([^,]+),([^,]+),([^,]+),([^,]+)" select="\1" override="true"/>
+        <propertyregex property="composite.partition" input="@{processName}" regexp="([^,]+),([^,]+),([^,]+),([^,]+),([^,]+)" select="\2" override="true"/>
+        <propertyregex property="composite.revision"  input="@{processName}" regexp="([^,]+),([^,]+),([^,]+),([^,]+),([^,]+)" select="\3" override="true"/>
+        <math result="processCount" operand1="${processCount}" operation="+" operand2="1" datatype="int"/>
+ 
+        <trycatch property="tryName" reference="exception_ref">
+          <try>
+ 
+            <echo>
+            ================================================================================
+            UNDEPLOY COMPOSITE #${processCount}: ${composite.name}
+            ================================================================================
+            </echo>
+            <ant antfile="${oracle.home}/bin/ant-sca-deploy.xml" target="undeploy" inheritall="false">
+              <property name="user"             value="${server.user}"/>
+              <property name="password"         value="${server.password}"/>
+              <property name="serverURL"        value="${serverURL}/soa-infra/deployer"/>
+              <property name="compositeName"    value="${composite.name}"/>
+              <property name="partition"        value="${composite.partition}"/>
+              <property name="revision"         value="${composite.revision}"/>
+            </ant>
+          </try>
+          <catch>
+            <property name="exception" refid="exception_ref" />
+            <property name="message" value="ERROR IN TRYCATCH BLOCK:${line.separator}${exception}" />
+            <echo></echo>
+            <echo message="${message}" />
+            <math result="errorCount" operand1="${errorCount}" operation="+" operand2="1" datatype="int"/>
+            <var name="errorProcessNames" value="${errorProcessNames}${line.separator}*     ${composite.name}"/>
+          </catch>
+        </trycatch>
+        <sleep seconds="1" />
+      </sequential>
+    </for>
+    <echo>
+        ***********************************************************************************
+        *
+        *   ANT TARGET NAME        : undeployComposites
+        *   TOTAL NUMBER OF ERRORS : ${errorCount} of ${processCount} processes
+        *   FAILED PROCESSES       : ${errorProcessNames}
+        *
+        ***********************************************************************************
+    </echo>
+  </target> -->
+ 
+  <!-- ================================================================================ -->
+  <!-- TARGET: listDeployedComposites                                                   -->
+  <!-- ================================================================================ -->
+ 
+ <!-- <target name="listDeployedComposites">
+    <trycatch property="tryName" reference="exception_ref">
+          <try>
+            <ant antfile="${oracle.home}/bin/ant-sca-mgmt.xml" target="listDeployedComposites" inheritall="false">
+              <property name="host"  value="${server.host}"/>
+              <property name="port"  value="${server.port}"/>
+              <property name="user"  value="${server.user}"/>
+              <property name="password"  value="${server.password}"/>
+            </ant>
+          </try>
+          <catch>
+             <property name="exception" refid="exception_ref" />
+             <property name="message" value="ERROR IN TRYCATCH BLOCK:${line.separator}${exception}" />
+             <echo>=========================</echo>
+             <echo message="${message}" />
+          </catch>
+      </trycatch>     
+  </target> -->
+</project>

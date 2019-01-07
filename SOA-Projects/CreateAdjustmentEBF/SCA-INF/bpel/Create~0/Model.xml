@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process name="CreateAdjustmentEBF" targetNamespace="http://xmlns.oracle.com/VFQA_FL/CreateAdjustmentEBF/CreateAdjustmentEBF" xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:client="http://xmlns.oracle.com/VFQA_FL/CreateAdjustmentEBF/CreateAdjustmentEBF" xmlns:ora="http://schemas.oracle.com/xpath/extension" xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns:ns1="http://xmlns.oracle.com/ABCSImpl/Asap/Industry/Telco/ProcessAccountBalanceAdjustmentAsapProvABCSImpl/V1" xmlns:ns2="http://xmlns.oracle.com/ABCSImpl/BRM/Industry/Comms/CreateAccountBalanceAdjustmentBRMCommsProvABCSImpl/V1" xmlns:bpelx="http://schemas.oracle.com/bpel/extension" xmlns:ns3="http://xmlns.oracle.com/VFQA_FL/ReserveNumberSiebelReqABCSImpl/ReserveNumberSiebelReqABCSImpl" xmlns:ns6="http://schemas.xmlsoap.org/ws/2003/03/addressing" xmlns:ns5="http://xmlns.oracle.com/EnterpriseObjects/Core/Common/V2" xmlns:ns8="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/Common/V2" xmlns:ns9="http://xmlns.oracle.com/EnterpriseObjects/Core/Custom/EBO/AccountBalanceAdjustment/V2" xmlns:ns10="http://xmlns.oracle.com/VFQA_FL/NumberReservationABM/NumberReservationABM" xmlns:ns7="urn:oasis:names:tc:xacml:2.0:context:schema:cd:04" xmlns:ns4="http://xmlns.oracle.com/EnterpriseObjects/Core/EBO/AccountBalanceAdjustment/V2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable" xmlns:ns11="http://siebel.com/asi/" xmlns:ns12="http://xmlns.oracle.com/ABCSImpl/Siebel/Industry/Comms/UpdateAccountBalanceAdjustmentRespSiebelCommsProvABCSImpl" xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20" xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions" xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc" xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue" xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath" xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath" xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk" xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions" xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap" xmlns:ns13="http://xmlns.oracle.com/AIAAsyncErrorHandlingBPELProcess" xmlns:ns14="http://xmlns.oracle.com/EV2_Deployment/GetMASNumberUIMProvABCSImpl/GetMASNumberUIMProvABCSImpl" xmlns:ns15="http://xmlns.oracle.com/pcbpel/adapter/jms/Campaign_Application/CreateAdjustmentEBF/VFQ_UPDATE_PROVISIONINGSTATUS_AIA_QUEUE" id="BpPrc0">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="createadjustmentebf_client" partnerLinkType="client:CreateAdjustmentEBF" myRole="CreateAdjustmentEBFProvider"/>
+    <partnerLink name="CreateAccountBalanceAdjustmentBRMCommsProvABCSImpl" partnerLinkType="ns2:CreateAccountBalanceAdjustmentBRMCommsProvABCSImpl" partnerRole="CreateAccountBalanceAdjustmentBRMCommsProvABCSImplProvider"/>
+    <partnerLink name="UpdateAccountBalanceAdjustmentRespSiebelCommsProvABCSImpl" partnerLinkType="ns12:UpdateAccountBalanceAdjustmentRespSiebelCommsProvABCSImpl" partnerRole="UpdateAccountBalanceAdjustmentRespSiebelCommsProvABCSImplProvider"/>
+    <partnerLink name="AIAAsyncErrorHandlingBPELProcess" partnerLinkType="ns13:AIAAsyncErrorHandlingBPELProcess" partnerRole="AIAAsyncErrorHandlingBPELProcessProvider"/>    
+    <partnerLink name="ProcessAccountBalanceAdjustmentAsapProvABCSImpl" partnerLinkType="ns1:ProcessAccountBalanceAdjustmentAsapProvABCSImpl" partnerRole="ProcessAccountBalanceAdjustmentAsapProvABCSImplProvider" myRole="ProcessAccountBalanceAdjustmentAsapProvABCSImplRequestor"/>
+    <partnerLink name="VFQ_UPDATE_PROVISIONINGSTATUS_AIA_QUEUE" partnerLinkType="ns15:Produce_Message_plt" partnerRole="Produce_Message_role"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:CreateAdjustmentEBFRequestMessage"/>
+    <variable name="Invoke_ASAP_process_InputVariable" messageType="ns1:CreateAccountBalanceAdjustmentListReqMsg"/>
+    <variable name="Invoke_BRM_CreateAccountBalanceAdjustmentList_InputVariable" messageType="ns2:CreateAccountBalanceAdjustmentListReqMsg"/>
+    <variable name="Title" type="xsd:string"/>
+    <variable name="ReceiveFrom_ASAP_processResponse_InputVariable" messageType="ns1:CreateAccountBalanceAdjustmentListResMsg"/>
+    <variable name="Invoke_Update_Siebel_UpdateAccountBalanceAdjustmentResp_InputVariable" messageType="ns12:UpdateAccountBalanceAdjustmentRespReqMsg"/>
+    <variable name="SystemFault" messageType="bpelx:RuntimeFaultMessage"/>
+    <variable name="Invoke_AIA_EH_initiate_InputVariable" messageType="ns13:AIAAsyncErrorHandlingBPELProcessRequestMessage"/>
+    <variable name="Status" type="xsd:string"/>
+    <variable name="callBRMFlag" type="xsd:string"/>
+    <variable name="Invoke_UpdateAdj_Status_Siebel_UpdateAccountBalanceAdjustmentResp_InputVariable" messageType="ns12:UpdateAccountBalanceAdjustmentRespReqMsg"/>
+    <variable name="Invoke_UPDATE_PROVISIONINGSTATUS_AIA_QUEUE_Produce_InputVariable" messageType="ns15:Produce_Message_msg"/>
+    <variable name="Variable1" messageType="client:CreateAdjustmentEBFRequestMessage"/>
+    <variable name="StatusCode" type="xsd:string"/>
+    <variable name="StatusDescription" type="xsd:string"/>
+  </variables>
+  <faultHandlers id="BpFhs0">
+    <catch faultName="bpelx:bindingFault" faultVariable="SystemFault" id="BpCFt0">
+      <sequence name="Sequence9" id="BpSeq0">
+        <invoke name="Invoke_Update_Siebel" bpelx:invokeAsDetail="no" inputVariable="Invoke_Update_Siebel_UpdateAccountBalanceAdjustmentResp_InputVariable" partnerLink="UpdateAccountBalanceAdjustmentRespSiebelCommsProvABCSImpl" portType="ns12:UpdateAccountBalanceAdjustmentRespSiebelCommsProvABCSImplService" operation="UpdateAccountBalanceAdjustmentResp" id="BpInv0"/>
+        <scope name="Scope_UpdateUnicaFailure" id="BpScp0">
+          <switch name="IfSourceIsUnica" id="BpSwt0">
+            <case condition="bpws:getVariableData('inputVariable','CreateAccountBalanceAdjustmentListEBM','/ns4:CreateAccountBalanceAdjustmentListEBM/ns4:DataArea/ns4:CreateAccountBalanceAdjustmentList/ns4:Custom/ns9:Source') = 'UNICA'">
+              <sequence name="Sequence_UpdateUnicaFailure" id="BpSeq1">
+                <assign name="Assign_StatusCode" id="BpAss0">
+                  <copy>
+                    <from expression="'9999'"/>
+                    <to variable="StatusCode"/>
+                  </copy>
+                  <copy>
+                    <from expression="'BindingFault'"/>
+                    <to variable="StatusDescription"/>
+                  </copy>
+                </assign>
+                <assign name="Transform_UpdateProvisioningStatus" id="BpAss1">
+                  <bpelx:annotation>
+                    <bpelx:pattern>transformation</bpelx:pattern>
+                  </bpelx:annotation>
+                  <copy>
+                    <from expression="ora:doXSLTransformForDoc('xsl/Transform_CreateAccountBalanceAdjustmentListEBM_to_UpdateProvisioningStatusRequest.xsl', $inputVariable.CreateAccountBalanceAdjustmentListEBM, 'StatusCode', $StatusCode, 'StatusDescription', $StatusDescription)"/>
+                    <to variable="Invoke_UPDATE_PROVISIONINGSTATUS_AIA_QUEUE_Produce_InputVariable" part="body"/>
+                  </copy>
+                </assign>
+                <invoke name="Invoke_VFQ_UPDATE_PROVISIONINGSTATUS_AIA_QUEUE" bpelx:invokeAsDetail="no" inputVariable="Invoke_UPDATE_PROVISIONINGSTATUS_AIA_QUEUE_Produce_InputVariable" partnerLink="VFQ_UPDATE_PROVISIONINGSTATUS_AIA_QUEUE" portType="ns15:Produce_Message_ptt" operation="Produce_Message" id="BpInv1"/>
+              </sequence>
+            </case>
+            <otherwise/>
+          </switch>
+        </scope>
+        <throw name="Throw_Binding_Fault" faultName="bpelx:bindingFault" faultVariable="SystemFault" id="BpThw0"/>
+      </sequence>
+    </catch>
+    <catch faultName="bpelx:remoteFault" faultVariable="SystemFault" id="BpCFt1">
+      <sequence name="Sequence8" id="BpSeq2">
+        <invoke name="Invoke_Update_Siebel" bpelx:invokeAsDetail="no" inputVariable="Invoke_Update_Siebel_UpdateAccountBalanceAdjustmentResp_InputVariable" partnerLink="UpdateAccountBalanceAdjustmentRespSiebelCommsProvABCSImpl" portType="ns12:UpdateAccountBalanceAdjustmentRespSiebelCommsProvABCSImplService" operation="UpdateAccountBalanceAdjustmentResp" id="BpInv2"/>
+        <scope name="Scope_UpdateUnicaFailure" id="BpScp1">
+          <switch name="IfSourceIsUnica" id="BpSwt1">
+            <case condition="bpws:getVariableData('inputVariable','CreateAccountBalanceAdjustmentListEBM','/ns4:CreateAccountBalanceAdjustmentListEBM/ns4:DataArea/ns4:CreateAccountBalanceAdjustmentList/ns4:Custom/ns9:Source') = 'UNICA'">
+              <sequence name="Sequence_UpdateUnicaFailure" id="BpSeq3">
+                <assign name="Assign_StatusCode" id="BpAss2">
+                  <copy>
+                    <from expression="'9999'"/>
+                    <to variable="StatusCode"/>
+                  </copy>
+                  <copy>
+                    <from expression="'RemoteFault'"/>
+                    <to variable="StatusDescription"/>
+                  </copy>
+                </assign>
+                <assign name="Transform_UpdateProvisioningStatus" id="BpAss3">
+                  <bpelx:annotation>
+                    <bpelx:pattern>transformation</bpelx:pattern>
+                  </bpelx:annotation>
+                  <copy>
+                    <from expression="ora:doXSLTransformForDoc('xsl/Transform_CreateAccountBalanceAdjustmentListEBM_to_UpdateProvisioningStatusRequest.xsl', $inputVariable.CreateAccountBalanceAdjustmentListEBM, 'StatusCode', $StatusCode, 'StatusDescription', $StatusDescription)"/>
+                    <to variable="Invoke_UPDATE_PROVISIONINGSTATUS_AIA_QUEUE_Produce_InputVariable" part="body"/>
+                  </copy>
+                </assign>
+                <invoke name="Invoke_VFQ_UPDATE_PROVISIONINGSTATUS_AIA_QUEUE" bpelx:invokeAsDetail="no" inputVariable="Invoke_UPDATE_PROVISIONINGSTATUS_AIA_QUEUE_Produce_InputVariable" partnerLink="VFQ_UPDATE_PROVISIONINGSTATUS_AIA_QUEUE" portType="ns15:Produce_Message_ptt" operation="Produce_Message" id="BpInv3"/>
+              </sequence>
+            </case>
+            <otherwise/>
+          </switch>
+        </scope>
+        <throw name="Throw_Remote_Fault" faultName="bpelx:remoteFault" faultVariable="SystemFault" id="BpThw1"/>
+      </sequence>
+    </catch>
+    <catchAll id="BpCAl0">
+      <sequence name="Sequence10" id="BpSeq4">
+        <invoke name="Invoke_Update_Siebel" inputVariable="Invoke_Update_Siebel_UpdateAccountBalanceAdjustmentResp_InputVariable" partnerLink="UpdateAccountBalanceAdjustmentRespSiebelCommsProvABCSImpl" bpelx:invokeAsDetail="no" portType="ns12:UpdateAccountBalanceAdjustmentRespSiebelCommsProvABCSImplService" operation="UpdateAccountBalanceAdjustmentResp" id="BpInv4"/>
+        <assign name="Assign_AIA_EH" id="BpAss4">
+          <copy>
+            <from variable="Invoke_Update_Siebel_UpdateAccountBalanceAdjustmentResp_InputVariable" part="CreateAccountBalanceAdjustmentListResponseEBM" query="/ns4:CreateAccountBalanceAdjustmentListResponseEBM/ns4:DataArea/ns4:CreateAccountBalanceAdjustmentListResponse/ns5:Status"/>
+            <to variable="Invoke_AIA_EH_initiate_InputVariable" part="FaultMessage" query="/ns5:Fault/ns5:FaultNotification/ns5:FaultMessage/ns5:Code"/>
+          </copy>
+          <copy>
+            <from variable="Invoke_Update_Siebel_UpdateAccountBalanceAdjustmentResp_InputVariable" part="CreateAccountBalanceAdjustmentListResponseEBM" query="/ns4:CreateAccountBalanceAdjustmentListResponseEBM/ns4:DataArea/ns4:CreateAccountBalanceAdjustmentListResponse/ns4:Description"/>
+            <to variable="Invoke_AIA_EH_initiate_InputVariable" part="FaultMessage" query="/ns5:Fault/ns5:FaultNotification/ns5:FaultMessage/ns5:Text"/>
+          </copy>
+          <copy>
+            <from expression="'BPEL'"/>
+            <to variable="Invoke_AIA_EH_initiate_InputVariable" part="FaultMessage" query="/ns5:Fault/ns5:FaultNotification/ns5:FaultingService/ns5:ImplementationCode"/>
+          </copy>
+          <copy>
+            <from expression="ora:getInstanceId()"/>
+            <to variable="Invoke_AIA_EH_initiate_InputVariable" part="FaultMessage" query="/ns5:Fault/ns5:FaultNotification/ns5:FaultingService/ns5:InstanceID"/>
+          </copy>
+          <copy>
+            <from expression="ora:getProcessId()"/>
+            <to variable="Invoke_AIA_EH_initiate_InputVariable" part="FaultMessage" query="/ns5:Fault/ns5:FaultNotification/ns5:FaultingService/ns5:ID"/>
+          </copy>
+        </assign>
+        <invoke name="Invoke_AIA_EH" bpelx:invokeAsDetail="no" inputVariable="Invoke_AIA_EH_initiate_InputVariable" partnerLink="AIAAsyncErrorHandlingBPELProcess" portType="ns13:AIAAsyncErrorHandlingBPELProcess" operation="initiate" id="BpInv5"/>
+        <scope name="Scope_UpdateUnicaFailure" id="BpScp2">
+          <switch name="IfSourceIsUnica" id="BpSwt2">
+            <case condition="bpws:getVariableData('inputVariable','CreateAccountBalanceAdjustmentListEBM','/ns4:CreateAccountBalanceAdjustmentListEBM/ns4:DataArea/ns4:CreateAccountBalanceAdjustmentList/ns4:Custom/ns9:Source') = 'UNICA'">
+              <sequence name="Sequence_UpdateUnicaFailure" id="BpSeq5">
+                <assign name="Assign_StatusCode" id="BpAss5">
+                  <copy>
+                    <from expression="'9999'"/>
+                    <to variable="StatusCode"/>
+                  </copy>
+                </assign>
+                <assign name="Transform_UpdateProvisioningStatus" id="BpAss6">
+                  <bpelx:annotation>
+                    <bpelx:pattern>transformation</bpelx:pattern>
+                  </bpelx:annotation>
+                  <copy>
+                    <from expression="ora:doXSLTransformForDoc('xsl/Transform_CreateAccountBalanceAdjustmentListEBM_to_UpdateProvisioningStatusRequest.xsl', $inputVariable.CreateAccountBalanceAdjustmentListEBM, 'StatusCode', $StatusCode)"/>
+                    <to variable="Invoke_UPDATE_PROVISIONINGSTATUS_AIA_QUEUE_Produce_InputVariable" part="body"/>
+                  </copy>
+                </assign>
+                <invoke name="Invoke_VFQ_UPDATE_PROVISIONINGSTATUS_AIA_QUEUE" bpelx:invokeAsDetail="no" inputVariable="Invoke_UPDATE_PROVISIONINGSTATUS_AIA_QUEUE_Produce_InputVariable" partnerLink="VFQ_UPDATE_PROVISIONINGSTATUS_AIA_QUEUE" portType="ns15:Produce_Message_ptt" operation="Produce_Message" id="BpInv6"/>
+              </sequence>
+            </case>
+            <otherwise/>
+          </switch>
+        </scope>
+        <throw name="Throw_ALL" faultName="bpelx:bindingFault" faultVariable="SystemFault" id="BpThw2"/>
+      </sequence>
+    </catchAll>
+  </faultHandlers>
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main" id="BpSeq6">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in CreateAdjustmentEBF.wsdl) -->
+    <receive name="receiveInput" partnerLink="createadjustmentebf_client" portType="client:CreateAdjustmentEBF" operation="process" variable="inputVariable" createInstance="yes" id="BpRcv0"/>
+    <scope name="Scope1" id="BpScp3">
+      <bpelx:annotation>
+        <bpelx:general>
+          <bpelx:property name="userLabel">SetTitle</bpelx:property>
+        </bpelx:general>
+      </bpelx:annotation>
+      <sequence name="Sequence5" id="BpSeq7">
+        <assign name="AssignTitle" id="BpAss7">
+          <copy>
+            <from expression="concat('ID',string(bpws:getVariableData('inputVariable','CreateAccountBalanceAdjustmentListEBM','/ns4:CreateAccountBalanceAdjustmentListEBM/ns4:DataArea/ns4:CreateAccountBalanceAdjustmentList/ns5:Identification/ns5:ID')))"/>
+            <to variable="Title"/>
+          </copy>
+        </assign>
+        <bpelx:exec name="Assign_Title_var" version="1.5" language="java" id="BxExe0">
+          <![CDATA[java.lang.String title=null;   
+title= (java.lang.String)getVariableData("Title");    
+setCompositeInstanceTitle(title);]]>
+        </bpelx:exec>
+      </sequence>
+    </scope>
+    <assign name="Assign_Status" id="BpAss8">
+      <copy>
+        <from expression="dvm:lookupValue(&quot;oramds:/apps/AIAMetaData/dvm/PAYMENT_STATUS.dvm&quot;,&quot;SEBL_01&quot;,bpws:getVariableData(&quot;inputVariable&quot;,&quot;CreateAccountBalanceAdjustmentListEBM&quot;,&quot;/ns4:CreateAccountBalanceAdjustmentListEBM/ns4:DataArea/ns4:CreateAccountBalanceAdjustmentList/ns5:Status/ns5:Code&quot;),&quot;AIA_01&quot;,&quot;&quot;)"/>
+        <to variable="Status"/>
+      </copy>
+    </assign>
+    <switch name="Switch_Adjustment" id="BpSwt3">
+      <case condition="((bpws:getVariableData('Status')='ASAP_FAIL' or bpws:getVariableData('Status')='OPEN') and (bpws:getVariableData('inputVariable','CreateAccountBalanceAdjustmentListEBM','/ns4:CreateAccountBalanceAdjustmentListEBM/ns4:DataArea/ns4:CreateAccountBalanceAdjustmentList/ns4:Custom/ns9:MSISDN')!='' or bpws:getVariableData('inputVariable','CreateAccountBalanceAdjustmentListEBM','/ns4:CreateAccountBalanceAdjustmentListEBM/ns4:DataArea/ns4:CreateAccountBalanceAdjustmentList/ns4:Custom/ns9:SERVICE_NUM')!=''))">
+        <scope name="Scope2" id="BpScp4">
+          <bpelx:annotation>
+            <bpelx:general>
+              <bpelx:property name="userLabel">Invoke_ASAP</bpelx:property>
+            </bpelx:general>
+          </bpelx:annotation>
+          <faultHandlers id="BpFhs1">
+            <catch faultName="bpelx:bindingFault" faultVariable="SystemFault" id="BpCFt2">
+              <sequence name="Sequence7" id="BpSeq8">
+                <assign name="Assign_Siebel_Update" id="BpAss9">
+                  <!--copy>
+                <from variable="inputVariable"
+                      part="CreateAccountBalanceAdjustmentListEBM"
+                      query="/ns4:CreateAccountBalanceAdjustmentListEBM/ns5:EBMHeader"/>
+                <to variable="Invoke_Update_Siebel_UpdateAccountBalanceAdjustmentResp_InputVariable"
+                    part="CreateAccountBalanceAdjustmentListResponseEBM"
+                    query="/ns4:CreateAccountBalanceAdjustmentListResponseEBM/ns5:EBMHeader"/>
+              </copy>
+              <copy>
+                <from expression="dvm:lookupValue('oramds:/apps/AIAMetadata/dvm/PAYMENT_STATUS.dvm','AIA_01','ASAP_FAIL','SEBL_01','')"/>
+                <to variable="Invoke_Update_Siebel_UpdateAccountBalanceAdjustmentResp_InputVariable"
+                    part="CreateAccountBalanceAdjustmentListResponseEBM"
+                    query="/ns4:CreateAccountBalanceAdjustmentListResponseEBM/ns4:DataArea/ns4:CreateAccountBalanceAdjustmentListResponse/ns5:Status"/>
+              </copy>
+              <copy>
+                <from expression="'ASAP Binding Fault'"/>
+                <to variable="Invoke_Update_Siebel_UpdateAccountBalanceAdjustmentResp_InputVariable"
+                    part="CreateAccountBalanceAdjustmentListResponseEBM"
+                    query="/ns4:CreateAccountBalanceAdjustmentListResponseEBM/ns4:DataArea/ns4:CreateAccountBalanceAdjustmentListResponse/ns4:Description"/>
+              </copy-->
+                  <copy>
+                    <from variable="inputVariable" part="CreateAccountBalanceAdjustmentListEBM" query="/ns4:CreateAccountBalanceAdjustmentListEBM/ns5:EBMHeader"/>
+                    <to variable="Invoke_Update_Siebel_UpdateAccountBalanceAdjustmentResp_InputVariable" part="CreateAccountBalanceAdjustmentListResponseEBM" query="/ns4:CreateAccountBalanceAdjustmentListResponseEBM/ns5:EBMHeader"/>
+                  </copy>
+                  <copy>
+                    <from variable="inputVariable" part="CreateAccountBalanceAdjustmentListEBM" query="/ns4:CreateAccountBalanceAdjustmentListEBM/ns4:DataArea/ns4:CreateAccountBalanceAdjustmentList"/>
+                    <to variable="Invoke_Update_Siebel_UpdateAccountBalanceAdjustmentResp_InputVariable" part="CreateAccountBalanceAdjustmentListResponseEBM" query="/ns4:CreateAccountBalanceAdjustmentListResponseEBM/ns4:DataArea/ns4:CreateAccountBalanceAdjustmentListResponse"/>
+                  </copy>
+                  <copy>
+                    <from expression="'SEBL_01'"/>
+                    <to variable="Invoke_Update_Siebel_UpdateAccountBalanceAdjustmentResp_InputVariable" part="CreateAccountBalanceAdjustmentListResponseEBM" query="/ns4:CreateAccountBalanceAdjustmentListResponseEBM/ns5:EBMHeader/ns5:Target/ns5:ID"/>
+                  </copy>
+                  <copy>
+                    <from expression="'BRM_01'"/>
+                    <to variable="Invoke_Update_Siebel_UpdateAccountBalanceAdjustmentResp_InputVariable" part="CreateAccountBalanceAdjustmentListResponseEBM" query="/ns4:CreateAccountBalanceAdjustmentListResponseEBM/ns5:EBMHeader/ns5:Sender/ns5:ID"/>
+                  </copy>
+                  <copy>
+                    <from expression="'Not Posted'"/>
+                    <to variable="Invoke_Update_Siebel_UpdateAccountBalanceAdjustmentResp_InputVariable" part="CreateAccountBalanceAdjustmentListResponseEBM" query="/ns4:CreateAccountBalanceAdjustmentListResponseEBM/ns4:DataArea/ns4:CreateAccountBalanceAdjustmentListResponse/ns5:Status/ns5:Code"/>
+                  </copy>
+                  <copy>
+                    <from expression="'Posting Failed ASAP'"/>
+                    <to variable="Invoke_Update_Siebel_UpdateAccountBalanceAdjustmentResp_InputVariable" part="CreateAccountBalanceAdjustmentListResponseEBM" query="/ns4:CreateAccountBalanceAdjustmentListResponseEBM/ns4:DataArea/ns4:CreateAccountBalanceAdjustmentListResponse/ns4:Description"/>
+                  </copy>
+                </assign>
+                <throw name="ThrowBindingFault" faultName="bpelx:bindingFault" faultVariable="SystemFault" id="BpThw3"/>
+              </sequence>
+            </catch>
+            <catch faultName="bpelx:remoteFault" faultVariable="SystemFault" id="BpCFt3">
+              <sequence name="Sequence6" id="BpSeq9">
+                <assign name="Assign_Siebel_Update" id="BpAss10">
+                  <copy>
+                    <from variable="inputVariable" part="CreateAccountBalanceAdjustmentListEBM" query="/ns4:CreateAccountBalanceAdjustmentListEBM/ns5:EBMHeader"/>
+                    <to variable="Invoke_Update_Siebel_UpdateAccountBalanceAdjustmentResp_InputVariable" part="CreateAccountBalanceAdjustmentListResponseEBM" query="/ns4:CreateAccountBalanceAdjustmentListResponseEBM/ns5:EBMHeader"/>
+                  </copy>
+                  <copy>
+                    <from expression="dvm:lookupValue('oramds:/apps/AIAMetadata/dvm/PAYMENT_STATUS.dvm','AIA_01','ASAP_FAIL','SEBL_01','')"/>
+                    <to variable="Invoke_Update_Siebel_UpdateAccountBalanceAdjustmentResp_InputVariable" part="CreateAccountBalanceAdjustmentListResponseEBM" query="/ns4:CreateAccountBalanceAdjustmentListResponseEBM/ns4:DataArea/ns4:CreateAccountBalanceAdjustmentListResponse/ns5:Status"/>
+                  </copy>
+                  <copy>
+                    <from expression="'ASAP Remote Fault'"/>
+                    <to variable="Invoke_Update_Siebel_UpdateAccountBalanceAdjustmentResp_InputVariable" part="CreateAccountBalanceAdjustmentListResponseEBM" query="/ns4:CreateAccountBalanceAdjustmentListResponseEBM/ns4:DataArea/ns4:CreateAccountBalanceAdjustmentListResponse/ns4:Description"/>
+                  </copy>
+                </assign>
+                <throw name="ThrowRemoteFault" faultName="bpelx:remoteFault" faultVariable="SystemFault" id="BpThw4"/>
+              </sequence>
+            </catch>
+          </faultHandlers>
+          <sequence name="Sequence1" id="BpSeq10">
+            <assign name="Assign_ASAP" id="BpAss11">
+              <copy>
+                <from variable="inputVariable" part="CreateAccountBalanceAdjustmentListEBM" query="/ns4:CreateAccountBalanceAdjustmentListEBM/ns5:EBMHeader"/>
+                <to variable="Invoke_ASAP_process_InputVariable" part="CreateAccountBalanceAdjustmentListEBM" query="/ns4:CreateAccountBalanceAdjustmentListEBM/ns5:EBMHeader"/>
+              </copy>
+              <copy>
+                <from variable="inputVariable" part="CreateAccountBalanceAdjustmentListEBM" query="/ns4:CreateAccountBalanceAdjustmentListEBM/ns4:DataArea"/>
+                <to variable="Invoke_ASAP_process_InputVariable" part="CreateAccountBalanceAdjustmentListEBM" query="/ns4:CreateAccountBalanceAdjustmentListEBM/ns4:DataArea"/>
+              </copy>
+              <!--copy>
+            <from variable="Invoke_UIM_process_OutputVariable" part="payload"
+                  query="/ns10:processResponse/ns10:MASNumber"/>
+            <to variable="Invoke_ASAP_process_InputVariable"
+                part="CreateAccountBalanceAdjustmentListEBM"
+                query="/ns4:CreateAccountBalanceAdjustmentListEBM/ns4:DataArea/ns4:CreateAccountBalanceAdjustmentList/ns4:Custom/ns9:PRIMARY_SCP_ID"/>
+          </copy-->
+            </assign>
+            <invoke name="Invoke_ASAP" bpelx:invokeAsDetail="no" inputVariable="Invoke_ASAP_process_InputVariable" partnerLink="ProcessAccountBalanceAdjustmentAsapProvABCSImpl" portType="ns1:ProcessAccountBalanceAdjustmentAsapProvABCSImpl" operation="process" id="BpInv7"/>
+            <receive name="ReceiveFrom_ASAP" createInstance="no" variable="ReceiveFrom_ASAP_processResponse_InputVariable" partnerLink="ProcessAccountBalanceAdjustmentAsapProvABCSImpl" portType="ns1:ProcessAccountBalanceAdjustmentAsapProvABCSImplCallback" operation="processResponse" id="BpRcv1"/>
+            <switch name="Switch2" id="BpSwt4">
+              <case condition="bpws:getVariableData('ReceiveFrom_ASAP_processResponse_InputVariable','CreateAccountBalanceAdjustmentListResponseEBM','/ns4:CreateAccountBalanceAdjustmentListResponseEBM/ns4:DataArea/ns4:CreateAccountBalanceAdjustmentListResponse/ns5:Status')='00000'">
+                <bpelx:annotation>
+                  <bpelx:general>
+                    <bpelx:property name="userLabel">ASAP_Success</bpelx:property>
+                  </bpelx:general>
+                </bpelx:annotation>
+                <sequence name="Sequence4" id="BpSeq11">
+                  <assign name="Assign_BRM" id="BpAss12">
+                    <copy>
+                      <from variable="inputVariable" part="CreateAccountBalanceAdjustmentListEBM" query="/ns4:CreateAccountBalanceAdjustmentListEBM"/>
+                      <to variable="Invoke_BRM_CreateAccountBalanceAdjustmentList_InputVariable" part="CreateAccountBalanceAdjustmentListEBM" query="/ns4:CreateAccountBalanceAdjustmentListEBM"/>
+                    </copy>
+                  </assign>
+                  <switch name="Switch3" id="BpSwt5">
+                    <case condition="boolean(bpws:getVariableData('inputVariable','CreateAccountBalanceAdjustmentListEBM','/ns4:CreateAccountBalanceAdjustmentListEBM/ns4:DataArea/ns4:CreateAccountBalanceAdjustmentList/ns4:Custom/ns9:STATUS_DESCRIPTION')/text())">
+                      <switch name="Switch4" id="BpSwt6">
+                        <case condition="bpws:getVariableData('inputVariable','CreateAccountBalanceAdjustmentListEBM','/ns4:CreateAccountBalanceAdjustmentListEBM/ns4:DataArea/ns4:CreateAccountBalanceAdjustmentList/ns4:Custom/ns9:STATUS_DESCRIPTION')='BRM' or bpws:getVariableData('inputVariable','CreateAccountBalanceAdjustmentListEBM','/ns4:CreateAccountBalanceAdjustmentListEBM/ns4:DataArea/ns4:CreateAccountBalanceAdjustmentList/ns4:Custom/ns9:TYPECODE')='Primary Bal Incr'">
+                          <assign name="Assign3" id="BpAss13">
+                            <copy>
+                              <from expression="'false'"/>
+                              <to variable="callBRMFlag"/>
+                            </copy>
+                          </assign>
+                        </case>
+                        <otherwise>
+                          <assign name="Assign2" id="BpAss14">
+                            <copy>
+                              <from expression="'true'"/>
+                              <to variable="callBRMFlag"/>
+                            </copy>
+                          </assign>
+                        </otherwise>
+                      </switch>
+                    </case>
+                    <otherwise>
+                      <assign name="Assign1" id="BpAss15">
+                        <copy>
+                          <from expression="'true'"/>
+                          <to variable="callBRMFlag"/>
+                        </copy>
+                      </assign>
+                    </otherwise>
+                  </switch>
+                  <switch name="Switch4" id="BpSwt7">
+                    <case condition="bpws:getVariableData('inputVariable','CreateAccountBalanceAdjustmentListEBM','/ns4:CreateAccountBalanceAdjustmentListEBM/ns4:DataArea/ns4:CreateAccountBalanceAdjustmentList/ns4:Custom/ns9:STATUS_DESCRIPTION')!='BRM' and bpws:getVariableData('inputVariable','CreateAccountBalanceAdjustmentListEBM','/ns4:CreateAccountBalanceAdjustmentListEBM/ns4:DataArea/ns4:CreateAccountBalanceAdjustmentList/ns4:Custom/ns9:TYPECODE')!='Primary Bal Incr'">
+                      <invoke name="Invoke_BRM" inputVariable="Invoke_BRM_CreateAccountBalanceAdjustmentList_InputVariable" partnerLink="CreateAccountBalanceAdjustmentBRMCommsProvABCSImpl" portType="ns2:CreateAccountBalanceAdjustmentBRMCommsProvABCSImpl" bpelx:invokeAsDetail="no" operation="CreateAccountBalanceAdjustmentList" id="BpInv8"/>
+                    </case>
+                    <otherwise/>
+                  </switch>
+                </sequence>
+              </case>
+              <otherwise>
+                <sequence name="Sequence_Other" id="BpSeq12">
+                  <throw name="ThrowBindingFault" faultName="bpelx:bindingFault" faultVariable="SystemFault" id="BpThw5"/>
+                </sequence>
+              </otherwise>
+            </switch>
+          </sequence>
+        </scope>
+      </case>
+      <otherwise>
+        <scope name="Scope4" id="BpScp5">
+          <sequence id="BpSeq13">
+            <assign name="Assign_BRM" id="BpAss16">
+              <copy>
+                <from variable="inputVariable" part="CreateAccountBalanceAdjustmentListEBM" query="/ns4:CreateAccountBalanceAdjustmentListEBM"/>
+                <to variable="Invoke_BRM_CreateAccountBalanceAdjustmentList_InputVariable" part="CreateAccountBalanceAdjustmentListEBM" query="/ns4:CreateAccountBalanceAdjustmentListEBM"/>
+              </copy>
+            </assign>
+            <invoke name="Invoke_BRM" inputVariable="Invoke_BRM_CreateAccountBalanceAdjustmentList_InputVariable" partnerLink="CreateAccountBalanceAdjustmentBRMCommsProvABCSImpl" portType="ns2:CreateAccountBalanceAdjustmentBRMCommsProvABCSImpl" bpelx:invokeAsDetail="no" operation="CreateAccountBalanceAdjustmentList" bpelx:skipCondition="bpws:getVariableData('callBRMFlag')='false'" id="BpInv9"/>
+          </sequence>
+        </scope>
+      </otherwise>
+    </switch>
+    <scope name="Scope5" bpelx:skipCondition="bpws:getVariableData('callBRMFlag')!='false'" id="BpScp6">
+      <sequence name="Sequence12" id="BpSeq14">
+        <switch name="Assign_PI" id="BpSwt8">
+          <case condition="bpws:getVariableData('inputVariable','CreateAccountBalanceAdjustmentListEBM','/ns4:CreateAccountBalanceAdjustmentListEBM/ns4:DataArea/ns4:CreateAccountBalanceAdjustmentList/ns4:Custom/ns9:STATUS_DESCRIPTION')!='BRM' and bpws:getVariableData('inputVariable','CreateAccountBalanceAdjustmentListEBM','/ns4:CreateAccountBalanceAdjustmentListEBM/ns4:DataArea/ns4:CreateAccountBalanceAdjustmentList/ns4:Custom/ns9:TYPECODE')!='Primary Bal Incr'">
+            <assign name="Assign_Update_Adj_Status_Detail" id="BpAss17">
+              <copy>
+                <from variable="ReceiveFrom_ASAP_processResponse_InputVariable" part="CreateAccountBalanceAdjustmentListResponseEBM" query="/ns4:CreateAccountBalanceAdjustmentListResponseEBM"/>
+                <to variable="Invoke_Update_Siebel_UpdateAccountBalanceAdjustmentResp_InputVariable" part="CreateAccountBalanceAdjustmentListResponseEBM" query="/ns4:CreateAccountBalanceAdjustmentListResponseEBM"/>
+              </copy>
+              <copy>
+                <from expression="'Success'"/>
+                <to variable="Invoke_UpdateAdj_Status_Siebel_UpdateAccountBalanceAdjustmentResp_InputVariable" part="CreateAccountBalanceAdjustmentListResponseEBM" query="/ns4:CreateAccountBalanceAdjustmentListResponseEBM/ns4:DataArea/ns4:CreateAccountBalanceAdjustmentListResponse/ns5:Status"/>
+              </copy>
+            </assign>
+          </case>
+          <otherwise>
+            <assign name="Assign_Payment_Incentive" id="BpAss18">
+              <copy>
+                <from variable="inputVariable" part="CreateAccountBalanceAdjustmentListEBM" query="/ns4:CreateAccountBalanceAdjustmentListEBM/ns5:EBMHeader"/>
+                <to variable="Invoke_UpdateAdj_Status_Siebel_UpdateAccountBalanceAdjustmentResp_InputVariable" part="CreateAccountBalanceAdjustmentListResponseEBM" query="/ns4:CreateAccountBalanceAdjustmentListResponseEBM/ns5:EBMHeader"/>
+              </copy>
+              <copy>
+                <from variable="inputVariable" part="CreateAccountBalanceAdjustmentListEBM" query="/ns4:CreateAccountBalanceAdjustmentListEBM/ns4:DataArea/ns4:CreateAccountBalanceAdjustmentList"/>
+                <to variable="Invoke_UpdateAdj_Status_Siebel_UpdateAccountBalanceAdjustmentResp_InputVariable" part="CreateAccountBalanceAdjustmentListResponseEBM" query="/ns4:CreateAccountBalanceAdjustmentListResponseEBM/ns4:DataArea/ns4:CreateAccountBalanceAdjustmentListResponse"/>
+              </copy>
+              <copy>
+                <from expression="'SEBL_01'"/>
+                <to variable="Invoke_UpdateAdj_Status_Siebel_UpdateAccountBalanceAdjustmentResp_InputVariable" part="CreateAccountBalanceAdjustmentListResponseEBM" query="/ns4:CreateAccountBalanceAdjustmentListResponseEBM/ns5:EBMHeader/ns5:Target/ns5:ID"/>
+              </copy>
+              <copy>
+                <from expression="'BRM_01'"/>
+                <to variable="Invoke_UpdateAdj_Status_Siebel_UpdateAccountBalanceAdjustmentResp_InputVariable" part="CreateAccountBalanceAdjustmentListResponseEBM" query="/ns4:CreateAccountBalanceAdjustmentListResponseEBM/ns5:EBMHeader/ns5:Sender/ns5:ID"/>
+              </copy>
+              <copy>
+                <from expression="'Posted'"/>
+                <to variable="Invoke_UpdateAdj_Status_Siebel_UpdateAccountBalanceAdjustmentResp_InputVariable" part="CreateAccountBalanceAdjustmentListResponseEBM" query="/ns4:CreateAccountBalanceAdjustmentListResponseEBM/ns4:DataArea/ns4:CreateAccountBalanceAdjustmentListResponse/ns5:Status/ns5:Code"/>
+              </copy>	
+            </assign>
+          </otherwise>
+        </switch>
+        <invoke name="Invoke_UpdateAdj_Status_Siebel" inputVariable="Invoke_UpdateAdj_Status_Siebel_UpdateAccountBalanceAdjustmentResp_InputVariable" partnerLink="UpdateAccountBalanceAdjustmentRespSiebelCommsProvABCSImpl" portType="ns12:UpdateAccountBalanceAdjustmentRespSiebelCommsProvABCSImplService" operation="UpdateAccountBalanceAdjustmentResp" bpelx:invokeAsDetail="no" id="BpInv10"/>
+      </sequence>
+    </scope>
+    <scope name="Scope_UpdateUnicaSuccess" id="BpScp7">
+      <switch name="IfSourceIsUnica" id="BpSwt9">
+        <case condition="bpws:getVariableData('inputVariable','CreateAccountBalanceAdjustmentListEBM','/ns4:CreateAccountBalanceAdjustmentListEBM/ns4:DataArea/ns4:CreateAccountBalanceAdjustmentList/ns4:Custom/ns9:Source') = 'UNICA'">
+          <sequence name="Sequence_UpdateUnicaSuccess" id="BpSeq15">
+            <assign name="Assign_StatusCode" id="BpAss19">
+              <copy>
+                <from expression="'0'"/>
+                <to variable="StatusCode"/>
+              </copy>
+              <copy>
+                <from expression="'SUCCESS'"/>
+                <to variable="StatusDescription"/>
+              </copy>
+            </assign>
+            <assign name="Transform_UpdateProvisioningStatus" id="BpAss20">
+              <bpelx:annotation>
+                <bpelx:pattern>transformation</bpelx:pattern>
+              </bpelx:annotation>
+              <copy>
+                <from expression="ora:doXSLTransformForDoc('xsl/Transform_CreateAccountBalanceAdjustmentListEBM_to_UpdateProvisioningStatusRequest.xsl', $inputVariable.CreateAccountBalanceAdjustmentListEBM, 'StatusCode', $StatusCode, 'StatusDescription', $StatusDescription)"/>
+                <to variable="Invoke_UPDATE_PROVISIONINGSTATUS_AIA_QUEUE_Produce_InputVariable" part="body"/>
+              </copy>
+            </assign>
+            <invoke name="Invoke_VFQ_UPDATE_PROVISIONINGSTATUS_AIA_QUEUE" bpelx:invokeAsDetail="no" inputVariable="Invoke_UPDATE_PROVISIONINGSTATUS_AIA_QUEUE_Produce_InputVariable" partnerLink="VFQ_UPDATE_PROVISIONINGSTATUS_AIA_QUEUE" portType="ns15:Produce_Message_ptt" operation="Produce_Message" id="BpInv11"/>
+          </sequence>
+        </case>
+        <otherwise/>
+      </switch>
+    </scope>
+  </sequence>
+</process><!--
+
+########################################################################
+##
+##
+## PROJECT
+## VFQA FL
+##
+## PURPOSE:Synchronous BPEL Process
+##
+##
+## DEVELOPED BY
+## Tech Mahindra Ltd.
+#########################################################################
+File name                    : PaymentEBF.bpel
+Package / File path          : VFQA_FL/AIA/trunk/Source/CodeBase/
+Author                       : Anindya Sanyal
+Code Reviewed By             :
+Created on                   :July 26,2012 
+Description                  : This process orchestrates adjustment request between brm and asap.
+                               
+
+File History
+#########################################################################
+Date            Version    Modified by                Description
+#########################################################################
+July 10,2012   1.0     xxxxxxxx xxxxxxxxx                   Initial creation
+#########################################################################
+
+-->

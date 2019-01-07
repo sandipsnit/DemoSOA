@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<project name="ant-scap" default="package" basedir=".">
+
+    <condition property="oracle.home" value="${basedir}/..">
+        <not>
+            <isset property="oracle.home"/>
+        </not>
+    </condition>
+    <echo message="oracle.home = ${oracle.home}"/>
+	<echo message="basedir = ${basedir}"/>
+
+    <input message="Please enter composite directory:" addproperty="compositeDir"/>
+    <input message="Please enter composite name:" addproperty="compositeName"/>
+    <input message="Please enter composite revision:" addproperty="revision"/>
+
+    <!-- input for scac -->
+    <property name="scac.input" value="${compositeDir}/composite.xml"/>
+    <!-- need to use the classpath def in ant-scac.xml -->
+    <import file="ant-sca-compile.xml"/>
+<echo message="compositeDir = ${compositeDir}"/>
+    <!-- src dir -->
+    <property name="src.dir" value="${compositeDir}/src"/>
+<echo message="src dir = ${compositeDir}/src"/>
+    <!-- deploy dir -->
+    <property name="deploy.dir" value="${compositeDir}/deploy"/>
+    <!-- sca-inf root -->
+    <property name="sca-inf.dir" value="${compositeDir}/SCA-INF"/>
+    <!-- sca-inf/classes-->
+    <property name="sca-inf.classes.dir" value="${sca-inf.dir}/classes"/>
+    <!-- composite name and path -->
+    <property name="deploy.composite.name" value="${deploy.dir}/sca_${compositeName}_rev${revision}.jar"/>
+
+   <!-- <taskdef name="replaceRevision" classname="oracle.integration.platform.blocks.deploy.servlet.client.ant.ReplaceRevisionTask">
+        <classpath>
+            <pathelement path="${scac.tasks.class.path}"/>
+        </classpath>
+    </taskdef> -->
+
+    <target name="init" depends="clean">
+        <tstamp/>
+        <mkdir dir="${sca-inf.dir}"/>
+        <mkdir dir="${deploy.dir}"/>
+    </target>
+
+    <target name="scac-validate" depends="init">
+        <echo message="Running scac-validate in ${scac.input}"/>
+      <!--  <antcall target="scac" inheritall="true"/>  -->
+    </target>
+
+    <target name="package" depends="scac-validate">
+	<echo>
+	inside package target 
+	</echo>
+<!--
+        <input message="Please enter composite directory:" addproperty="compositeDir"/>
+        <input message="Please enter composite name:" addproperty="compositeName"/>
+        <input message="Please enter composite revision:" addproperty="revision"/>
+-->
+
+        <!-- compile source if any -->
+        <available file="${src.dir}" type="dir" property="compile.source"/>
+        <antcall target="compile-source"/>
+
+        <property name="tmp.dir" value="${compositeDir}/dist"/>
+        <mkdir dir="${tmp.dir}"/>
+        <!-- bug 7653824: artifacts can be any subdir under composite dir -->
+        <copy todir="${tmp.dir}" failonerror="false" includeEmptyDirs="false">
+            <fileset dir="${compositeDir}">
+                <exclude name="classes/**"/>
+                <exclude name="deploy/**"/>
+                <exclude name="dist/**"/>
+                <exclude name=".designer/**"/>
+                <exclude name="**/*.jpr"/>
+                <exclude name="**/*.ear"/>
+                <exclude name="**/*.zip"/>
+                <exclude name="**/*.war"/>
+                <exclude name="**/*.jws"/>
+                <exclude name="**/.ade_path/**"/>
+                <exclude name="**/scac.log"/>
+                <exclude name="**/scac_out.xml"/>
+                <!--<exclude name="**/*.bin"/>-->
+            </fileset>
+        </copy>
+        <!--
+        <copy todir="${tmp.dir}" failonerror="false">
+            <fileset dir="${compositeDir}">
+                <include name="SCA-INF/**"/>
+                <include name="*"/>
+                <include name="*/**/*.wsdl"/>
+                <include name="*/**/*.xsd"/>
+                <include name="*/**/*.rules"/>
+                <include name="*/**/*.edl"/>
+                bug 7573241 include bam as well
+                <include name="*/**/*.xsl"/>
+                <include name="*/**/*.jcabam"/> 
+                <include name="xsd/**"/>
+                <include name="xsl/**"/>
+                bug 7555226 include testsuites as well
+                <include name="testsuites/**"/>
+                <exclude name="*.jpr"/>
+            </fileset>
+        </copy>
+        -->
+
+        <!--<replace token="1.0" value="${revision}" file="${tmp.dir}/composite.xml"/>-->
+        <!--
+        <replace file="${tmp.dir}/composite.xml">
+          <replacetoken><![CDATA[revision="1.0"]]></replacetoken>
+          <replacevalue><![CDATA[revision="@REVISION@"]]></replacevalue>
+        </replace>
+        <replace token="@REVISION@" value="${revision}" file="${tmp.dir}/composite.xml"/>
+        -->
+        <!-- following code not working if revision attr is in the middle (bug 9134602)
+        <replaceregexp file="${tmp.dir}/composite.xml"
+                match="revision=&quot;(.*)&quot;|revision='(.*)'"
+                replace="revision=&quot;${revision}&quot;"/>
+        -->
+        <!-- xmlproperty does not work with namespace in element tag
+        <xmlproperty file="${tmp.dir}/composite.xml"/>
+        -->
+        <!--<echo message="composite(revision)=${composite(revision)}"/>-->
+        <!--
+        <replaceregexp file="${tmp.dir}/composite.xml"
+                match="revision=&quot;${composite(revision)}&quot;|revision='${composite(revision)}'"
+                replace="revision=&quot;${revision}&quot;"/>
+        -->
+      <!--  <replaceRevision  compositeFile="${tmp.dir}/composite.xml" revision="${revision}"/>  -->
+
+        <copy todir="${tmp.dir}/SCA-INF/classes" failonerror="false">
+            <fileset dir="${compositeDir}/../.adf">
+                <include name="META-INF/**"/>
+            </fileset>
+            <fileset dir="${compositeDir}/../src">
+                <include name="META-INF/*"/>
+            </fileset>
+            <!-- copy .exm and .xml files from sources -->
+            <fileset dir="${compositeDir}/src">
+                <include name="**/*.xml"/>
+                <include name="**/*.exm"/>
+            </fileset>
+            <fileset dir="${compositeDir}/SCA-INF/src">
+                <include name="**/*.xml"/>
+                <include name="**/*.exm"/>
+            </fileset>
+            <!-- bug #15847942, copy ${composite}/resources into SCA-INF/classes -->
+            <fileset dir="${compositeDir}/resources">
+                <exclude name="**/.ade_path/**"/>
+            </fileset>
+        </copy>
+
+        <!-- bug 7653824: artifacts can be any subdir under composite dir -->
+        <jar basedir="${tmp.dir}" destfile="${deploy.composite.name}">
+            <exclude name="**/.ade_path/**"/>
+        </jar>
+        <!--
+        <jar basedir="${tmp.dir}" destfile="${deploy.composite.name}">
+            <include name="SCA-INF/**"/>
+            <include name="*"/>
+            <include name="*/**/*.wsdl"/>
+            <include name="*/**/*.xsd"/>
+            <include name="*/**/*.rules"/>
+            <include name="*/**/*.edl"/>
+            <include name="*/**/*.xsl"/>
+            <include name="*/**/*.jcabam"/>
+            <include name="xsd/**"/>
+            <include name="testsuites/**"/>
+            <include name="xsl/**"/>
+            <exclude name="*.jpr"/>
+        </jar>
+        -->
+
+        <!--<delete dir="${tmp.dir}" includes="*/**" deleteonexit="true" includeemptydirs="true"/>-->
+        <delete deleteonexit="true" includeemptydirs="true">
+             <fileset dir="${tmp.dir}" includes="*/**"/>
+        </delete>
+        <delete dir="${tmp.dir}"/>
+    </target>
+
+    <target name="compile-source" if="compile.source">
+        <!--<echo message="deleting contents of ${sca-inf.classes.dir}"/>-->
+        <!--<delete dir="${sca-inf.classes.dir}" includeemptydirs="true" includes="*/**" failonerror="false"/>-->
+        <!--<delete includeemptydirs="true" failonerror="false">
+             <fileset dir="${sca-inf.classes.dir}" includes="*/**"/>
+        </delete>-->
+        <!-- bug 10275223, work around for compiling package-info.java: not removing p-i.class+ touch p-i.java-->
+        <echo message="deleting .class files of ${sca-inf.classes.dir}"/>
+        <delete includeemptydirs="true" failonerror="false">
+             <fileset dir="${sca-inf.classes.dir}" includes="**/*.class" excludes="**/package-info.class"/>
+        </delete>
+        <mkdir dir="${sca-inf.classes.dir}"/>
+        <touch> 
+              <fileset dir="${src.dir}" 
+                         includes="**/package-info.java"/> 
+        </touch> 
+        <javac srcdir="${src.dir}" classpathref="scac.tasks.class.path"
+               destdir="${sca-inf.classes.dir}" debug="true">
+        </javac>
+    </target>
+
+    <target name="clean">
+        <!--
+        <echo message="deleting contents of ${sca-inf.classes.dir}"/>
+        <delete dir="${sca-inf.classes.dir}" includeemptydirs="true" includes="*/**" failonerror="false"/>
+        -->
+        <echo message="deleting ${deploy.composite.name}"/>
+        <delete file="${deploy.composite.name}" failonerror="false"/>
+    </target>
+
+     <target name="help">
+          <echo message=" ================================================================================"/>
+          <echo message="Usage : package"/>
+          <echo message="    ant -f ${ant.file} -DcompositeDir=composite.dir -DcompositeName=composite.name -Drevision=composite.revision"/>
+          <echo message="       compositeDir - the absolute path of the directory that holds composite.xml"/>
+          <echo message="       compositeName - the name of the composite"/>
+          <echo message="       revision - the revision ID of the composite"/>
+          <echo message="    example:"/>
+          <echo message="         ant -f ${ant.file} -DserverDir=/tmp/HelloWorldApp/HelloWorld -DcompositeName=HelloWorld -Drevision=1.0"/>
+          <echo message="================================================================================"/>
+      </target>
+
+</project>

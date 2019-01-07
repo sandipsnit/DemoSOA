@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<composite name="CreateAdjustmentEBF" revision="1.0" label="2012-07-23_14-55-20_478" mode="active" state="on" xmlns="http://xmlns.oracle.com/sca/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:orawsp="http://schemas.oracle.com/ws/2006/01/policy" xmlns:ui="http://xmlns.oracle.com/soa/designer/">
+   <import namespace="http://xmlns.oracle.com/VFQA_FL/CreateAdjustmentEBF/CreateAdjustmentEBF" location="CreateAdjustmentEBF.wsdl" importType="wsdl"/>
+   <import namespace="http://xmlns.oracle.com/ABCSImpl/Siebel/Industry/Comms/UpdateAccountBalanceAdjustmentRespSiebelCommsProvABCSImpl" location="oramds:/apps/AIAMetaData/AIAComponents/ApplicationConnectorServiceLibrary/Siebel/V1/ProviderABCS/UpdateAccountBalanceAdjustmentRespSiebelCommsProvABCSImpl.wsdl" importType="wsdl"/>
+   <import namespace="http://xmlns.oracle.com/AIAAsyncErrorHandlingBPELProcess" location="oramds:/apps/AIAMetaData/AIAComponents/InfrastructureServiceLibrary/V1/wsdls/AIAAsyncErrorHandlingBPELProcess.wsdl" importType="wsdl"/>
+   <import namespace="http://xmlns.oracle.com/ABCSImpl/BRM/Industry/Comms/CreateAccountBalanceAdjustmentBRMCommsProvABCSImpl/V1" location="oramds:/apps/AIAMetaData/AIAComponents/ApplicationConnectorServiceLibrary/BRM/V1/ProviderABCS/CreateAccountBalanceAdjustmentBRMCommsProvABCSImpl.wsdl" importType="wsdl"/>
+   <import namespace="http://xmlns.oracle.com/ABCSImpl/Asap/Industry/Telco/ProcessAccountBalanceAdjustmentAsapProvABCSImpl/V1" location="oramds:/deployed-composites/vfqamrgdomain/ProcessAccountBalanceAdjustmentAsapProvABCSImpl_rev1.0/ProcessAccountBalanceAdjustmentAsapProvABCSImpl.wsdl" importType="wsdl"/>
+   <service name="createadjustmentebf_client_ep" ui:wsdlLocation="CreateAdjustmentEBF.wsdl">
+      <interface.wsdl interface="http://xmlns.oracle.com/VFQA_FL/CreateAdjustmentEBF/CreateAdjustmentEBF#wsdl.interface(CreateAdjustmentEBF)"/>
+      <binding.ws port="http://xmlns.oracle.com/VFQA_FL/CreateAdjustmentEBF/CreateAdjustmentEBF#wsdl.endpoint(createadjustmentebf_client_ep/CreateAdjustmentEBF_pt)">
+         <wsp:PolicyReference URI="oracle/no_authentication_service_policy" orawsp:category="security" orawsp:status="enabled"/>
+      </binding.ws>
+   </service>
+   <property name="oracle.composite.faultPolicyFile" xml:id="id_9">CreateAdjustmentEBFFaultPolicy.xml</property>
+   <property name="oracle.composite.faultBindingFile" xml:id="id_10">fault-bindings.xml</property>
+   <component name="CreateAdjustmentEBF" version="1.1">
+      <implementation.bpel src="CreateAdjustmentEBF.bpel"/>
+   </component>
+   <reference name="ProcessAccountBalanceAdjustmentAsapProvABCSImpl" ui:wsdlLocation="oramds:/deployed-composites/vfqamrgdomain/ProcessAccountBalanceAdjustmentAsapProvABCSImpl_rev1.0/ProcessAccountBalanceAdjustmentAsapProvABCSImpl.wsdl">
+      <interface.wsdl interface="http://xmlns.oracle.com/ABCSImpl/Asap/Industry/Telco/ProcessAccountBalanceAdjustmentAsapProvABCSImpl/V1#wsdl.interface(ProcessAccountBalanceAdjustmentAsapProvABCSImpl)" callbackInterface="http://xmlns.oracle.com/ABCSImpl/Asap/Industry/Telco/ProcessAccountBalanceAdjustmentAsapProvABCSImpl/V1#wsdl.interface(ProcessAccountBalanceAdjustmentAsapProvABCSImplCallback)"/>
+      <binding.ws port="http://xmlns.oracle.com/ABCSImpl/Asap/Industry/Telco/ProcessAccountBalanceAdjustmentAsapProvABCSImpl/V1#wsdl.endpoint(client/ProcessAccountBalanceAdjustmentAsapProvABCSImpl_pt)" location="http://vqaiaapp01:8001/soa-infra/services/vfqamrgdomain/ProcessAccountBalanceAdjustmentAsapProvABCSImpl!1.0/client?WSDL" soapVersion="1.1">
+         <wsp:PolicyReference URI="oracle/no_authentication_client_policy" orawsp:category="security" orawsp:status="enabled"/>
+         <property name="weblogic.wsee.wsat.transaction.flowOption" type="xs:string" many="false">WSDLDriven</property>
+      </binding.ws>
+      <callback>
+         <binding.ws port="http://xmlns.oracle.com/ABCSImpl/Asap/Industry/Telco/ProcessAccountBalanceAdjustmentAsapProvABCSImpl/V1#wsdl.endpoint(client/ProcessAccountBalanceAdjustmentAsapProvABCSImplCallback_pt)">
+            <wsp:PolicyReference URI="oracle/no_authentication_service_policy" orawsp:category="security" orawsp:status="enabled"/>
+            <property name="weblogic.wsee.wsat.transaction.flowOption" type="xs:string" many="false">WSDLDriven</property>
+         </binding.ws>
+      </callback>
+   </reference>
+   <reference name="CreateAccountBalanceAdjustmentBRMCommsProvABCSImpl" ui:wsdlLocation="oramds:/apps/AIAMetaData/AIAComponents/ApplicationConnectorServiceLibrary/BRM/V1/ProviderABCS/CreateAccountBalanceAdjustmentBRMCommsProvABCSImpl.wsdl">
+      <interface.wsdl interface="http://xmlns.oracle.com/ABCSImpl/BRM/Industry/Comms/CreateAccountBalanceAdjustmentBRMCommsProvABCSImpl/V1#wsdl.interface(CreateAccountBalanceAdjustmentBRMCommsProvABCSImpl)"/>
+      <binding.ws port="http://xmlns.oracle.com/ABCSImpl/BRM/Industry/Comms/CreateAccountBalanceAdjustmentBRMCommsProvABCSImpl/V1#wsdl.endpoint(CreateAccountBalanceAdjustmentBRMCommsProvABCSImpl/CreateAccountBalanceAdjustmentBRMCommsProvABCSImpl)" location="http://vqaiaapp01:8001/soa-infra/services/default/CreateAccountBalanceAdjustmentBRMCommsProvABCSImpl/client?WSDL" soapVersion="1.1">
+         <property name="weblogic.wsee.wsat.transaction.flowOption" type="xs:string" many="false">WSDLDriven</property>
+      </binding.ws>
+   </reference>
+   <reference name="UpdateAccountBalanceAdjustmentRespSiebelCommsProvABCSImpl" ui:wsdlLocation="oramds:/apps/AIAMetaData/AIAComponents/ApplicationConnectorServiceLibrary/Siebel/V1/ProviderABCS/UpdateAccountBalanceAdjustmentRespSiebelCommsProvABCSImpl.wsdl">
+      <interface.wsdl interface="http://xmlns.oracle.com/ABCSImpl/Siebel/Industry/Comms/UpdateAccountBalanceAdjustmentRespSiebelCommsProvABCSImpl#wsdl.interface(UpdateAccountBalanceAdjustmentRespSiebelCommsProvABCSImplService)"/>
+      <binding.ws port="http://xmlns.oracle.com/ABCSImpl/Siebel/Industry/Comms/UpdateAccountBalanceAdjustmentRespSiebelCommsProvABCSImpl#wsdl.endpoint(UpdateAccountBalanceAdjustmentRespSiebelCommsProvABCSImplService/UpdateAccountBalanceAdjustmentRespSiebelCommsProvABCSImplService)" location="http://vqaiaapp01:8001/soa-infra/services/default/UpdateAccountBalanceAdjustmentRespSiebelCommsProvABCSImpl/UpdateAccountBalanceAdjustmentRespSiebelCommsProvABCSImpl?WSDL" soapVersion="1.1">
+         <wsp:PolicyReference URI="oracle/no_authentication_client_policy" orawsp:category="security" orawsp:status="enabled"/>
+         <property name="weblogic.wsee.wsat.transaction.flowOption" type="xs:string" many="false">WSDLDriven</property>
+      </binding.ws>
+   </reference>
+   <reference name="AIAAsyncErrorHandlingBPELProcess" ui:wsdlLocation="oramds:/apps/AIAMetaData/AIAComponents/InfrastructureServiceLibrary/V1/wsdls/AIAAsyncErrorHandlingBPELProcess.wsdl">
+      <interface.wsdl interface="http://xmlns.oracle.com/AIAAsyncErrorHandlingBPELProcess#wsdl.interface(AIAAsyncErrorHandlingBPELProcess)"/>
+      <binding.ws port="http://xmlns.oracle.com/AIAAsyncErrorHandlingBPELProcess#wsdl.endpoint(AIAAsyncErrorHandlingBPELProcess/AIAAsyncErrorHandlingBPELProcess)" location="http://vqaiaapp01:8001/soa-infra/services/default/AIAAsyncErrorHandlingBPELProcess/client?WSDL" soapVersion="1.1"/>
+   </reference>
+   <wire>
+      <source.uri>createadjustmentebf_client_ep</source.uri>
+      <target.uri>CreateAdjustmentEBF/createadjustmentebf_client</target.uri>
+   </wire>
+   <wire>
+      <source.uri>CreateAdjustmentEBF/CreateAccountBalanceAdjustmentBRMCommsProvABCSImpl</source.uri>
+      <target.uri>CreateAccountBalanceAdjustmentBRMCommsProvABCSImpl</target.uri>
+   </wire>
+   <wire>
+      <source.uri>CreateAdjustmentEBF/UpdateAccountBalanceAdjustmentRespSiebelCommsProvABCSImpl</source.uri>
+      <target.uri>UpdateAccountBalanceAdjustmentRespSiebelCommsProvABCSImpl</target.uri>
+   </wire>
+   <wire>
+      <source.uri>CreateAdjustmentEBF/AIAAsyncErrorHandlingBPELProcess</source.uri>
+      <target.uri>AIAAsyncErrorHandlingBPELProcess</target.uri>
+   </wire>
+   <wire>
+      <source.uri>CreateAdjustmentEBF/ProcessAccountBalanceAdjustmentAsapProvABCSImpl</source.uri>
+      <target.uri>ProcessAccountBalanceAdjustmentAsapProvABCSImpl</target.uri>
+   </wire>
+   <wire>
+      <source.uri>createadjustmentebf_client_ep</source.uri>
+      <target.uri>CreateAdjustmentEBF/createadjustmentebf_client</target.uri>
+   </wire>
+</composite>

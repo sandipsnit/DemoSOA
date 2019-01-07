@@ -1,0 +1,1764 @@
+Dec 11, 2018 5:11:40 PM oracle.security.jps.util.JpsUtil disableAudit
+INFO: JpsUtil: isAuditDisabled set to true
+Dec 11, 2018 5:11:41 PM oracle.security.jps.util.JpsUtil disableAudit
+INFO: JpsUtil: isAuditDisabled set to false
+Dec 11, 2018 5:11:48 PM oracle.mds
+NOTIFICATION: PManager instance is created without multitenancy support as JVM flag "oracle.multitenant.enabled" is not set to enable multitenancy support.
+Dec 11, 2018 5:11:50 PM oracle.security.jps.internal.config.xml.XmlConfigurationFactory initDefaultConfiguration
+SEVERE: java.io.FileNotFoundException: .\config\jps-config.xml (The system cannot find the path specified)
+Dec 11, 2018 5:11:50 PM oracle.mds
+NOTIFICATION: Auditing is disabled for component MDS.
+Dec 11, 2018 5:11:55 PM oracle.adf.share.ADFContext getCurrent
+WARNING: Automatically initializing a DefaultContext for getCurrent.
+Caller should ensure that a DefaultContext is proper for this use.
+Memory leaks and/or unexpected behaviour may occur if the automatic initialization is performed improperly.
+This message may be avoided by performing initADFContext before using getCurrent().
+For more information please enable logging for oracle.adf.share.ADFContext at FINEST level.
+Dec 11, 2018 5:11:58 PM oracle.adf.share.config.ADFMDSConfig createMDSInstanceFromelement
+SEVERE: MDSConfigurationException encountered in parseADFConfigurationMDS-01330: unable to load MDS configuration document    
+MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+oracle.mds.config.MDSConfigurationException: MDS-01330: unable to load MDS configuration document    
+MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1014)
+	at oracle.mds.config.PConfig.<init>(PConfig.java:767)
+	at oracle.mds.config.MDSConfig.loadFromBean(MDSConfig.java:1151)
+	at oracle.mds.config.MDSConfig.loadFromElement(MDSConfig.java:1218)
+	at oracle.mds.config.MDSConfig.<init>(MDSConfig.java:781)
+	at oracle.mds.core.MDSInstance.getMDSConfigFromDocument(MDSInstance.java:2788)
+	at oracle.mds.core.MDSInstance.findAndStoreMDSInstanceWithCustConfig(MDSInstance.java:2621)
+	at oracle.mds.core.MDSInstance.getOrCreateInstanceInternal(MDSInstance.java:2118)
+	at oracle.mds.core.MDSInstance.getOrCreateInstance(MDSInstance.java:812)
+	at oracle.adf.share.config.ADFMDSConfig.createMDSInstanceFromelement(ADFMDSConfig.java:276)
+	at oracle.adf.share.config.MDSConfigFactory.createApplication(MDSConfigFactory.java:123)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:150)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:82)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:60)
+	at oracle.adf.share.ADFContext.getADFConfigEx(ADFContext.java:888)
+	at oracle.adf.share.ADFContext.getADFConfig(ADFContext.java:837)
+	at oracle.adf.share.config.ADFContextMDSConfigHelperImpl.createMDSSession(ADFContextMDSConfigHelperImpl.java:62)
+	at oracle.adf.share.ADFContext.getMDSSessionAsObject(ADFContext.java:1722)
+	at oracle.mds.internal.net.OraMDSURLConnection.getMDSSession(OraMDSURLConnection.java:153)
+	at oracle.mds.internal.net.OraMDSURLConnection.getInputStream(OraMDSURLConnection.java:83)
+	at java.net.URL.openStream(URL.java:1010)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.openAsStreamConnection(WSDLReaderImpl.java:576)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readDocument(WSDLReaderImpl.java:438)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:377)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseImport(WSDLReaderImpl.java:937)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseDefinition(WSDLReaderImpl.java:820)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:719)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:688)
+	at oracle.fabric.common.wsdl.SchemaBuilder.convDOMElemToWSDLDef(SchemaBuilder.java:1307)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadEmbeddedSchemas(SchemaBuilder.java:504)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadSchemasFromWSDL(SchemaBuilder.java:456)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadAllSchemas(SchemaBuilder.java:247)
+	at oracle.fabric.common.wsdl.SchemaManager.loadAllXSD(SchemaManager.java:305)
+	at oracle.fabric.common.wsdl.SchemaManager.buildXDKSchema(SchemaManager.java:553)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupSchema(SchemaManager.java:404)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupXSDElementDeclaration(SchemaManager.java:729)
+	at oracle.soa.scac.WSDLValidator.validateMessageParts(WSDLValidator.java:112)
+	at oracle.soa.scac.WSDLValidator.validateMessages(WSDLValidator.java:88)
+	at oracle.soa.scac.WSDLValidator.validate(WSDLValidator.java:44)
+	at oracle.soa.scac.ValidateComposite.loadWSDLs(ValidateComposite.java:900)
+	at oracle.soa.scac.ValidateComposite.doValidation0(ValidateComposite.java:493)
+	at oracle.soa.scac.ValidateComposite.doValidation(ValidateComposite.java:481)
+	at oracle.soa.scac.ValidateComposite.run0(ValidateComposite.java:206)
+	at oracle.soa.scac.ValidateComposite.run(ValidateComposite.java:187)
+	at oracle.soa.scac.ValidateComposite.main(ValidateComposite.java:179)
+Caused by: oracle.mds.exception.MDSExceptionList: MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1008)
+	... 44 more
+Dec 11, 2018 5:11:58 PM oracle.adf.share.config.MDSConfigFactory createApplication
+INFO: 
+oracle.adf.share.ADFShareException: MDSConfigurationException encountered in parseADFConfiguration
+	at oracle.adf.share.config.ADFMDSConfig.createMDSInstanceFromelement(ADFMDSConfig.java:292)
+	at oracle.adf.share.config.MDSConfigFactory.createApplication(MDSConfigFactory.java:123)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:150)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:82)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:60)
+	at oracle.adf.share.ADFContext.getADFConfigEx(ADFContext.java:888)
+	at oracle.adf.share.ADFContext.getADFConfig(ADFContext.java:837)
+	at oracle.adf.share.config.ADFContextMDSConfigHelperImpl.createMDSSession(ADFContextMDSConfigHelperImpl.java:62)
+	at oracle.adf.share.ADFContext.getMDSSessionAsObject(ADFContext.java:1722)
+	at oracle.mds.internal.net.OraMDSURLConnection.getMDSSession(OraMDSURLConnection.java:153)
+	at oracle.mds.internal.net.OraMDSURLConnection.getInputStream(OraMDSURLConnection.java:83)
+	at java.net.URL.openStream(URL.java:1010)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.openAsStreamConnection(WSDLReaderImpl.java:576)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readDocument(WSDLReaderImpl.java:438)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:377)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseImport(WSDLReaderImpl.java:937)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseDefinition(WSDLReaderImpl.java:820)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:719)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:688)
+	at oracle.fabric.common.wsdl.SchemaBuilder.convDOMElemToWSDLDef(SchemaBuilder.java:1307)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadEmbeddedSchemas(SchemaBuilder.java:504)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadSchemasFromWSDL(SchemaBuilder.java:456)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadAllSchemas(SchemaBuilder.java:247)
+	at oracle.fabric.common.wsdl.SchemaManager.loadAllXSD(SchemaManager.java:305)
+	at oracle.fabric.common.wsdl.SchemaManager.buildXDKSchema(SchemaManager.java:553)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupSchema(SchemaManager.java:404)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupXSDElementDeclaration(SchemaManager.java:729)
+	at oracle.soa.scac.WSDLValidator.validateMessageParts(WSDLValidator.java:112)
+	at oracle.soa.scac.WSDLValidator.validateMessages(WSDLValidator.java:88)
+	at oracle.soa.scac.WSDLValidator.validate(WSDLValidator.java:44)
+	at oracle.soa.scac.ValidateComposite.loadWSDLs(ValidateComposite.java:900)
+	at oracle.soa.scac.ValidateComposite.doValidation0(ValidateComposite.java:493)
+	at oracle.soa.scac.ValidateComposite.doValidation(ValidateComposite.java:481)
+	at oracle.soa.scac.ValidateComposite.run0(ValidateComposite.java:206)
+	at oracle.soa.scac.ValidateComposite.run(ValidateComposite.java:187)
+	at oracle.soa.scac.ValidateComposite.main(ValidateComposite.java:179)
+Caused by: oracle.mds.config.MDSConfigurationException: MDS-01330: unable to load MDS configuration document    
+MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1014)
+	at oracle.mds.config.PConfig.<init>(PConfig.java:767)
+	at oracle.mds.config.MDSConfig.loadFromBean(MDSConfig.java:1151)
+	at oracle.mds.config.MDSConfig.loadFromElement(MDSConfig.java:1218)
+	at oracle.mds.config.MDSConfig.<init>(MDSConfig.java:781)
+	at oracle.mds.core.MDSInstance.getMDSConfigFromDocument(MDSInstance.java:2788)
+	at oracle.mds.core.MDSInstance.findAndStoreMDSInstanceWithCustConfig(MDSInstance.java:2621)
+	at oracle.mds.core.MDSInstance.getOrCreateInstanceInternal(MDSInstance.java:2118)
+	at oracle.mds.core.MDSInstance.getOrCreateInstance(MDSInstance.java:812)
+	at oracle.adf.share.config.ADFMDSConfig.createMDSInstanceFromelement(ADFMDSConfig.java:276)
+	... 35 more
+Caused by: oracle.mds.exception.MDSExceptionList: MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1008)
+	... 44 more
+Dec 11, 2018 5:11:59 PM oracle.adf.share.config.ADFMDSConfig createMDSInstanceFromelement
+SEVERE: MDSConfigurationException encountered in parseADFConfigurationMDS-01330: unable to load MDS configuration document    
+MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+oracle.mds.config.MDSConfigurationException: MDS-01330: unable to load MDS configuration document    
+MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1014)
+	at oracle.mds.config.PConfig.<init>(PConfig.java:767)
+	at oracle.mds.config.MDSConfig.loadFromBean(MDSConfig.java:1151)
+	at oracle.mds.config.MDSConfig.loadFromElement(MDSConfig.java:1218)
+	at oracle.mds.config.MDSConfig.<init>(MDSConfig.java:781)
+	at oracle.mds.core.MDSInstance.getMDSConfigFromDocument(MDSInstance.java:2788)
+	at oracle.mds.core.MDSInstance.findAndStoreMDSInstanceWithCustConfig(MDSInstance.java:2621)
+	at oracle.mds.core.MDSInstance.getOrCreateInstanceInternal(MDSInstance.java:2118)
+	at oracle.mds.core.MDSInstance.getOrCreateInstance(MDSInstance.java:812)
+	at oracle.adf.share.config.ADFMDSConfig.createMDSInstanceFromelement(ADFMDSConfig.java:276)
+	at oracle.adf.share.config.MDSConfigFactory.createApplication(MDSConfigFactory.java:123)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:150)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:82)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:60)
+	at oracle.adf.share.ADFContext.getADFConfigEx(ADFContext.java:888)
+	at oracle.adf.share.ADFContext.getADFConfig(ADFContext.java:837)
+	at oracle.adf.share.ADFContext.getADFContextProperty(ADFContext.java:1078)
+	at oracle.adf.share.mds.MDSUtil.getCustClassList(MDSUtil.java:69)
+	at oracle.adf.share.config.ADFMDSConfig.parseADFConfiguration(ADFMDSConfig.java:125)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at oracle.adf.share.config.ADFConfigImpl.getResultFromComponent(ADFConfigImpl.java:533)
+	at oracle.adf.share.config.ADFConfigImpl.getConfigObject(ADFConfigImpl.java:604)
+	at oracle.adf.share.config.ADFConfigImpl.getConfigObject(ADFConfigImpl.java:582)
+	at oracle.adf.share.config.ADFConfigImpl.getMDSInstance(ADFConfigImpl.java:647)
+	at oracle.adf.share.config.ADFConfigImpl.getMDSInstance(ADFConfigImpl.java:642)
+	at oracle.adf.share.config.ADFContextMDSConfigHelperImpl.createMDSSession(ADFContextMDSConfigHelperImpl.java:62)
+	at oracle.adf.share.ADFContext.getMDSSessionAsObject(ADFContext.java:1722)
+	at oracle.mds.internal.net.OraMDSURLConnection.getMDSSession(OraMDSURLConnection.java:153)
+	at oracle.mds.internal.net.OraMDSURLConnection.getInputStream(OraMDSURLConnection.java:83)
+	at java.net.URL.openStream(URL.java:1010)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.openAsStreamConnection(WSDLReaderImpl.java:576)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readDocument(WSDLReaderImpl.java:438)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:377)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseImport(WSDLReaderImpl.java:937)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseDefinition(WSDLReaderImpl.java:820)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:719)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:688)
+	at oracle.fabric.common.wsdl.SchemaBuilder.convDOMElemToWSDLDef(SchemaBuilder.java:1307)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadEmbeddedSchemas(SchemaBuilder.java:504)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadSchemasFromWSDL(SchemaBuilder.java:456)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadAllSchemas(SchemaBuilder.java:247)
+	at oracle.fabric.common.wsdl.SchemaManager.loadAllXSD(SchemaManager.java:305)
+	at oracle.fabric.common.wsdl.SchemaManager.buildXDKSchema(SchemaManager.java:553)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupSchema(SchemaManager.java:404)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupXSDElementDeclaration(SchemaManager.java:729)
+	at oracle.soa.scac.WSDLValidator.validateMessageParts(WSDLValidator.java:112)
+	at oracle.soa.scac.WSDLValidator.validateMessages(WSDLValidator.java:88)
+	at oracle.soa.scac.WSDLValidator.validate(WSDLValidator.java:44)
+	at oracle.soa.scac.ValidateComposite.loadWSDLs(ValidateComposite.java:900)
+	at oracle.soa.scac.ValidateComposite.doValidation0(ValidateComposite.java:493)
+	at oracle.soa.scac.ValidateComposite.doValidation(ValidateComposite.java:481)
+	at oracle.soa.scac.ValidateComposite.run0(ValidateComposite.java:206)
+	at oracle.soa.scac.ValidateComposite.run(ValidateComposite.java:187)
+	at oracle.soa.scac.ValidateComposite.main(ValidateComposite.java:179)
+Caused by: oracle.mds.exception.MDSExceptionList: MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1008)
+	... 56 more
+Dec 11, 2018 5:11:59 PM oracle.adf.share.config.MDSConfigFactory createApplication
+INFO: 
+oracle.adf.share.ADFShareException: MDSConfigurationException encountered in parseADFConfiguration
+	at oracle.adf.share.config.ADFMDSConfig.createMDSInstanceFromelement(ADFMDSConfig.java:292)
+	at oracle.adf.share.config.MDSConfigFactory.createApplication(MDSConfigFactory.java:123)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:150)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:82)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:60)
+	at oracle.adf.share.ADFContext.getADFConfigEx(ADFContext.java:888)
+	at oracle.adf.share.ADFContext.getADFConfig(ADFContext.java:837)
+	at oracle.adf.share.ADFContext.getADFContextProperty(ADFContext.java:1078)
+	at oracle.adf.share.mds.MDSUtil.getCustClassList(MDSUtil.java:69)
+	at oracle.adf.share.config.ADFMDSConfig.parseADFConfiguration(ADFMDSConfig.java:125)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at oracle.adf.share.config.ADFConfigImpl.getResultFromComponent(ADFConfigImpl.java:533)
+	at oracle.adf.share.config.ADFConfigImpl.getConfigObject(ADFConfigImpl.java:604)
+	at oracle.adf.share.config.ADFConfigImpl.getConfigObject(ADFConfigImpl.java:582)
+	at oracle.adf.share.config.ADFConfigImpl.getMDSInstance(ADFConfigImpl.java:647)
+	at oracle.adf.share.config.ADFConfigImpl.getMDSInstance(ADFConfigImpl.java:642)
+	at oracle.adf.share.config.ADFContextMDSConfigHelperImpl.createMDSSession(ADFContextMDSConfigHelperImpl.java:62)
+	at oracle.adf.share.ADFContext.getMDSSessionAsObject(ADFContext.java:1722)
+	at oracle.mds.internal.net.OraMDSURLConnection.getMDSSession(OraMDSURLConnection.java:153)
+	at oracle.mds.internal.net.OraMDSURLConnection.getInputStream(OraMDSURLConnection.java:83)
+	at java.net.URL.openStream(URL.java:1010)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.openAsStreamConnection(WSDLReaderImpl.java:576)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readDocument(WSDLReaderImpl.java:438)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:377)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseImport(WSDLReaderImpl.java:937)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseDefinition(WSDLReaderImpl.java:820)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:719)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:688)
+	at oracle.fabric.common.wsdl.SchemaBuilder.convDOMElemToWSDLDef(SchemaBuilder.java:1307)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadEmbeddedSchemas(SchemaBuilder.java:504)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadSchemasFromWSDL(SchemaBuilder.java:456)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadAllSchemas(SchemaBuilder.java:247)
+	at oracle.fabric.common.wsdl.SchemaManager.loadAllXSD(SchemaManager.java:305)
+	at oracle.fabric.common.wsdl.SchemaManager.buildXDKSchema(SchemaManager.java:553)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupSchema(SchemaManager.java:404)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupXSDElementDeclaration(SchemaManager.java:729)
+	at oracle.soa.scac.WSDLValidator.validateMessageParts(WSDLValidator.java:112)
+	at oracle.soa.scac.WSDLValidator.validateMessages(WSDLValidator.java:88)
+	at oracle.soa.scac.WSDLValidator.validate(WSDLValidator.java:44)
+	at oracle.soa.scac.ValidateComposite.loadWSDLs(ValidateComposite.java:900)
+	at oracle.soa.scac.ValidateComposite.doValidation0(ValidateComposite.java:493)
+	at oracle.soa.scac.ValidateComposite.doValidation(ValidateComposite.java:481)
+	at oracle.soa.scac.ValidateComposite.run0(ValidateComposite.java:206)
+	at oracle.soa.scac.ValidateComposite.run(ValidateComposite.java:187)
+	at oracle.soa.scac.ValidateComposite.main(ValidateComposite.java:179)
+Caused by: oracle.mds.config.MDSConfigurationException: MDS-01330: unable to load MDS configuration document    
+MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1014)
+	at oracle.mds.config.PConfig.<init>(PConfig.java:767)
+	at oracle.mds.config.MDSConfig.loadFromBean(MDSConfig.java:1151)
+	at oracle.mds.config.MDSConfig.loadFromElement(MDSConfig.java:1218)
+	at oracle.mds.config.MDSConfig.<init>(MDSConfig.java:781)
+	at oracle.mds.core.MDSInstance.getMDSConfigFromDocument(MDSInstance.java:2788)
+	at oracle.mds.core.MDSInstance.findAndStoreMDSInstanceWithCustConfig(MDSInstance.java:2621)
+	at oracle.mds.core.MDSInstance.getOrCreateInstanceInternal(MDSInstance.java:2118)
+	at oracle.mds.core.MDSInstance.getOrCreateInstance(MDSInstance.java:812)
+	at oracle.adf.share.config.ADFMDSConfig.createMDSInstanceFromelement(ADFMDSConfig.java:276)
+	... 47 more
+Caused by: oracle.mds.exception.MDSExceptionList: MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1008)
+	... 56 more
+Dec 11, 2018 5:12:00 PM oracle.adf.share.config.ADFMDSConfig parseADFConfiguration
+SEVERE: MDSConfigurationException encountered in parseADFConfigurationMDS-01330: unable to load MDS configuration document    
+MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+oracle.mds.config.MDSConfigurationException: MDS-01330: unable to load MDS configuration document    
+MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1014)
+	at oracle.mds.config.PConfig.<init>(PConfig.java:767)
+	at oracle.mds.config.MDSConfig.loadFromBean(MDSConfig.java:1151)
+	at oracle.mds.config.MDSConfig.loadFromElement(MDSConfig.java:1218)
+	at oracle.mds.config.MDSConfig.<init>(MDSConfig.java:781)
+	at oracle.mds.core.MDSInstance.getMDSConfigFromDocument(MDSInstance.java:2788)
+	at oracle.mds.core.MDSInstance.findAndStoreMDSInstanceWithCustConfig(MDSInstance.java:2621)
+	at oracle.mds.core.MDSInstance.getOrCreateInstanceInternal(MDSInstance.java:2118)
+	at oracle.mds.core.MDSInstance.getOrCreateInstance(MDSInstance.java:812)
+	at oracle.adf.share.config.ADFMDSConfig.parseADFConfiguration(ADFMDSConfig.java:146)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at oracle.adf.share.config.ADFConfigImpl.getResultFromComponent(ADFConfigImpl.java:533)
+	at oracle.adf.share.config.ADFConfigImpl.getConfigObject(ADFConfigImpl.java:604)
+	at oracle.adf.share.config.ADFConfigImpl.getConfigObject(ADFConfigImpl.java:582)
+	at oracle.adf.share.config.ADFConfigImpl.getMDSInstance(ADFConfigImpl.java:647)
+	at oracle.adf.share.config.ADFConfigImpl.getMDSInstance(ADFConfigImpl.java:642)
+	at oracle.adf.share.config.ADFContextMDSConfigHelperImpl.createMDSSession(ADFContextMDSConfigHelperImpl.java:62)
+	at oracle.adf.share.ADFContext.getMDSSessionAsObject(ADFContext.java:1722)
+	at oracle.mds.internal.net.OraMDSURLConnection.getMDSSession(OraMDSURLConnection.java:153)
+	at oracle.mds.internal.net.OraMDSURLConnection.getInputStream(OraMDSURLConnection.java:83)
+	at java.net.URL.openStream(URL.java:1010)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.openAsStreamConnection(WSDLReaderImpl.java:576)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readDocument(WSDLReaderImpl.java:438)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:377)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseImport(WSDLReaderImpl.java:937)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseDefinition(WSDLReaderImpl.java:820)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:719)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:688)
+	at oracle.fabric.common.wsdl.SchemaBuilder.convDOMElemToWSDLDef(SchemaBuilder.java:1307)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadEmbeddedSchemas(SchemaBuilder.java:504)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadSchemasFromWSDL(SchemaBuilder.java:456)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadAllSchemas(SchemaBuilder.java:247)
+	at oracle.fabric.common.wsdl.SchemaManager.loadAllXSD(SchemaManager.java:305)
+	at oracle.fabric.common.wsdl.SchemaManager.buildXDKSchema(SchemaManager.java:553)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupSchema(SchemaManager.java:404)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupXSDElementDeclaration(SchemaManager.java:729)
+	at oracle.soa.scac.WSDLValidator.validateMessageParts(WSDLValidator.java:112)
+	at oracle.soa.scac.WSDLValidator.validateMessages(WSDLValidator.java:88)
+	at oracle.soa.scac.WSDLValidator.validate(WSDLValidator.java:44)
+	at oracle.soa.scac.ValidateComposite.loadWSDLs(ValidateComposite.java:900)
+	at oracle.soa.scac.ValidateComposite.doValidation0(ValidateComposite.java:493)
+	at oracle.soa.scac.ValidateComposite.doValidation(ValidateComposite.java:481)
+	at oracle.soa.scac.ValidateComposite.run0(ValidateComposite.java:206)
+	at oracle.soa.scac.ValidateComposite.run(ValidateComposite.java:187)
+	at oracle.soa.scac.ValidateComposite.main(ValidateComposite.java:179)
+Caused by: oracle.mds.exception.MDSExceptionList: MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1008)
+	... 47 more
+Dec 11, 2018 5:12:00 PM oracle.adf.share.config.ADFContextMDSConfigHelperImpl createMDSSession
+INFO: 
+oracle.adf.share.ADFShareException: MDSConfigurationException encountered in parseADFConfiguration
+	at oracle.adf.share.config.ADFMDSConfig.parseADFConfiguration(ADFMDSConfig.java:209)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at oracle.adf.share.config.ADFConfigImpl.getResultFromComponent(ADFConfigImpl.java:533)
+	at oracle.adf.share.config.ADFConfigImpl.getConfigObject(ADFConfigImpl.java:604)
+	at oracle.adf.share.config.ADFConfigImpl.getConfigObject(ADFConfigImpl.java:582)
+	at oracle.adf.share.config.ADFConfigImpl.getMDSInstance(ADFConfigImpl.java:647)
+	at oracle.adf.share.config.ADFConfigImpl.getMDSInstance(ADFConfigImpl.java:642)
+	at oracle.adf.share.config.ADFContextMDSConfigHelperImpl.createMDSSession(ADFContextMDSConfigHelperImpl.java:62)
+	at oracle.adf.share.ADFContext.getMDSSessionAsObject(ADFContext.java:1722)
+	at oracle.mds.internal.net.OraMDSURLConnection.getMDSSession(OraMDSURLConnection.java:153)
+	at oracle.mds.internal.net.OraMDSURLConnection.getInputStream(OraMDSURLConnection.java:83)
+	at java.net.URL.openStream(URL.java:1010)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.openAsStreamConnection(WSDLReaderImpl.java:576)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readDocument(WSDLReaderImpl.java:438)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:377)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseImport(WSDLReaderImpl.java:937)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseDefinition(WSDLReaderImpl.java:820)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:719)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:688)
+	at oracle.fabric.common.wsdl.SchemaBuilder.convDOMElemToWSDLDef(SchemaBuilder.java:1307)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadEmbeddedSchemas(SchemaBuilder.java:504)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadSchemasFromWSDL(SchemaBuilder.java:456)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadAllSchemas(SchemaBuilder.java:247)
+	at oracle.fabric.common.wsdl.SchemaManager.loadAllXSD(SchemaManager.java:305)
+	at oracle.fabric.common.wsdl.SchemaManager.buildXDKSchema(SchemaManager.java:553)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupSchema(SchemaManager.java:404)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupXSDElementDeclaration(SchemaManager.java:729)
+	at oracle.soa.scac.WSDLValidator.validateMessageParts(WSDLValidator.java:112)
+	at oracle.soa.scac.WSDLValidator.validateMessages(WSDLValidator.java:88)
+	at oracle.soa.scac.WSDLValidator.validate(WSDLValidator.java:44)
+	at oracle.soa.scac.ValidateComposite.loadWSDLs(ValidateComposite.java:900)
+	at oracle.soa.scac.ValidateComposite.doValidation0(ValidateComposite.java:493)
+	at oracle.soa.scac.ValidateComposite.doValidation(ValidateComposite.java:481)
+	at oracle.soa.scac.ValidateComposite.run0(ValidateComposite.java:206)
+	at oracle.soa.scac.ValidateComposite.run(ValidateComposite.java:187)
+	at oracle.soa.scac.ValidateComposite.main(ValidateComposite.java:179)
+Caused by: oracle.mds.config.MDSConfigurationException: MDS-01330: unable to load MDS configuration document    
+MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1014)
+	at oracle.mds.config.PConfig.<init>(PConfig.java:767)
+	at oracle.mds.config.MDSConfig.loadFromBean(MDSConfig.java:1151)
+	at oracle.mds.config.MDSConfig.loadFromElement(MDSConfig.java:1218)
+	at oracle.mds.config.MDSConfig.<init>(MDSConfig.java:781)
+	at oracle.mds.core.MDSInstance.getMDSConfigFromDocument(MDSInstance.java:2788)
+	at oracle.mds.core.MDSInstance.findAndStoreMDSInstanceWithCustConfig(MDSInstance.java:2621)
+	at oracle.mds.core.MDSInstance.getOrCreateInstanceInternal(MDSInstance.java:2118)
+	at oracle.mds.core.MDSInstance.getOrCreateInstance(MDSInstance.java:812)
+	at oracle.adf.share.config.ADFMDSConfig.parseADFConfiguration(ADFMDSConfig.java:146)
+	... 38 more
+Caused by: oracle.mds.exception.MDSExceptionList: MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1008)
+	... 47 more
+Dec 11, 2018 5:12:27 PM oracle.adf.share.config.ADFMDSConfig createMDSInstanceFromelement
+SEVERE: MDSConfigurationException encountered in parseADFConfigurationMDS-01330: unable to load MDS configuration document    
+MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+oracle.mds.config.MDSConfigurationException: MDS-01330: unable to load MDS configuration document    
+MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1014)
+	at oracle.mds.config.PConfig.<init>(PConfig.java:767)
+	at oracle.mds.config.MDSConfig.loadFromBean(MDSConfig.java:1151)
+	at oracle.mds.config.MDSConfig.loadFromElement(MDSConfig.java:1218)
+	at oracle.mds.config.MDSConfig.<init>(MDSConfig.java:781)
+	at oracle.mds.core.MDSInstance.getMDSConfigFromDocument(MDSInstance.java:2788)
+	at oracle.mds.core.MDSInstance.findAndStoreMDSInstanceWithCustConfig(MDSInstance.java:2621)
+	at oracle.mds.core.MDSInstance.getOrCreateInstanceInternal(MDSInstance.java:2118)
+	at oracle.mds.core.MDSInstance.getOrCreateInstance(MDSInstance.java:812)
+	at oracle.adf.share.config.ADFMDSConfig.createMDSInstanceFromelement(ADFMDSConfig.java:276)
+	at oracle.adf.share.config.MDSConfigFactory.createApplication(MDSConfigFactory.java:123)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:150)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:82)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:60)
+	at oracle.adf.share.ADFContext.getADFConfigEx(ADFContext.java:888)
+	at oracle.adf.share.ADFContext.getADFConfig(ADFContext.java:837)
+	at oracle.adf.share.config.ADFContextMDSConfigHelperImpl.createMDSSession(ADFContextMDSConfigHelperImpl.java:62)
+	at oracle.adf.share.ADFContext.getMDSSessionAsObject(ADFContext.java:1722)
+	at oracle.mds.internal.net.OraMDSURLConnection.getMDSSession(OraMDSURLConnection.java:153)
+	at oracle.mds.internal.net.OraMDSURLConnection.getInputStream(OraMDSURLConnection.java:83)
+	at java.net.URL.openStream(URL.java:1010)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.openAsStreamConnection(WSDLReaderImpl.java:576)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readDocument(WSDLReaderImpl.java:438)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:377)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseImport(WSDLReaderImpl.java:937)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseDefinition(WSDLReaderImpl.java:820)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:719)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:688)
+	at oracle.fabric.common.wsdl.SchemaBuilder.convDOMElemToWSDLDef(SchemaBuilder.java:1307)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadEmbeddedSchemas(SchemaBuilder.java:504)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadSchemasFromWSDL(SchemaBuilder.java:456)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadAllSchemas(SchemaBuilder.java:247)
+	at oracle.fabric.common.wsdl.SchemaManager.loadAllXSD(SchemaManager.java:305)
+	at oracle.fabric.common.wsdl.SchemaManager.buildXDKSchema(SchemaManager.java:553)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupSchema(SchemaManager.java:404)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupXSDElementDeclaration(SchemaManager.java:729)
+	at oracle.soa.scac.WSDLValidator.validateMessageParts(WSDLValidator.java:112)
+	at oracle.soa.scac.WSDLValidator.validateMessages(WSDLValidator.java:88)
+	at oracle.soa.scac.WSDLValidator.validate(WSDLValidator.java:44)
+	at oracle.soa.scac.ValidateComposite.loadWSDLs(ValidateComposite.java:900)
+	at oracle.soa.scac.ValidateComposite.doValidation0(ValidateComposite.java:493)
+	at oracle.soa.scac.ValidateComposite.doValidation(ValidateComposite.java:481)
+	at oracle.soa.scac.ValidateComposite.run0(ValidateComposite.java:206)
+	at oracle.soa.scac.ValidateComposite.run(ValidateComposite.java:187)
+	at oracle.soa.scac.ValidateComposite.main(ValidateComposite.java:179)
+Caused by: oracle.mds.exception.MDSExceptionList: MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1008)
+	... 44 more
+Dec 11, 2018 5:12:27 PM oracle.adf.share.config.MDSConfigFactory createApplication
+INFO: 
+oracle.adf.share.ADFShareException: MDSConfigurationException encountered in parseADFConfiguration
+	at oracle.adf.share.config.ADFMDSConfig.createMDSInstanceFromelement(ADFMDSConfig.java:292)
+	at oracle.adf.share.config.MDSConfigFactory.createApplication(MDSConfigFactory.java:123)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:150)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:82)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:60)
+	at oracle.adf.share.ADFContext.getADFConfigEx(ADFContext.java:888)
+	at oracle.adf.share.ADFContext.getADFConfig(ADFContext.java:837)
+	at oracle.adf.share.config.ADFContextMDSConfigHelperImpl.createMDSSession(ADFContextMDSConfigHelperImpl.java:62)
+	at oracle.adf.share.ADFContext.getMDSSessionAsObject(ADFContext.java:1722)
+	at oracle.mds.internal.net.OraMDSURLConnection.getMDSSession(OraMDSURLConnection.java:153)
+	at oracle.mds.internal.net.OraMDSURLConnection.getInputStream(OraMDSURLConnection.java:83)
+	at java.net.URL.openStream(URL.java:1010)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.openAsStreamConnection(WSDLReaderImpl.java:576)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readDocument(WSDLReaderImpl.java:438)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:377)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseImport(WSDLReaderImpl.java:937)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseDefinition(WSDLReaderImpl.java:820)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:719)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:688)
+	at oracle.fabric.common.wsdl.SchemaBuilder.convDOMElemToWSDLDef(SchemaBuilder.java:1307)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadEmbeddedSchemas(SchemaBuilder.java:504)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadSchemasFromWSDL(SchemaBuilder.java:456)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadAllSchemas(SchemaBuilder.java:247)
+	at oracle.fabric.common.wsdl.SchemaManager.loadAllXSD(SchemaManager.java:305)
+	at oracle.fabric.common.wsdl.SchemaManager.buildXDKSchema(SchemaManager.java:553)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupSchema(SchemaManager.java:404)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupXSDElementDeclaration(SchemaManager.java:729)
+	at oracle.soa.scac.WSDLValidator.validateMessageParts(WSDLValidator.java:112)
+	at oracle.soa.scac.WSDLValidator.validateMessages(WSDLValidator.java:88)
+	at oracle.soa.scac.WSDLValidator.validate(WSDLValidator.java:44)
+	at oracle.soa.scac.ValidateComposite.loadWSDLs(ValidateComposite.java:900)
+	at oracle.soa.scac.ValidateComposite.doValidation0(ValidateComposite.java:493)
+	at oracle.soa.scac.ValidateComposite.doValidation(ValidateComposite.java:481)
+	at oracle.soa.scac.ValidateComposite.run0(ValidateComposite.java:206)
+	at oracle.soa.scac.ValidateComposite.run(ValidateComposite.java:187)
+	at oracle.soa.scac.ValidateComposite.main(ValidateComposite.java:179)
+Caused by: oracle.mds.config.MDSConfigurationException: MDS-01330: unable to load MDS configuration document    
+MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1014)
+	at oracle.mds.config.PConfig.<init>(PConfig.java:767)
+	at oracle.mds.config.MDSConfig.loadFromBean(MDSConfig.java:1151)
+	at oracle.mds.config.MDSConfig.loadFromElement(MDSConfig.java:1218)
+	at oracle.mds.config.MDSConfig.<init>(MDSConfig.java:781)
+	at oracle.mds.core.MDSInstance.getMDSConfigFromDocument(MDSInstance.java:2788)
+	at oracle.mds.core.MDSInstance.findAndStoreMDSInstanceWithCustConfig(MDSInstance.java:2621)
+	at oracle.mds.core.MDSInstance.getOrCreateInstanceInternal(MDSInstance.java:2118)
+	at oracle.mds.core.MDSInstance.getOrCreateInstance(MDSInstance.java:812)
+	at oracle.adf.share.config.ADFMDSConfig.createMDSInstanceFromelement(ADFMDSConfig.java:276)
+	... 35 more
+Caused by: oracle.mds.exception.MDSExceptionList: MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1008)
+	... 44 more
+Dec 11, 2018 5:12:27 PM oracle.adf.share.config.ADFMDSConfig createMDSInstanceFromelement
+SEVERE: MDSConfigurationException encountered in parseADFConfigurationMDS-01330: unable to load MDS configuration document    
+MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+oracle.mds.config.MDSConfigurationException: MDS-01330: unable to load MDS configuration document    
+MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1014)
+	at oracle.mds.config.PConfig.<init>(PConfig.java:767)
+	at oracle.mds.config.MDSConfig.loadFromBean(MDSConfig.java:1151)
+	at oracle.mds.config.MDSConfig.loadFromElement(MDSConfig.java:1218)
+	at oracle.mds.config.MDSConfig.<init>(MDSConfig.java:781)
+	at oracle.mds.core.MDSInstance.getMDSConfigFromDocument(MDSInstance.java:2788)
+	at oracle.mds.core.MDSInstance.findAndStoreMDSInstanceWithCustConfig(MDSInstance.java:2621)
+	at oracle.mds.core.MDSInstance.getOrCreateInstanceInternal(MDSInstance.java:2118)
+	at oracle.mds.core.MDSInstance.getOrCreateInstance(MDSInstance.java:812)
+	at oracle.adf.share.config.ADFMDSConfig.createMDSInstanceFromelement(ADFMDSConfig.java:276)
+	at oracle.adf.share.config.MDSConfigFactory.createApplication(MDSConfigFactory.java:123)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:150)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:82)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:60)
+	at oracle.adf.share.ADFContext.getADFConfigEx(ADFContext.java:888)
+	at oracle.adf.share.ADFContext.getADFConfig(ADFContext.java:837)
+	at oracle.adf.share.ADFContext.getADFContextProperty(ADFContext.java:1078)
+	at oracle.adf.share.mds.MDSUtil.getCustClassList(MDSUtil.java:69)
+	at oracle.adf.share.config.ADFMDSConfig.parseADFConfiguration(ADFMDSConfig.java:125)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at oracle.adf.share.config.ADFConfigImpl.getResultFromComponent(ADFConfigImpl.java:533)
+	at oracle.adf.share.config.ADFConfigImpl.getConfigObject(ADFConfigImpl.java:604)
+	at oracle.adf.share.config.ADFConfigImpl.getConfigObject(ADFConfigImpl.java:582)
+	at oracle.adf.share.config.ADFConfigImpl.getMDSInstance(ADFConfigImpl.java:647)
+	at oracle.adf.share.config.ADFConfigImpl.getMDSInstance(ADFConfigImpl.java:642)
+	at oracle.adf.share.config.ADFContextMDSConfigHelperImpl.createMDSSession(ADFContextMDSConfigHelperImpl.java:62)
+	at oracle.adf.share.ADFContext.getMDSSessionAsObject(ADFContext.java:1722)
+	at oracle.mds.internal.net.OraMDSURLConnection.getMDSSession(OraMDSURLConnection.java:153)
+	at oracle.mds.internal.net.OraMDSURLConnection.getInputStream(OraMDSURLConnection.java:83)
+	at java.net.URL.openStream(URL.java:1010)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.openAsStreamConnection(WSDLReaderImpl.java:576)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readDocument(WSDLReaderImpl.java:438)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:377)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseImport(WSDLReaderImpl.java:937)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseDefinition(WSDLReaderImpl.java:820)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:719)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:688)
+	at oracle.fabric.common.wsdl.SchemaBuilder.convDOMElemToWSDLDef(SchemaBuilder.java:1307)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadEmbeddedSchemas(SchemaBuilder.java:504)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadSchemasFromWSDL(SchemaBuilder.java:456)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadAllSchemas(SchemaBuilder.java:247)
+	at oracle.fabric.common.wsdl.SchemaManager.loadAllXSD(SchemaManager.java:305)
+	at oracle.fabric.common.wsdl.SchemaManager.buildXDKSchema(SchemaManager.java:553)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupSchema(SchemaManager.java:404)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupXSDElementDeclaration(SchemaManager.java:729)
+	at oracle.soa.scac.WSDLValidator.validateMessageParts(WSDLValidator.java:112)
+	at oracle.soa.scac.WSDLValidator.validateMessages(WSDLValidator.java:88)
+	at oracle.soa.scac.WSDLValidator.validate(WSDLValidator.java:44)
+	at oracle.soa.scac.ValidateComposite.loadWSDLs(ValidateComposite.java:900)
+	at oracle.soa.scac.ValidateComposite.doValidation0(ValidateComposite.java:493)
+	at oracle.soa.scac.ValidateComposite.doValidation(ValidateComposite.java:481)
+	at oracle.soa.scac.ValidateComposite.run0(ValidateComposite.java:206)
+	at oracle.soa.scac.ValidateComposite.run(ValidateComposite.java:187)
+	at oracle.soa.scac.ValidateComposite.main(ValidateComposite.java:179)
+Caused by: oracle.mds.exception.MDSExceptionList: MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1008)
+	... 56 more
+Dec 11, 2018 5:12:27 PM oracle.adf.share.config.MDSConfigFactory createApplication
+INFO: 
+oracle.adf.share.ADFShareException: MDSConfigurationException encountered in parseADFConfiguration
+	at oracle.adf.share.config.ADFMDSConfig.createMDSInstanceFromelement(ADFMDSConfig.java:292)
+	at oracle.adf.share.config.MDSConfigFactory.createApplication(MDSConfigFactory.java:123)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:150)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:82)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:60)
+	at oracle.adf.share.ADFContext.getADFConfigEx(ADFContext.java:888)
+	at oracle.adf.share.ADFContext.getADFConfig(ADFContext.java:837)
+	at oracle.adf.share.ADFContext.getADFContextProperty(ADFContext.java:1078)
+	at oracle.adf.share.mds.MDSUtil.getCustClassList(MDSUtil.java:69)
+	at oracle.adf.share.config.ADFMDSConfig.parseADFConfiguration(ADFMDSConfig.java:125)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at oracle.adf.share.config.ADFConfigImpl.getResultFromComponent(ADFConfigImpl.java:533)
+	at oracle.adf.share.config.ADFConfigImpl.getConfigObject(ADFConfigImpl.java:604)
+	at oracle.adf.share.config.ADFConfigImpl.getConfigObject(ADFConfigImpl.java:582)
+	at oracle.adf.share.config.ADFConfigImpl.getMDSInstance(ADFConfigImpl.java:647)
+	at oracle.adf.share.config.ADFConfigImpl.getMDSInstance(ADFConfigImpl.java:642)
+	at oracle.adf.share.config.ADFContextMDSConfigHelperImpl.createMDSSession(ADFContextMDSConfigHelperImpl.java:62)
+	at oracle.adf.share.ADFContext.getMDSSessionAsObject(ADFContext.java:1722)
+	at oracle.mds.internal.net.OraMDSURLConnection.getMDSSession(OraMDSURLConnection.java:153)
+	at oracle.mds.internal.net.OraMDSURLConnection.getInputStream(OraMDSURLConnection.java:83)
+	at java.net.URL.openStream(URL.java:1010)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.openAsStreamConnection(WSDLReaderImpl.java:576)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readDocument(WSDLReaderImpl.java:438)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:377)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseImport(WSDLReaderImpl.java:937)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseDefinition(WSDLReaderImpl.java:820)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:719)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:688)
+	at oracle.fabric.common.wsdl.SchemaBuilder.convDOMElemToWSDLDef(SchemaBuilder.java:1307)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadEmbeddedSchemas(SchemaBuilder.java:504)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadSchemasFromWSDL(SchemaBuilder.java:456)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadAllSchemas(SchemaBuilder.java:247)
+	at oracle.fabric.common.wsdl.SchemaManager.loadAllXSD(SchemaManager.java:305)
+	at oracle.fabric.common.wsdl.SchemaManager.buildXDKSchema(SchemaManager.java:553)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupSchema(SchemaManager.java:404)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupXSDElementDeclaration(SchemaManager.java:729)
+	at oracle.soa.scac.WSDLValidator.validateMessageParts(WSDLValidator.java:112)
+	at oracle.soa.scac.WSDLValidator.validateMessages(WSDLValidator.java:88)
+	at oracle.soa.scac.WSDLValidator.validate(WSDLValidator.java:44)
+	at oracle.soa.scac.ValidateComposite.loadWSDLs(ValidateComposite.java:900)
+	at oracle.soa.scac.ValidateComposite.doValidation0(ValidateComposite.java:493)
+	at oracle.soa.scac.ValidateComposite.doValidation(ValidateComposite.java:481)
+	at oracle.soa.scac.ValidateComposite.run0(ValidateComposite.java:206)
+	at oracle.soa.scac.ValidateComposite.run(ValidateComposite.java:187)
+	at oracle.soa.scac.ValidateComposite.main(ValidateComposite.java:179)
+Caused by: oracle.mds.config.MDSConfigurationException: MDS-01330: unable to load MDS configuration document    
+MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1014)
+	at oracle.mds.config.PConfig.<init>(PConfig.java:767)
+	at oracle.mds.config.MDSConfig.loadFromBean(MDSConfig.java:1151)
+	at oracle.mds.config.MDSConfig.loadFromElement(MDSConfig.java:1218)
+	at oracle.mds.config.MDSConfig.<init>(MDSConfig.java:781)
+	at oracle.mds.core.MDSInstance.getMDSConfigFromDocument(MDSInstance.java:2788)
+	at oracle.mds.core.MDSInstance.findAndStoreMDSInstanceWithCustConfig(MDSInstance.java:2621)
+	at oracle.mds.core.MDSInstance.getOrCreateInstanceInternal(MDSInstance.java:2118)
+	at oracle.mds.core.MDSInstance.getOrCreateInstance(MDSInstance.java:812)
+	at oracle.adf.share.config.ADFMDSConfig.createMDSInstanceFromelement(ADFMDSConfig.java:276)
+	... 47 more
+Caused by: oracle.mds.exception.MDSExceptionList: MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1008)
+	... 56 more
+Dec 11, 2018 5:12:27 PM oracle.adf.share.config.ADFMDSConfig parseADFConfiguration
+SEVERE: MDSConfigurationException encountered in parseADFConfigurationMDS-01330: unable to load MDS configuration document    
+MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+oracle.mds.config.MDSConfigurationException: MDS-01330: unable to load MDS configuration document    
+MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1014)
+	at oracle.mds.config.PConfig.<init>(PConfig.java:767)
+	at oracle.mds.config.MDSConfig.loadFromBean(MDSConfig.java:1151)
+	at oracle.mds.config.MDSConfig.loadFromElement(MDSConfig.java:1218)
+	at oracle.mds.config.MDSConfig.<init>(MDSConfig.java:781)
+	at oracle.mds.core.MDSInstance.getMDSConfigFromDocument(MDSInstance.java:2788)
+	at oracle.mds.core.MDSInstance.findAndStoreMDSInstanceWithCustConfig(MDSInstance.java:2621)
+	at oracle.mds.core.MDSInstance.getOrCreateInstanceInternal(MDSInstance.java:2118)
+	at oracle.mds.core.MDSInstance.getOrCreateInstance(MDSInstance.java:812)
+	at oracle.adf.share.config.ADFMDSConfig.parseADFConfiguration(ADFMDSConfig.java:146)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at oracle.adf.share.config.ADFConfigImpl.getResultFromComponent(ADFConfigImpl.java:533)
+	at oracle.adf.share.config.ADFConfigImpl.getConfigObject(ADFConfigImpl.java:604)
+	at oracle.adf.share.config.ADFConfigImpl.getConfigObject(ADFConfigImpl.java:582)
+	at oracle.adf.share.config.ADFConfigImpl.getMDSInstance(ADFConfigImpl.java:647)
+	at oracle.adf.share.config.ADFConfigImpl.getMDSInstance(ADFConfigImpl.java:642)
+	at oracle.adf.share.config.ADFContextMDSConfigHelperImpl.createMDSSession(ADFContextMDSConfigHelperImpl.java:62)
+	at oracle.adf.share.ADFContext.getMDSSessionAsObject(ADFContext.java:1722)
+	at oracle.mds.internal.net.OraMDSURLConnection.getMDSSession(OraMDSURLConnection.java:153)
+	at oracle.mds.internal.net.OraMDSURLConnection.getInputStream(OraMDSURLConnection.java:83)
+	at java.net.URL.openStream(URL.java:1010)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.openAsStreamConnection(WSDLReaderImpl.java:576)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readDocument(WSDLReaderImpl.java:438)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:377)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseImport(WSDLReaderImpl.java:937)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseDefinition(WSDLReaderImpl.java:820)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:719)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:688)
+	at oracle.fabric.common.wsdl.SchemaBuilder.convDOMElemToWSDLDef(SchemaBuilder.java:1307)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadEmbeddedSchemas(SchemaBuilder.java:504)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadSchemasFromWSDL(SchemaBuilder.java:456)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadAllSchemas(SchemaBuilder.java:247)
+	at oracle.fabric.common.wsdl.SchemaManager.loadAllXSD(SchemaManager.java:305)
+	at oracle.fabric.common.wsdl.SchemaManager.buildXDKSchema(SchemaManager.java:553)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupSchema(SchemaManager.java:404)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupXSDElementDeclaration(SchemaManager.java:729)
+	at oracle.soa.scac.WSDLValidator.validateMessageParts(WSDLValidator.java:112)
+	at oracle.soa.scac.WSDLValidator.validateMessages(WSDLValidator.java:88)
+	at oracle.soa.scac.WSDLValidator.validate(WSDLValidator.java:44)
+	at oracle.soa.scac.ValidateComposite.loadWSDLs(ValidateComposite.java:900)
+	at oracle.soa.scac.ValidateComposite.doValidation0(ValidateComposite.java:493)
+	at oracle.soa.scac.ValidateComposite.doValidation(ValidateComposite.java:481)
+	at oracle.soa.scac.ValidateComposite.run0(ValidateComposite.java:206)
+	at oracle.soa.scac.ValidateComposite.run(ValidateComposite.java:187)
+	at oracle.soa.scac.ValidateComposite.main(ValidateComposite.java:179)
+Caused by: oracle.mds.exception.MDSExceptionList: MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1008)
+	... 47 more
+Dec 11, 2018 5:12:27 PM oracle.adf.share.config.ADFContextMDSConfigHelperImpl createMDSSession
+INFO: 
+oracle.adf.share.ADFShareException: MDSConfigurationException encountered in parseADFConfiguration
+	at oracle.adf.share.config.ADFMDSConfig.parseADFConfiguration(ADFMDSConfig.java:209)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at oracle.adf.share.config.ADFConfigImpl.getResultFromComponent(ADFConfigImpl.java:533)
+	at oracle.adf.share.config.ADFConfigImpl.getConfigObject(ADFConfigImpl.java:604)
+	at oracle.adf.share.config.ADFConfigImpl.getConfigObject(ADFConfigImpl.java:582)
+	at oracle.adf.share.config.ADFConfigImpl.getMDSInstance(ADFConfigImpl.java:647)
+	at oracle.adf.share.config.ADFConfigImpl.getMDSInstance(ADFConfigImpl.java:642)
+	at oracle.adf.share.config.ADFContextMDSConfigHelperImpl.createMDSSession(ADFContextMDSConfigHelperImpl.java:62)
+	at oracle.adf.share.ADFContext.getMDSSessionAsObject(ADFContext.java:1722)
+	at oracle.mds.internal.net.OraMDSURLConnection.getMDSSession(OraMDSURLConnection.java:153)
+	at oracle.mds.internal.net.OraMDSURLConnection.getInputStream(OraMDSURLConnection.java:83)
+	at java.net.URL.openStream(URL.java:1010)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.openAsStreamConnection(WSDLReaderImpl.java:576)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readDocument(WSDLReaderImpl.java:438)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:377)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseImport(WSDLReaderImpl.java:937)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseDefinition(WSDLReaderImpl.java:820)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:719)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:688)
+	at oracle.fabric.common.wsdl.SchemaBuilder.convDOMElemToWSDLDef(SchemaBuilder.java:1307)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadEmbeddedSchemas(SchemaBuilder.java:504)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadSchemasFromWSDL(SchemaBuilder.java:456)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadAllSchemas(SchemaBuilder.java:247)
+	at oracle.fabric.common.wsdl.SchemaManager.loadAllXSD(SchemaManager.java:305)
+	at oracle.fabric.common.wsdl.SchemaManager.buildXDKSchema(SchemaManager.java:553)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupSchema(SchemaManager.java:404)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupXSDElementDeclaration(SchemaManager.java:729)
+	at oracle.soa.scac.WSDLValidator.validateMessageParts(WSDLValidator.java:112)
+	at oracle.soa.scac.WSDLValidator.validateMessages(WSDLValidator.java:88)
+	at oracle.soa.scac.WSDLValidator.validate(WSDLValidator.java:44)
+	at oracle.soa.scac.ValidateComposite.loadWSDLs(ValidateComposite.java:900)
+	at oracle.soa.scac.ValidateComposite.doValidation0(ValidateComposite.java:493)
+	at oracle.soa.scac.ValidateComposite.doValidation(ValidateComposite.java:481)
+	at oracle.soa.scac.ValidateComposite.run0(ValidateComposite.java:206)
+	at oracle.soa.scac.ValidateComposite.run(ValidateComposite.java:187)
+	at oracle.soa.scac.ValidateComposite.main(ValidateComposite.java:179)
+Caused by: oracle.mds.config.MDSConfigurationException: MDS-01330: unable to load MDS configuration document    
+MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1014)
+	at oracle.mds.config.PConfig.<init>(PConfig.java:767)
+	at oracle.mds.config.MDSConfig.loadFromBean(MDSConfig.java:1151)
+	at oracle.mds.config.MDSConfig.loadFromElement(MDSConfig.java:1218)
+	at oracle.mds.config.MDSConfig.<init>(MDSConfig.java:781)
+	at oracle.mds.core.MDSInstance.getMDSConfigFromDocument(MDSInstance.java:2788)
+	at oracle.mds.core.MDSInstance.findAndStoreMDSInstanceWithCustConfig(MDSInstance.java:2621)
+	at oracle.mds.core.MDSInstance.getOrCreateInstanceInternal(MDSInstance.java:2118)
+	at oracle.mds.core.MDSInstance.getOrCreateInstance(MDSInstance.java:812)
+	at oracle.adf.share.config.ADFMDSConfig.parseADFConfiguration(ADFMDSConfig.java:146)
+	... 38 more
+Caused by: oracle.mds.exception.MDSExceptionList: MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1008)
+	... 47 more
+Dec 11, 2018 5:12:31 PM oracle.adf.share.config.ADFMDSConfig createMDSInstanceFromelement
+SEVERE: MDSConfigurationException encountered in parseADFConfigurationMDS-01330: unable to load MDS configuration document    
+MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+oracle.mds.config.MDSConfigurationException: MDS-01330: unable to load MDS configuration document    
+MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1014)
+	at oracle.mds.config.PConfig.<init>(PConfig.java:767)
+	at oracle.mds.config.MDSConfig.loadFromBean(MDSConfig.java:1151)
+	at oracle.mds.config.MDSConfig.loadFromElement(MDSConfig.java:1218)
+	at oracle.mds.config.MDSConfig.<init>(MDSConfig.java:781)
+	at oracle.mds.core.MDSInstance.getMDSConfigFromDocument(MDSInstance.java:2788)
+	at oracle.mds.core.MDSInstance.findAndStoreMDSInstanceWithCustConfig(MDSInstance.java:2621)
+	at oracle.mds.core.MDSInstance.getOrCreateInstanceInternal(MDSInstance.java:2118)
+	at oracle.mds.core.MDSInstance.getOrCreateInstance(MDSInstance.java:812)
+	at oracle.adf.share.config.ADFMDSConfig.createMDSInstanceFromelement(ADFMDSConfig.java:276)
+	at oracle.adf.share.config.MDSConfigFactory.createApplication(MDSConfigFactory.java:123)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:150)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:82)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:60)
+	at oracle.adf.share.ADFContext.getADFConfigEx(ADFContext.java:888)
+	at oracle.adf.share.ADFContext.getADFConfig(ADFContext.java:837)
+	at oracle.adf.share.config.ADFContextMDSConfigHelperImpl.createMDSSession(ADFContextMDSConfigHelperImpl.java:62)
+	at oracle.adf.share.ADFContext.getMDSSessionAsObject(ADFContext.java:1722)
+	at oracle.mds.internal.net.OraMDSURLConnection.getMDSSession(OraMDSURLConnection.java:153)
+	at oracle.mds.internal.net.OraMDSURLConnection.getInputStream(OraMDSURLConnection.java:83)
+	at java.net.URL.openStream(URL.java:1010)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.openAsStreamConnection(WSDLReaderImpl.java:576)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readDocument(WSDLReaderImpl.java:438)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:377)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseImport(WSDLReaderImpl.java:937)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseDefinition(WSDLReaderImpl.java:820)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:719)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:688)
+	at oracle.fabric.common.wsdl.SchemaBuilder.convDOMElemToWSDLDef(SchemaBuilder.java:1307)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadEmbeddedSchemas(SchemaBuilder.java:504)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadSchemasFromWSDL(SchemaBuilder.java:456)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadAllSchemas(SchemaBuilder.java:247)
+	at oracle.fabric.common.wsdl.SchemaManager.loadAllXSD(SchemaManager.java:305)
+	at oracle.fabric.common.wsdl.SchemaManager.buildXDKSchema(SchemaManager.java:553)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupSchema(SchemaManager.java:404)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupXSDElementDeclaration(SchemaManager.java:729)
+	at oracle.soa.scac.WSDLValidator.validateMessageParts(WSDLValidator.java:112)
+	at oracle.soa.scac.WSDLValidator.validateMessages(WSDLValidator.java:88)
+	at oracle.soa.scac.WSDLValidator.validate(WSDLValidator.java:44)
+	at oracle.soa.scac.ValidateComposite.loadWSDLs(ValidateComposite.java:900)
+	at oracle.soa.scac.ValidateComposite.doValidation0(ValidateComposite.java:493)
+	at oracle.soa.scac.ValidateComposite.doValidation(ValidateComposite.java:481)
+	at oracle.soa.scac.ValidateComposite.run0(ValidateComposite.java:206)
+	at oracle.soa.scac.ValidateComposite.run(ValidateComposite.java:187)
+	at oracle.soa.scac.ValidateComposite.main(ValidateComposite.java:179)
+Caused by: oracle.mds.exception.MDSExceptionList: MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1008)
+	... 44 more
+Dec 11, 2018 5:12:31 PM oracle.adf.share.config.MDSConfigFactory createApplication
+INFO: 
+oracle.adf.share.ADFShareException: MDSConfigurationException encountered in parseADFConfiguration
+	at oracle.adf.share.config.ADFMDSConfig.createMDSInstanceFromelement(ADFMDSConfig.java:292)
+	at oracle.adf.share.config.MDSConfigFactory.createApplication(MDSConfigFactory.java:123)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:150)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:82)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:60)
+	at oracle.adf.share.ADFContext.getADFConfigEx(ADFContext.java:888)
+	at oracle.adf.share.ADFContext.getADFConfig(ADFContext.java:837)
+	at oracle.adf.share.config.ADFContextMDSConfigHelperImpl.createMDSSession(ADFContextMDSConfigHelperImpl.java:62)
+	at oracle.adf.share.ADFContext.getMDSSessionAsObject(ADFContext.java:1722)
+	at oracle.mds.internal.net.OraMDSURLConnection.getMDSSession(OraMDSURLConnection.java:153)
+	at oracle.mds.internal.net.OraMDSURLConnection.getInputStream(OraMDSURLConnection.java:83)
+	at java.net.URL.openStream(URL.java:1010)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.openAsStreamConnection(WSDLReaderImpl.java:576)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readDocument(WSDLReaderImpl.java:438)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:377)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseImport(WSDLReaderImpl.java:937)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseDefinition(WSDLReaderImpl.java:820)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:719)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:688)
+	at oracle.fabric.common.wsdl.SchemaBuilder.convDOMElemToWSDLDef(SchemaBuilder.java:1307)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadEmbeddedSchemas(SchemaBuilder.java:504)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadSchemasFromWSDL(SchemaBuilder.java:456)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadAllSchemas(SchemaBuilder.java:247)
+	at oracle.fabric.common.wsdl.SchemaManager.loadAllXSD(SchemaManager.java:305)
+	at oracle.fabric.common.wsdl.SchemaManager.buildXDKSchema(SchemaManager.java:553)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupSchema(SchemaManager.java:404)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupXSDElementDeclaration(SchemaManager.java:729)
+	at oracle.soa.scac.WSDLValidator.validateMessageParts(WSDLValidator.java:112)
+	at oracle.soa.scac.WSDLValidator.validateMessages(WSDLValidator.java:88)
+	at oracle.soa.scac.WSDLValidator.validate(WSDLValidator.java:44)
+	at oracle.soa.scac.ValidateComposite.loadWSDLs(ValidateComposite.java:900)
+	at oracle.soa.scac.ValidateComposite.doValidation0(ValidateComposite.java:493)
+	at oracle.soa.scac.ValidateComposite.doValidation(ValidateComposite.java:481)
+	at oracle.soa.scac.ValidateComposite.run0(ValidateComposite.java:206)
+	at oracle.soa.scac.ValidateComposite.run(ValidateComposite.java:187)
+	at oracle.soa.scac.ValidateComposite.main(ValidateComposite.java:179)
+Caused by: oracle.mds.config.MDSConfigurationException: MDS-01330: unable to load MDS configuration document    
+MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1014)
+	at oracle.mds.config.PConfig.<init>(PConfig.java:767)
+	at oracle.mds.config.MDSConfig.loadFromBean(MDSConfig.java:1151)
+	at oracle.mds.config.MDSConfig.loadFromElement(MDSConfig.java:1218)
+	at oracle.mds.config.MDSConfig.<init>(MDSConfig.java:781)
+	at oracle.mds.core.MDSInstance.getMDSConfigFromDocument(MDSInstance.java:2788)
+	at oracle.mds.core.MDSInstance.findAndStoreMDSInstanceWithCustConfig(MDSInstance.java:2621)
+	at oracle.mds.core.MDSInstance.getOrCreateInstanceInternal(MDSInstance.java:2118)
+	at oracle.mds.core.MDSInstance.getOrCreateInstance(MDSInstance.java:812)
+	at oracle.adf.share.config.ADFMDSConfig.createMDSInstanceFromelement(ADFMDSConfig.java:276)
+	... 35 more
+Caused by: oracle.mds.exception.MDSExceptionList: MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1008)
+	... 44 more
+Dec 11, 2018 5:12:32 PM oracle.adf.share.config.ADFMDSConfig createMDSInstanceFromelement
+SEVERE: MDSConfigurationException encountered in parseADFConfigurationMDS-01330: unable to load MDS configuration document    
+MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+oracle.mds.config.MDSConfigurationException: MDS-01330: unable to load MDS configuration document    
+MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1014)
+	at oracle.mds.config.PConfig.<init>(PConfig.java:767)
+	at oracle.mds.config.MDSConfig.loadFromBean(MDSConfig.java:1151)
+	at oracle.mds.config.MDSConfig.loadFromElement(MDSConfig.java:1218)
+	at oracle.mds.config.MDSConfig.<init>(MDSConfig.java:781)
+	at oracle.mds.core.MDSInstance.getMDSConfigFromDocument(MDSInstance.java:2788)
+	at oracle.mds.core.MDSInstance.findAndStoreMDSInstanceWithCustConfig(MDSInstance.java:2621)
+	at oracle.mds.core.MDSInstance.getOrCreateInstanceInternal(MDSInstance.java:2118)
+	at oracle.mds.core.MDSInstance.getOrCreateInstance(MDSInstance.java:812)
+	at oracle.adf.share.config.ADFMDSConfig.createMDSInstanceFromelement(ADFMDSConfig.java:276)
+	at oracle.adf.share.config.MDSConfigFactory.createApplication(MDSConfigFactory.java:123)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:150)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:82)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:60)
+	at oracle.adf.share.ADFContext.getADFConfigEx(ADFContext.java:888)
+	at oracle.adf.share.ADFContext.getADFConfig(ADFContext.java:837)
+	at oracle.adf.share.ADFContext.getADFContextProperty(ADFContext.java:1078)
+	at oracle.adf.share.mds.MDSUtil.getCustClassList(MDSUtil.java:69)
+	at oracle.adf.share.config.ADFMDSConfig.parseADFConfiguration(ADFMDSConfig.java:125)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at oracle.adf.share.config.ADFConfigImpl.getResultFromComponent(ADFConfigImpl.java:533)
+	at oracle.adf.share.config.ADFConfigImpl.getConfigObject(ADFConfigImpl.java:604)
+	at oracle.adf.share.config.ADFConfigImpl.getConfigObject(ADFConfigImpl.java:582)
+	at oracle.adf.share.config.ADFConfigImpl.getMDSInstance(ADFConfigImpl.java:647)
+	at oracle.adf.share.config.ADFConfigImpl.getMDSInstance(ADFConfigImpl.java:642)
+	at oracle.adf.share.config.ADFContextMDSConfigHelperImpl.createMDSSession(ADFContextMDSConfigHelperImpl.java:62)
+	at oracle.adf.share.ADFContext.getMDSSessionAsObject(ADFContext.java:1722)
+	at oracle.mds.internal.net.OraMDSURLConnection.getMDSSession(OraMDSURLConnection.java:153)
+	at oracle.mds.internal.net.OraMDSURLConnection.getInputStream(OraMDSURLConnection.java:83)
+	at java.net.URL.openStream(URL.java:1010)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.openAsStreamConnection(WSDLReaderImpl.java:576)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readDocument(WSDLReaderImpl.java:438)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:377)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseImport(WSDLReaderImpl.java:937)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseDefinition(WSDLReaderImpl.java:820)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:719)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:688)
+	at oracle.fabric.common.wsdl.SchemaBuilder.convDOMElemToWSDLDef(SchemaBuilder.java:1307)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadEmbeddedSchemas(SchemaBuilder.java:504)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadSchemasFromWSDL(SchemaBuilder.java:456)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadAllSchemas(SchemaBuilder.java:247)
+	at oracle.fabric.common.wsdl.SchemaManager.loadAllXSD(SchemaManager.java:305)
+	at oracle.fabric.common.wsdl.SchemaManager.buildXDKSchema(SchemaManager.java:553)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupSchema(SchemaManager.java:404)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupXSDElementDeclaration(SchemaManager.java:729)
+	at oracle.soa.scac.WSDLValidator.validateMessageParts(WSDLValidator.java:112)
+	at oracle.soa.scac.WSDLValidator.validateMessages(WSDLValidator.java:88)
+	at oracle.soa.scac.WSDLValidator.validate(WSDLValidator.java:44)
+	at oracle.soa.scac.ValidateComposite.loadWSDLs(ValidateComposite.java:900)
+	at oracle.soa.scac.ValidateComposite.doValidation0(ValidateComposite.java:493)
+	at oracle.soa.scac.ValidateComposite.doValidation(ValidateComposite.java:481)
+	at oracle.soa.scac.ValidateComposite.run0(ValidateComposite.java:206)
+	at oracle.soa.scac.ValidateComposite.run(ValidateComposite.java:187)
+	at oracle.soa.scac.ValidateComposite.main(ValidateComposite.java:179)
+Caused by: oracle.mds.exception.MDSExceptionList: MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1008)
+	... 56 more
+Dec 11, 2018 5:12:32 PM oracle.adf.share.config.MDSConfigFactory createApplication
+INFO: 
+oracle.adf.share.ADFShareException: MDSConfigurationException encountered in parseADFConfiguration
+	at oracle.adf.share.config.ADFMDSConfig.createMDSInstanceFromelement(ADFMDSConfig.java:292)
+	at oracle.adf.share.config.MDSConfigFactory.createApplication(MDSConfigFactory.java:123)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:150)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:82)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:60)
+	at oracle.adf.share.ADFContext.getADFConfigEx(ADFContext.java:888)
+	at oracle.adf.share.ADFContext.getADFConfig(ADFContext.java:837)
+	at oracle.adf.share.ADFContext.getADFContextProperty(ADFContext.java:1078)
+	at oracle.adf.share.mds.MDSUtil.getCustClassList(MDSUtil.java:69)
+	at oracle.adf.share.config.ADFMDSConfig.parseADFConfiguration(ADFMDSConfig.java:125)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at oracle.adf.share.config.ADFConfigImpl.getResultFromComponent(ADFConfigImpl.java:533)
+	at oracle.adf.share.config.ADFConfigImpl.getConfigObject(ADFConfigImpl.java:604)
+	at oracle.adf.share.config.ADFConfigImpl.getConfigObject(ADFConfigImpl.java:582)
+	at oracle.adf.share.config.ADFConfigImpl.getMDSInstance(ADFConfigImpl.java:647)
+	at oracle.adf.share.config.ADFConfigImpl.getMDSInstance(ADFConfigImpl.java:642)
+	at oracle.adf.share.config.ADFContextMDSConfigHelperImpl.createMDSSession(ADFContextMDSConfigHelperImpl.java:62)
+	at oracle.adf.share.ADFContext.getMDSSessionAsObject(ADFContext.java:1722)
+	at oracle.mds.internal.net.OraMDSURLConnection.getMDSSession(OraMDSURLConnection.java:153)
+	at oracle.mds.internal.net.OraMDSURLConnection.getInputStream(OraMDSURLConnection.java:83)
+	at java.net.URL.openStream(URL.java:1010)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.openAsStreamConnection(WSDLReaderImpl.java:576)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readDocument(WSDLReaderImpl.java:438)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:377)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseImport(WSDLReaderImpl.java:937)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseDefinition(WSDLReaderImpl.java:820)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:719)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:688)
+	at oracle.fabric.common.wsdl.SchemaBuilder.convDOMElemToWSDLDef(SchemaBuilder.java:1307)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadEmbeddedSchemas(SchemaBuilder.java:504)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadSchemasFromWSDL(SchemaBuilder.java:456)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadAllSchemas(SchemaBuilder.java:247)
+	at oracle.fabric.common.wsdl.SchemaManager.loadAllXSD(SchemaManager.java:305)
+	at oracle.fabric.common.wsdl.SchemaManager.buildXDKSchema(SchemaManager.java:553)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupSchema(SchemaManager.java:404)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupXSDElementDeclaration(SchemaManager.java:729)
+	at oracle.soa.scac.WSDLValidator.validateMessageParts(WSDLValidator.java:112)
+	at oracle.soa.scac.WSDLValidator.validateMessages(WSDLValidator.java:88)
+	at oracle.soa.scac.WSDLValidator.validate(WSDLValidator.java:44)
+	at oracle.soa.scac.ValidateComposite.loadWSDLs(ValidateComposite.java:900)
+	at oracle.soa.scac.ValidateComposite.doValidation0(ValidateComposite.java:493)
+	at oracle.soa.scac.ValidateComposite.doValidation(ValidateComposite.java:481)
+	at oracle.soa.scac.ValidateComposite.run0(ValidateComposite.java:206)
+	at oracle.soa.scac.ValidateComposite.run(ValidateComposite.java:187)
+	at oracle.soa.scac.ValidateComposite.main(ValidateComposite.java:179)
+Caused by: oracle.mds.config.MDSConfigurationException: MDS-01330: unable to load MDS configuration document    
+MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1014)
+	at oracle.mds.config.PConfig.<init>(PConfig.java:767)
+	at oracle.mds.config.MDSConfig.loadFromBean(MDSConfig.java:1151)
+	at oracle.mds.config.MDSConfig.loadFromElement(MDSConfig.java:1218)
+	at oracle.mds.config.MDSConfig.<init>(MDSConfig.java:781)
+	at oracle.mds.core.MDSInstance.getMDSConfigFromDocument(MDSInstance.java:2788)
+	at oracle.mds.core.MDSInstance.findAndStoreMDSInstanceWithCustConfig(MDSInstance.java:2621)
+	at oracle.mds.core.MDSInstance.getOrCreateInstanceInternal(MDSInstance.java:2118)
+	at oracle.mds.core.MDSInstance.getOrCreateInstance(MDSInstance.java:812)
+	at oracle.adf.share.config.ADFMDSConfig.createMDSInstanceFromelement(ADFMDSConfig.java:276)
+	... 47 more
+Caused by: oracle.mds.exception.MDSExceptionList: MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1008)
+	... 56 more
+Dec 11, 2018 5:12:32 PM oracle.adf.share.config.ADFMDSConfig parseADFConfiguration
+SEVERE: MDSConfigurationException encountered in parseADFConfigurationMDS-01330: unable to load MDS configuration document    
+MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+oracle.mds.config.MDSConfigurationException: MDS-01330: unable to load MDS configuration document    
+MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1014)
+	at oracle.mds.config.PConfig.<init>(PConfig.java:767)
+	at oracle.mds.config.MDSConfig.loadFromBean(MDSConfig.java:1151)
+	at oracle.mds.config.MDSConfig.loadFromElement(MDSConfig.java:1218)
+	at oracle.mds.config.MDSConfig.<init>(MDSConfig.java:781)
+	at oracle.mds.core.MDSInstance.getMDSConfigFromDocument(MDSInstance.java:2788)
+	at oracle.mds.core.MDSInstance.findAndStoreMDSInstanceWithCustConfig(MDSInstance.java:2621)
+	at oracle.mds.core.MDSInstance.getOrCreateInstanceInternal(MDSInstance.java:2118)
+	at oracle.mds.core.MDSInstance.getOrCreateInstance(MDSInstance.java:812)
+	at oracle.adf.share.config.ADFMDSConfig.parseADFConfiguration(ADFMDSConfig.java:146)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at oracle.adf.share.config.ADFConfigImpl.getResultFromComponent(ADFConfigImpl.java:533)
+	at oracle.adf.share.config.ADFConfigImpl.getConfigObject(ADFConfigImpl.java:604)
+	at oracle.adf.share.config.ADFConfigImpl.getConfigObject(ADFConfigImpl.java:582)
+	at oracle.adf.share.config.ADFConfigImpl.getMDSInstance(ADFConfigImpl.java:647)
+	at oracle.adf.share.config.ADFConfigImpl.getMDSInstance(ADFConfigImpl.java:642)
+	at oracle.adf.share.config.ADFContextMDSConfigHelperImpl.createMDSSession(ADFContextMDSConfigHelperImpl.java:62)
+	at oracle.adf.share.ADFContext.getMDSSessionAsObject(ADFContext.java:1722)
+	at oracle.mds.internal.net.OraMDSURLConnection.getMDSSession(OraMDSURLConnection.java:153)
+	at oracle.mds.internal.net.OraMDSURLConnection.getInputStream(OraMDSURLConnection.java:83)
+	at java.net.URL.openStream(URL.java:1010)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.openAsStreamConnection(WSDLReaderImpl.java:576)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readDocument(WSDLReaderImpl.java:438)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:377)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseImport(WSDLReaderImpl.java:937)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseDefinition(WSDLReaderImpl.java:820)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:719)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:688)
+	at oracle.fabric.common.wsdl.SchemaBuilder.convDOMElemToWSDLDef(SchemaBuilder.java:1307)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadEmbeddedSchemas(SchemaBuilder.java:504)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadSchemasFromWSDL(SchemaBuilder.java:456)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadAllSchemas(SchemaBuilder.java:247)
+	at oracle.fabric.common.wsdl.SchemaManager.loadAllXSD(SchemaManager.java:305)
+	at oracle.fabric.common.wsdl.SchemaManager.buildXDKSchema(SchemaManager.java:553)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupSchema(SchemaManager.java:404)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupXSDElementDeclaration(SchemaManager.java:729)
+	at oracle.soa.scac.WSDLValidator.validateMessageParts(WSDLValidator.java:112)
+	at oracle.soa.scac.WSDLValidator.validateMessages(WSDLValidator.java:88)
+	at oracle.soa.scac.WSDLValidator.validate(WSDLValidator.java:44)
+	at oracle.soa.scac.ValidateComposite.loadWSDLs(ValidateComposite.java:900)
+	at oracle.soa.scac.ValidateComposite.doValidation0(ValidateComposite.java:493)
+	at oracle.soa.scac.ValidateComposite.doValidation(ValidateComposite.java:481)
+	at oracle.soa.scac.ValidateComposite.run0(ValidateComposite.java:206)
+	at oracle.soa.scac.ValidateComposite.run(ValidateComposite.java:187)
+	at oracle.soa.scac.ValidateComposite.main(ValidateComposite.java:179)
+Caused by: oracle.mds.exception.MDSExceptionList: MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1008)
+	... 47 more
+Dec 11, 2018 5:12:32 PM oracle.adf.share.config.ADFContextMDSConfigHelperImpl createMDSSession
+INFO: 
+oracle.adf.share.ADFShareException: MDSConfigurationException encountered in parseADFConfiguration
+	at oracle.adf.share.config.ADFMDSConfig.parseADFConfiguration(ADFMDSConfig.java:209)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at oracle.adf.share.config.ADFConfigImpl.getResultFromComponent(ADFConfigImpl.java:533)
+	at oracle.adf.share.config.ADFConfigImpl.getConfigObject(ADFConfigImpl.java:604)
+	at oracle.adf.share.config.ADFConfigImpl.getConfigObject(ADFConfigImpl.java:582)
+	at oracle.adf.share.config.ADFConfigImpl.getMDSInstance(ADFConfigImpl.java:647)
+	at oracle.adf.share.config.ADFConfigImpl.getMDSInstance(ADFConfigImpl.java:642)
+	at oracle.adf.share.config.ADFContextMDSConfigHelperImpl.createMDSSession(ADFContextMDSConfigHelperImpl.java:62)
+	at oracle.adf.share.ADFContext.getMDSSessionAsObject(ADFContext.java:1722)
+	at oracle.mds.internal.net.OraMDSURLConnection.getMDSSession(OraMDSURLConnection.java:153)
+	at oracle.mds.internal.net.OraMDSURLConnection.getInputStream(OraMDSURLConnection.java:83)
+	at java.net.URL.openStream(URL.java:1010)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.openAsStreamConnection(WSDLReaderImpl.java:576)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readDocument(WSDLReaderImpl.java:438)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:377)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseImport(WSDLReaderImpl.java:937)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseDefinition(WSDLReaderImpl.java:820)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:719)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:688)
+	at oracle.fabric.common.wsdl.SchemaBuilder.convDOMElemToWSDLDef(SchemaBuilder.java:1307)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadEmbeddedSchemas(SchemaBuilder.java:504)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadSchemasFromWSDL(SchemaBuilder.java:456)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadAllSchemas(SchemaBuilder.java:247)
+	at oracle.fabric.common.wsdl.SchemaManager.loadAllXSD(SchemaManager.java:305)
+	at oracle.fabric.common.wsdl.SchemaManager.buildXDKSchema(SchemaManager.java:553)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupSchema(SchemaManager.java:404)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupXSDElementDeclaration(SchemaManager.java:729)
+	at oracle.soa.scac.WSDLValidator.validateMessageParts(WSDLValidator.java:112)
+	at oracle.soa.scac.WSDLValidator.validateMessages(WSDLValidator.java:88)
+	at oracle.soa.scac.WSDLValidator.validate(WSDLValidator.java:44)
+	at oracle.soa.scac.ValidateComposite.loadWSDLs(ValidateComposite.java:900)
+	at oracle.soa.scac.ValidateComposite.doValidation0(ValidateComposite.java:493)
+	at oracle.soa.scac.ValidateComposite.doValidation(ValidateComposite.java:481)
+	at oracle.soa.scac.ValidateComposite.run0(ValidateComposite.java:206)
+	at oracle.soa.scac.ValidateComposite.run(ValidateComposite.java:187)
+	at oracle.soa.scac.ValidateComposite.main(ValidateComposite.java:179)
+Caused by: oracle.mds.config.MDSConfigurationException: MDS-01330: unable to load MDS configuration document    
+MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1014)
+	at oracle.mds.config.PConfig.<init>(PConfig.java:767)
+	at oracle.mds.config.MDSConfig.loadFromBean(MDSConfig.java:1151)
+	at oracle.mds.config.MDSConfig.loadFromElement(MDSConfig.java:1218)
+	at oracle.mds.config.MDSConfig.<init>(MDSConfig.java:781)
+	at oracle.mds.core.MDSInstance.getMDSConfigFromDocument(MDSInstance.java:2788)
+	at oracle.mds.core.MDSInstance.findAndStoreMDSInstanceWithCustConfig(MDSInstance.java:2621)
+	at oracle.mds.core.MDSInstance.getOrCreateInstanceInternal(MDSInstance.java:2118)
+	at oracle.mds.core.MDSInstance.getOrCreateInstance(MDSInstance.java:812)
+	at oracle.adf.share.config.ADFMDSConfig.parseADFConfiguration(ADFMDSConfig.java:146)
+	... 38 more
+Caused by: oracle.mds.exception.MDSExceptionList: MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1008)
+	... 47 more
+Dec 11, 2018 5:12:35 PM oracle.adf.share.config.ADFMDSConfig createMDSInstanceFromelement
+SEVERE: MDSConfigurationException encountered in parseADFConfigurationMDS-01330: unable to load MDS configuration document    
+MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+oracle.mds.config.MDSConfigurationException: MDS-01330: unable to load MDS configuration document    
+MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1014)
+	at oracle.mds.config.PConfig.<init>(PConfig.java:767)
+	at oracle.mds.config.MDSConfig.loadFromBean(MDSConfig.java:1151)
+	at oracle.mds.config.MDSConfig.loadFromElement(MDSConfig.java:1218)
+	at oracle.mds.config.MDSConfig.<init>(MDSConfig.java:781)
+	at oracle.mds.core.MDSInstance.getMDSConfigFromDocument(MDSInstance.java:2788)
+	at oracle.mds.core.MDSInstance.findAndStoreMDSInstanceWithCustConfig(MDSInstance.java:2621)
+	at oracle.mds.core.MDSInstance.getOrCreateInstanceInternal(MDSInstance.java:2118)
+	at oracle.mds.core.MDSInstance.getOrCreateInstance(MDSInstance.java:812)
+	at oracle.adf.share.config.ADFMDSConfig.createMDSInstanceFromelement(ADFMDSConfig.java:276)
+	at oracle.adf.share.config.MDSConfigFactory.createApplication(MDSConfigFactory.java:123)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:150)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:82)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:60)
+	at oracle.adf.share.ADFContext.getADFConfigEx(ADFContext.java:888)
+	at oracle.adf.share.ADFContext.getADFConfig(ADFContext.java:837)
+	at oracle.adf.share.config.ADFContextMDSConfigHelperImpl.createMDSSession(ADFContextMDSConfigHelperImpl.java:62)
+	at oracle.adf.share.ADFContext.getMDSSessionAsObject(ADFContext.java:1722)
+	at oracle.mds.internal.net.OraMDSURLConnection.getMDSSession(OraMDSURLConnection.java:153)
+	at oracle.mds.internal.net.OraMDSURLConnection.getInputStream(OraMDSURLConnection.java:83)
+	at java.net.URL.openStream(URL.java:1010)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.openAsStreamConnection(WSDLReaderImpl.java:576)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readDocument(WSDLReaderImpl.java:438)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:377)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseImport(WSDLReaderImpl.java:937)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseDefinition(WSDLReaderImpl.java:820)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:719)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:688)
+	at oracle.fabric.common.wsdl.SchemaBuilder.convDOMElemToWSDLDef(SchemaBuilder.java:1307)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadEmbeddedSchemas(SchemaBuilder.java:504)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadSchemasFromWSDL(SchemaBuilder.java:456)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadAllSchemas(SchemaBuilder.java:247)
+	at oracle.fabric.common.wsdl.SchemaManager.loadAllXSD(SchemaManager.java:305)
+	at oracle.fabric.common.wsdl.SchemaManager.buildXDKSchema(SchemaManager.java:553)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupSchema(SchemaManager.java:404)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupXSDElementDeclaration(SchemaManager.java:729)
+	at oracle.soa.scac.WSDLValidator.validateMessageParts(WSDLValidator.java:112)
+	at oracle.soa.scac.WSDLValidator.validateMessages(WSDLValidator.java:88)
+	at oracle.soa.scac.WSDLValidator.validate(WSDLValidator.java:44)
+	at oracle.soa.scac.ValidateComposite.loadWSDLs(ValidateComposite.java:900)
+	at oracle.soa.scac.ValidateComposite.doValidation0(ValidateComposite.java:493)
+	at oracle.soa.scac.ValidateComposite.doValidation(ValidateComposite.java:481)
+	at oracle.soa.scac.ValidateComposite.run0(ValidateComposite.java:206)
+	at oracle.soa.scac.ValidateComposite.run(ValidateComposite.java:187)
+	at oracle.soa.scac.ValidateComposite.main(ValidateComposite.java:179)
+Caused by: oracle.mds.exception.MDSExceptionList: MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1008)
+	... 44 more
+Dec 11, 2018 5:12:35 PM oracle.adf.share.config.MDSConfigFactory createApplication
+INFO: 
+oracle.adf.share.ADFShareException: MDSConfigurationException encountered in parseADFConfiguration
+	at oracle.adf.share.config.ADFMDSConfig.createMDSInstanceFromelement(ADFMDSConfig.java:292)
+	at oracle.adf.share.config.MDSConfigFactory.createApplication(MDSConfigFactory.java:123)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:150)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:82)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:60)
+	at oracle.adf.share.ADFContext.getADFConfigEx(ADFContext.java:888)
+	at oracle.adf.share.ADFContext.getADFConfig(ADFContext.java:837)
+	at oracle.adf.share.config.ADFContextMDSConfigHelperImpl.createMDSSession(ADFContextMDSConfigHelperImpl.java:62)
+	at oracle.adf.share.ADFContext.getMDSSessionAsObject(ADFContext.java:1722)
+	at oracle.mds.internal.net.OraMDSURLConnection.getMDSSession(OraMDSURLConnection.java:153)
+	at oracle.mds.internal.net.OraMDSURLConnection.getInputStream(OraMDSURLConnection.java:83)
+	at java.net.URL.openStream(URL.java:1010)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.openAsStreamConnection(WSDLReaderImpl.java:576)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readDocument(WSDLReaderImpl.java:438)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:377)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseImport(WSDLReaderImpl.java:937)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseDefinition(WSDLReaderImpl.java:820)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:719)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:688)
+	at oracle.fabric.common.wsdl.SchemaBuilder.convDOMElemToWSDLDef(SchemaBuilder.java:1307)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadEmbeddedSchemas(SchemaBuilder.java:504)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadSchemasFromWSDL(SchemaBuilder.java:456)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadAllSchemas(SchemaBuilder.java:247)
+	at oracle.fabric.common.wsdl.SchemaManager.loadAllXSD(SchemaManager.java:305)
+	at oracle.fabric.common.wsdl.SchemaManager.buildXDKSchema(SchemaManager.java:553)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupSchema(SchemaManager.java:404)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupXSDElementDeclaration(SchemaManager.java:729)
+	at oracle.soa.scac.WSDLValidator.validateMessageParts(WSDLValidator.java:112)
+	at oracle.soa.scac.WSDLValidator.validateMessages(WSDLValidator.java:88)
+	at oracle.soa.scac.WSDLValidator.validate(WSDLValidator.java:44)
+	at oracle.soa.scac.ValidateComposite.loadWSDLs(ValidateComposite.java:900)
+	at oracle.soa.scac.ValidateComposite.doValidation0(ValidateComposite.java:493)
+	at oracle.soa.scac.ValidateComposite.doValidation(ValidateComposite.java:481)
+	at oracle.soa.scac.ValidateComposite.run0(ValidateComposite.java:206)
+	at oracle.soa.scac.ValidateComposite.run(ValidateComposite.java:187)
+	at oracle.soa.scac.ValidateComposite.main(ValidateComposite.java:179)
+Caused by: oracle.mds.config.MDSConfigurationException: MDS-01330: unable to load MDS configuration document    
+MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1014)
+	at oracle.mds.config.PConfig.<init>(PConfig.java:767)
+	at oracle.mds.config.MDSConfig.loadFromBean(MDSConfig.java:1151)
+	at oracle.mds.config.MDSConfig.loadFromElement(MDSConfig.java:1218)
+	at oracle.mds.config.MDSConfig.<init>(MDSConfig.java:781)
+	at oracle.mds.core.MDSInstance.getMDSConfigFromDocument(MDSInstance.java:2788)
+	at oracle.mds.core.MDSInstance.findAndStoreMDSInstanceWithCustConfig(MDSInstance.java:2621)
+	at oracle.mds.core.MDSInstance.getOrCreateInstanceInternal(MDSInstance.java:2118)
+	at oracle.mds.core.MDSInstance.getOrCreateInstance(MDSInstance.java:812)
+	at oracle.adf.share.config.ADFMDSConfig.createMDSInstanceFromelement(ADFMDSConfig.java:276)
+	... 35 more
+Caused by: oracle.mds.exception.MDSExceptionList: MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1008)
+	... 44 more
+Dec 11, 2018 5:12:35 PM oracle.adf.share.config.ADFMDSConfig createMDSInstanceFromelement
+SEVERE: MDSConfigurationException encountered in parseADFConfigurationMDS-01330: unable to load MDS configuration document    
+MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+oracle.mds.config.MDSConfigurationException: MDS-01330: unable to load MDS configuration document    
+MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1014)
+	at oracle.mds.config.PConfig.<init>(PConfig.java:767)
+	at oracle.mds.config.MDSConfig.loadFromBean(MDSConfig.java:1151)
+	at oracle.mds.config.MDSConfig.loadFromElement(MDSConfig.java:1218)
+	at oracle.mds.config.MDSConfig.<init>(MDSConfig.java:781)
+	at oracle.mds.core.MDSInstance.getMDSConfigFromDocument(MDSInstance.java:2788)
+	at oracle.mds.core.MDSInstance.findAndStoreMDSInstanceWithCustConfig(MDSInstance.java:2621)
+	at oracle.mds.core.MDSInstance.getOrCreateInstanceInternal(MDSInstance.java:2118)
+	at oracle.mds.core.MDSInstance.getOrCreateInstance(MDSInstance.java:812)
+	at oracle.adf.share.config.ADFMDSConfig.createMDSInstanceFromelement(ADFMDSConfig.java:276)
+	at oracle.adf.share.config.MDSConfigFactory.createApplication(MDSConfigFactory.java:123)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:150)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:82)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:60)
+	at oracle.adf.share.ADFContext.getADFConfigEx(ADFContext.java:888)
+	at oracle.adf.share.ADFContext.getADFConfig(ADFContext.java:837)
+	at oracle.adf.share.ADFContext.getADFContextProperty(ADFContext.java:1078)
+	at oracle.adf.share.mds.MDSUtil.getCustClassList(MDSUtil.java:69)
+	at oracle.adf.share.config.ADFMDSConfig.parseADFConfiguration(ADFMDSConfig.java:125)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at oracle.adf.share.config.ADFConfigImpl.getResultFromComponent(ADFConfigImpl.java:533)
+	at oracle.adf.share.config.ADFConfigImpl.getConfigObject(ADFConfigImpl.java:604)
+	at oracle.adf.share.config.ADFConfigImpl.getConfigObject(ADFConfigImpl.java:582)
+	at oracle.adf.share.config.ADFConfigImpl.getMDSInstance(ADFConfigImpl.java:647)
+	at oracle.adf.share.config.ADFConfigImpl.getMDSInstance(ADFConfigImpl.java:642)
+	at oracle.adf.share.config.ADFContextMDSConfigHelperImpl.createMDSSession(ADFContextMDSConfigHelperImpl.java:62)
+	at oracle.adf.share.ADFContext.getMDSSessionAsObject(ADFContext.java:1722)
+	at oracle.mds.internal.net.OraMDSURLConnection.getMDSSession(OraMDSURLConnection.java:153)
+	at oracle.mds.internal.net.OraMDSURLConnection.getInputStream(OraMDSURLConnection.java:83)
+	at java.net.URL.openStream(URL.java:1010)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.openAsStreamConnection(WSDLReaderImpl.java:576)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readDocument(WSDLReaderImpl.java:438)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:377)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseImport(WSDLReaderImpl.java:937)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseDefinition(WSDLReaderImpl.java:820)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:719)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:688)
+	at oracle.fabric.common.wsdl.SchemaBuilder.convDOMElemToWSDLDef(SchemaBuilder.java:1307)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadEmbeddedSchemas(SchemaBuilder.java:504)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadSchemasFromWSDL(SchemaBuilder.java:456)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadAllSchemas(SchemaBuilder.java:247)
+	at oracle.fabric.common.wsdl.SchemaManager.loadAllXSD(SchemaManager.java:305)
+	at oracle.fabric.common.wsdl.SchemaManager.buildXDKSchema(SchemaManager.java:553)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupSchema(SchemaManager.java:404)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupXSDElementDeclaration(SchemaManager.java:729)
+	at oracle.soa.scac.WSDLValidator.validateMessageParts(WSDLValidator.java:112)
+	at oracle.soa.scac.WSDLValidator.validateMessages(WSDLValidator.java:88)
+	at oracle.soa.scac.WSDLValidator.validate(WSDLValidator.java:44)
+	at oracle.soa.scac.ValidateComposite.loadWSDLs(ValidateComposite.java:900)
+	at oracle.soa.scac.ValidateComposite.doValidation0(ValidateComposite.java:493)
+	at oracle.soa.scac.ValidateComposite.doValidation(ValidateComposite.java:481)
+	at oracle.soa.scac.ValidateComposite.run0(ValidateComposite.java:206)
+	at oracle.soa.scac.ValidateComposite.run(ValidateComposite.java:187)
+	at oracle.soa.scac.ValidateComposite.main(ValidateComposite.java:179)
+Caused by: oracle.mds.exception.MDSExceptionList: MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1008)
+	... 56 more
+Dec 11, 2018 5:12:35 PM oracle.adf.share.config.MDSConfigFactory createApplication
+INFO: 
+oracle.adf.share.ADFShareException: MDSConfigurationException encountered in parseADFConfiguration
+	at oracle.adf.share.config.ADFMDSConfig.createMDSInstanceFromelement(ADFMDSConfig.java:292)
+	at oracle.adf.share.config.MDSConfigFactory.createApplication(MDSConfigFactory.java:123)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:150)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:82)
+	at oracle.adf.share.config.ADFConfigFactory.findOrCreateADFConfig(ADFConfigFactory.java:60)
+	at oracle.adf.share.ADFContext.getADFConfigEx(ADFContext.java:888)
+	at oracle.adf.share.ADFContext.getADFConfig(ADFContext.java:837)
+	at oracle.adf.share.ADFContext.getADFContextProperty(ADFContext.java:1078)
+	at oracle.adf.share.mds.MDSUtil.getCustClassList(MDSUtil.java:69)
+	at oracle.adf.share.config.ADFMDSConfig.parseADFConfiguration(ADFMDSConfig.java:125)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at oracle.adf.share.config.ADFConfigImpl.getResultFromComponent(ADFConfigImpl.java:533)
+	at oracle.adf.share.config.ADFConfigImpl.getConfigObject(ADFConfigImpl.java:604)
+	at oracle.adf.share.config.ADFConfigImpl.getConfigObject(ADFConfigImpl.java:582)
+	at oracle.adf.share.config.ADFConfigImpl.getMDSInstance(ADFConfigImpl.java:647)
+	at oracle.adf.share.config.ADFConfigImpl.getMDSInstance(ADFConfigImpl.java:642)
+	at oracle.adf.share.config.ADFContextMDSConfigHelperImpl.createMDSSession(ADFContextMDSConfigHelperImpl.java:62)
+	at oracle.adf.share.ADFContext.getMDSSessionAsObject(ADFContext.java:1722)
+	at oracle.mds.internal.net.OraMDSURLConnection.getMDSSession(OraMDSURLConnection.java:153)
+	at oracle.mds.internal.net.OraMDSURLConnection.getInputStream(OraMDSURLConnection.java:83)
+	at java.net.URL.openStream(URL.java:1010)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.openAsStreamConnection(WSDLReaderImpl.java:576)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readDocument(WSDLReaderImpl.java:438)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:377)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseImport(WSDLReaderImpl.java:937)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseDefinition(WSDLReaderImpl.java:820)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:719)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:688)
+	at oracle.fabric.common.wsdl.SchemaBuilder.convDOMElemToWSDLDef(SchemaBuilder.java:1307)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadEmbeddedSchemas(SchemaBuilder.java:504)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadSchemasFromWSDL(SchemaBuilder.java:456)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadAllSchemas(SchemaBuilder.java:247)
+	at oracle.fabric.common.wsdl.SchemaManager.loadAllXSD(SchemaManager.java:305)
+	at oracle.fabric.common.wsdl.SchemaManager.buildXDKSchema(SchemaManager.java:553)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupSchema(SchemaManager.java:404)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupXSDElementDeclaration(SchemaManager.java:729)
+	at oracle.soa.scac.WSDLValidator.validateMessageParts(WSDLValidator.java:112)
+	at oracle.soa.scac.WSDLValidator.validateMessages(WSDLValidator.java:88)
+	at oracle.soa.scac.WSDLValidator.validate(WSDLValidator.java:44)
+	at oracle.soa.scac.ValidateComposite.loadWSDLs(ValidateComposite.java:900)
+	at oracle.soa.scac.ValidateComposite.doValidation0(ValidateComposite.java:493)
+	at oracle.soa.scac.ValidateComposite.doValidation(ValidateComposite.java:481)
+	at oracle.soa.scac.ValidateComposite.run0(ValidateComposite.java:206)
+	at oracle.soa.scac.ValidateComposite.run(ValidateComposite.java:187)
+	at oracle.soa.scac.ValidateComposite.main(ValidateComposite.java:179)
+Caused by: oracle.mds.config.MDSConfigurationException: MDS-01330: unable to load MDS configuration document    
+MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1014)
+	at oracle.mds.config.PConfig.<init>(PConfig.java:767)
+	at oracle.mds.config.MDSConfig.loadFromBean(MDSConfig.java:1151)
+	at oracle.mds.config.MDSConfig.loadFromElement(MDSConfig.java:1218)
+	at oracle.mds.config.MDSConfig.<init>(MDSConfig.java:781)
+	at oracle.mds.core.MDSInstance.getMDSConfigFromDocument(MDSInstance.java:2788)
+	at oracle.mds.core.MDSInstance.findAndStoreMDSInstanceWithCustConfig(MDSInstance.java:2621)
+	at oracle.mds.core.MDSInstance.getOrCreateInstanceInternal(MDSInstance.java:2118)
+	at oracle.mds.core.MDSInstance.getOrCreateInstance(MDSInstance.java:812)
+	at oracle.adf.share.config.ADFMDSConfig.createMDSInstanceFromelement(ADFMDSConfig.java:276)
+	... 47 more
+Caused by: oracle.mds.exception.MDSExceptionList: MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1008)
+	... 56 more
+Dec 11, 2018 5:12:35 PM oracle.adf.share.config.ADFMDSConfig parseADFConfiguration
+SEVERE: MDSConfigurationException encountered in parseADFConfigurationMDS-01330: unable to load MDS configuration document    
+MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+oracle.mds.config.MDSConfigurationException: MDS-01330: unable to load MDS configuration document    
+MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1014)
+	at oracle.mds.config.PConfig.<init>(PConfig.java:767)
+	at oracle.mds.config.MDSConfig.loadFromBean(MDSConfig.java:1151)
+	at oracle.mds.config.MDSConfig.loadFromElement(MDSConfig.java:1218)
+	at oracle.mds.config.MDSConfig.<init>(MDSConfig.java:781)
+	at oracle.mds.core.MDSInstance.getMDSConfigFromDocument(MDSInstance.java:2788)
+	at oracle.mds.core.MDSInstance.findAndStoreMDSInstanceWithCustConfig(MDSInstance.java:2621)
+	at oracle.mds.core.MDSInstance.getOrCreateInstanceInternal(MDSInstance.java:2118)
+	at oracle.mds.core.MDSInstance.getOrCreateInstance(MDSInstance.java:812)
+	at oracle.adf.share.config.ADFMDSConfig.parseADFConfiguration(ADFMDSConfig.java:146)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at oracle.adf.share.config.ADFConfigImpl.getResultFromComponent(ADFConfigImpl.java:533)
+	at oracle.adf.share.config.ADFConfigImpl.getConfigObject(ADFConfigImpl.java:604)
+	at oracle.adf.share.config.ADFConfigImpl.getConfigObject(ADFConfigImpl.java:582)
+	at oracle.adf.share.config.ADFConfigImpl.getMDSInstance(ADFConfigImpl.java:647)
+	at oracle.adf.share.config.ADFConfigImpl.getMDSInstance(ADFConfigImpl.java:642)
+	at oracle.adf.share.config.ADFContextMDSConfigHelperImpl.createMDSSession(ADFContextMDSConfigHelperImpl.java:62)
+	at oracle.adf.share.ADFContext.getMDSSessionAsObject(ADFContext.java:1722)
+	at oracle.mds.internal.net.OraMDSURLConnection.getMDSSession(OraMDSURLConnection.java:153)
+	at oracle.mds.internal.net.OraMDSURLConnection.getInputStream(OraMDSURLConnection.java:83)
+	at java.net.URL.openStream(URL.java:1010)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.openAsStreamConnection(WSDLReaderImpl.java:576)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readDocument(WSDLReaderImpl.java:438)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:377)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseImport(WSDLReaderImpl.java:937)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseDefinition(WSDLReaderImpl.java:820)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:719)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:688)
+	at oracle.fabric.common.wsdl.SchemaBuilder.convDOMElemToWSDLDef(SchemaBuilder.java:1307)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadEmbeddedSchemas(SchemaBuilder.java:504)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadSchemasFromWSDL(SchemaBuilder.java:456)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadAllSchemas(SchemaBuilder.java:247)
+	at oracle.fabric.common.wsdl.SchemaManager.loadAllXSD(SchemaManager.java:305)
+	at oracle.fabric.common.wsdl.SchemaManager.buildXDKSchema(SchemaManager.java:553)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupSchema(SchemaManager.java:404)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupXSDElementDeclaration(SchemaManager.java:729)
+	at oracle.soa.scac.WSDLValidator.validateMessageParts(WSDLValidator.java:112)
+	at oracle.soa.scac.WSDLValidator.validateMessages(WSDLValidator.java:88)
+	at oracle.soa.scac.WSDLValidator.validate(WSDLValidator.java:44)
+	at oracle.soa.scac.ValidateComposite.loadWSDLs(ValidateComposite.java:900)
+	at oracle.soa.scac.ValidateComposite.doValidation0(ValidateComposite.java:493)
+	at oracle.soa.scac.ValidateComposite.doValidation(ValidateComposite.java:481)
+	at oracle.soa.scac.ValidateComposite.run0(ValidateComposite.java:206)
+	at oracle.soa.scac.ValidateComposite.run(ValidateComposite.java:187)
+	at oracle.soa.scac.ValidateComposite.main(ValidateComposite.java:179)
+Caused by: oracle.mds.exception.MDSExceptionList: MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1008)
+	... 47 more
+Dec 11, 2018 5:12:35 PM oracle.adf.share.config.ADFContextMDSConfigHelperImpl createMDSSession
+INFO: 
+oracle.adf.share.ADFShareException: MDSConfigurationException encountered in parseADFConfiguration
+	at oracle.adf.share.config.ADFMDSConfig.parseADFConfiguration(ADFMDSConfig.java:209)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at oracle.adf.share.config.ADFConfigImpl.getResultFromComponent(ADFConfigImpl.java:533)
+	at oracle.adf.share.config.ADFConfigImpl.getConfigObject(ADFConfigImpl.java:604)
+	at oracle.adf.share.config.ADFConfigImpl.getConfigObject(ADFConfigImpl.java:582)
+	at oracle.adf.share.config.ADFConfigImpl.getMDSInstance(ADFConfigImpl.java:647)
+	at oracle.adf.share.config.ADFConfigImpl.getMDSInstance(ADFConfigImpl.java:642)
+	at oracle.adf.share.config.ADFContextMDSConfigHelperImpl.createMDSSession(ADFContextMDSConfigHelperImpl.java:62)
+	at oracle.adf.share.ADFContext.getMDSSessionAsObject(ADFContext.java:1722)
+	at oracle.mds.internal.net.OraMDSURLConnection.getMDSSession(OraMDSURLConnection.java:153)
+	at oracle.mds.internal.net.OraMDSURLConnection.getInputStream(OraMDSURLConnection.java:83)
+	at java.net.URL.openStream(URL.java:1010)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.openAsStreamConnection(WSDLReaderImpl.java:576)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readDocument(WSDLReaderImpl.java:438)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:377)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseImport(WSDLReaderImpl.java:937)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.parseDefinition(WSDLReaderImpl.java:820)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:719)
+	at oracle.j2ee.ws.wsdl.xml.WSDLReaderImpl.readWSDL(WSDLReaderImpl.java:688)
+	at oracle.fabric.common.wsdl.SchemaBuilder.convDOMElemToWSDLDef(SchemaBuilder.java:1307)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadEmbeddedSchemas(SchemaBuilder.java:504)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadSchemasFromWSDL(SchemaBuilder.java:456)
+	at oracle.fabric.common.wsdl.SchemaBuilder.loadAllSchemas(SchemaBuilder.java:247)
+	at oracle.fabric.common.wsdl.SchemaManager.loadAllXSD(SchemaManager.java:305)
+	at oracle.fabric.common.wsdl.SchemaManager.buildXDKSchema(SchemaManager.java:553)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupSchema(SchemaManager.java:404)
+	at oracle.fabric.common.wsdl.SchemaManager.lookupXSDElementDeclaration(SchemaManager.java:729)
+	at oracle.soa.scac.WSDLValidator.validateMessageParts(WSDLValidator.java:112)
+	at oracle.soa.scac.WSDLValidator.validateMessages(WSDLValidator.java:88)
+	at oracle.soa.scac.WSDLValidator.validate(WSDLValidator.java:44)
+	at oracle.soa.scac.ValidateComposite.loadWSDLs(ValidateComposite.java:900)
+	at oracle.soa.scac.ValidateComposite.doValidation0(ValidateComposite.java:493)
+	at oracle.soa.scac.ValidateComposite.doValidation(ValidateComposite.java:481)
+	at oracle.soa.scac.ValidateComposite.run0(ValidateComposite.java:206)
+	at oracle.soa.scac.ValidateComposite.run(ValidateComposite.java:187)
+	at oracle.soa.scac.ValidateComposite.main(ValidateComposite.java:179)
+Caused by: oracle.mds.config.MDSConfigurationException: MDS-01330: unable to load MDS configuration document    
+MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1014)
+	at oracle.mds.config.PConfig.<init>(PConfig.java:767)
+	at oracle.mds.config.MDSConfig.loadFromBean(MDSConfig.java:1151)
+	at oracle.mds.config.MDSConfig.loadFromElement(MDSConfig.java:1218)
+	at oracle.mds.config.MDSConfig.<init>(MDSConfig.java:781)
+	at oracle.mds.core.MDSInstance.getMDSConfigFromDocument(MDSInstance.java:2788)
+	at oracle.mds.core.MDSInstance.findAndStoreMDSInstanceWithCustConfig(MDSInstance.java:2621)
+	at oracle.mds.core.MDSInstance.getOrCreateInstanceInternal(MDSInstance.java:2118)
+	at oracle.mds.core.MDSInstance.getOrCreateInstance(MDSInstance.java:812)
+	at oracle.adf.share.config.ADFMDSConfig.parseADFConfiguration(ADFMDSConfig.java:146)
+	... 38 more
+Caused by: oracle.mds.exception.MDSExceptionList: MDS-01329: unable to load element "persistence-config"
+MDS-01370: MetadataStore configuration for metadata-store-usage "mstore-usage_1" is invalid.    
+MDS-01259: The metadata store "oracle.mds.persistence.stores.db.DBMetadataStore" cannot be instantiated.    
+MDS-00003: error connecting to the database    
+Exception occurred while getting connection: oracle.ucp.UniversalConnectionPoolException: Cannot get Connection from Datasource: java.sql.SQLRecoverableException: IO Error: Unknown host specified 
+
+	at oracle.mds.config.PConfig.loadFromBean(PConfig.java:1008)
+	... 47 more
+Dec 11, 2018 5:12:37 PM oracle.fabric.common.wsdl.SchemaManager isIncrementalBuildSupported
+INFO: XMLSchema incremental build enabled.
+Dec 11, 2018 5:12:45 PM oracle.fabric.common.wsdl.WSDLManager loadWSDL
+WARNING: Failed to load WSDL from http://vqaiaapp01:8001/soa-infra/services/vfqamrgdomain/ProcessAccountBalanceAdjustmentAsapProvABCSImpl/client?wsdl due to: Error in getting XML input stream: http://vqaiaapp01:8001/soa-infra/services/vfqamrgdomain/ProcessAccountBalanceAdjustmentAsapProvABCSImpl/client?wsdl: vqaiaapp01
+Dec 11, 2018 5:12:45 PM oracle.fabric.common.wsdl.WSDLManager loadWSDL
+WARNING: Failed to load WSDL from http://vqaiaapp01:8001/soa-infra/services/default/UpdateAccountBalanceAdjustmentRespSiebelCommsProvABCSImpl/UpdateAccountBalanceAdjustmentRespSiebelCommsProvABCSImpl?WSDL due to: Error in getting XML input stream: http://vqaiaapp01:8001/soa-infra/services/default/UpdateAccountBalanceAdjustmentRespSiebelCommsProvABCSImpl/UpdateAccountBalanceAdjustmentRespSiebelCommsProvABCSImpl?WSDL: vqaiaapp01
+Dec 11, 2018 5:12:45 PM oracle.fabric.common.wsdl.WSDLManager loadWSDL
+WARNING: Failed to load WSDL from http://vqaiaapp01:8001/soa-infra/services/default/CreateAccountBalanceAdjustmentBRMCommsProvABCSImpl/client?WSDL due to: Error in getting XML input stream: http://vqaiaapp01:8001/soa-infra/services/default/CreateAccountBalanceAdjustmentBRMCommsProvABCSImpl/client?WSDL: vqaiaapp01
+Dec 11, 2018 5:12:46 PM oracle.fabric.common.wsdl.WSDLManager loadWSDL
+WARNING: Failed to load WSDL from http://vqaiaapp01:8001/soa-infra/services/default/AIAAsyncErrorHandlingBPELProcess/client?WSDL due to: Error in getting XML input stream: http://vqaiaapp01:8001/soa-infra/services/default/AIAAsyncErrorHandlingBPELProcess/client?WSDL: vqaiaapp01
+Dec 11, 2018 5:12:46 PM com.collaxa.cube.CubeLogger info
+INFO: validating "CreateAdjustmentEBF.bpel" ...
+Dec 11, 2018 5:12:47 PM oracle.integration.platform.blocks.FabricConfigManager <clinit>
+WARNING: JRF is unable to determine the current application server platform.
+Dec 11, 2018 5:12:47 PM oracle.integration.platform.blocks.WLSPlatformConfigurationProvider <clinit>
+WARNING: JRF is unable to determine the current application server platform.
+Dec 11, 2018 5:12:49 PM oracle.fabric.common.wsdl.SchemaManager buildXDKSchema
+INFO: Namespace specified for the lookup belongs to a default namespace URI: http://www.w3.org/2001/XMLSchema. Will not attempt to build the schema model for it...
+Dec 11, 2018 5:12:49 PM oracle.fabric.common.wsdl.SchemaManager buildXDKSchema
+INFO: Namespace specified for the lookup belongs to a default namespace URI: http://www.w3.org/2001/XMLSchema. Will not attempt to build the schema model for it...
+Dec 11, 2018 5:12:49 PM oracle.fabric.common.wsdl.SchemaManager buildXDKSchema
+INFO: Namespace specified for the lookup belongs to a default namespace URI: http://www.w3.org/2001/XMLSchema. Will not attempt to build the schema model for it...
+Dec 11, 2018 5:12:49 PM com.collaxa.cube.CubeLogger info
+INFO: Composed "CreateAdjustmentEBF" in 216.6 milliseconds [nodes 123=0+123, 568.0 nodes/sec]
+Dec 11, 2018 5:13:16 PM com.collaxa.cube.CubeLogger info
+INFO: Compiled "CreateAdjustmentEBF" in 26.476 seconds
+Dec 11, 2018 5:13:16 PM com.collaxa.cube.CubeLogger info
+INFO: Gathered 4 files in 4.1 milliseconds
+
+Dec 11, 2018 5:13:16 PM com.collaxa.cube.CubeLogger info
+INFO: Packaged "CreateAdjustmentEBF" in 429.0 milliseconds
+

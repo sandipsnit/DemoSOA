@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+
+<!--  $Header: pcbpel/fabric/tools/ant-soa-common.xml /main/5 2010/03/24 19:21:15 gsah Exp $ -->
+
+<!-- 
+ Copyright (c) 2009, 2010, Oracle and/or its affiliates. All rights reserved. 
+
+   NAME
+     ant-soa-common.xml - <one-line expansion of the name>
+
+   DESCRIPTION
+     <short description of component this file declares/defines>
+
+   NOTES
+     <other useful comments, qualifications, etc.>
+
+   MODIFIED   (MM/DD/YY)
+   gsah        09/17/09 - use oracle.soa.mgmt.home
+   gsah        08/09/09 - Creation
+
+-->
+<project name="ant-soa-common" default="" basedir=".">
+  <property name="soa.oracle.home" value="${oracle.home}"/>
+
+  <property name="mw.home" value="${oracle.home}/.."/>
+
+  <property name="common.components.home" value="${mw.home}/oracle_common"/>
+  <fail message="common.components.home: ${common.components.home} doesn't exist.">
+    <condition>
+      <not><available file="${common.components.home}" type="dir"/></not>
+    </condition>
+  </fail>
+
+  <property name="common.components.modules" value="${common.components.home}/modules"/>
+
+  <property name="soa.modules" value="${soa.oracle.home}/soa/modules"/>
+
+  <condition property="oracle.soa.mgmt.home"
+             value="${common.components.home}"
+             else="${oracle.home}">
+    <available file="C:/Oracle/Middleware/oracle_common/soa/modules/oracle.soa.mgmt_11.1.1/soa-infra-mgmt.jar"/>
+  </condition>
+</project>

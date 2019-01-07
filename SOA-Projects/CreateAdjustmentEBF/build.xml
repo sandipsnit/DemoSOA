@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project name="CustomBuildFile" default="buildAndDeploy">
+   <property file="build.properties"/>
+   <property name="deploy.dir" location="deploy"/>
+   <property name="compositeDir" value="${basedir}"/>
+   <property environment="env"/>
+   <property name="oracle.home" value="${env.ORACLE_HOME}"/>
+   <property name="aia.home" value="${env.AIA_HOME}"/>
+   <property name="java.home" value="${env.JAVA_HOME}"/>
+   <property name="aia.instance" value="${env.AIA_INSTANCE}"/>
+   <xmlproperty file="${composite.dir}/composite.xml" keeproot="false"/>
+   <property name="compositename" value="${composite.name}"/>
+   <echo>--------composite name-----------------${compositename}</echo>
+   <xmlproperty file="${aia.instance}/config/AIAInstallProperties.xml" keeproot="false"/>
+   <property name="mds.config.file" value="${compositeDir}/SCA-INF/classes/META-INF/adf-config.xml"/>
+   <target name="compile-package">
+      <property name="sca-inf.classes.dir" value="../SCA-INF/classes"/>
+      <mkdir dir="${sca-inf.classes.dir}"/>
+      <ant antfile="${oracle.home}/bin/ant-sca-package.xml" target="package" inheritall="false">
+         <property name="oracle.home" value="${oracle.home}"/>
+         <property name="compositeDir" value="${compositeDir}"/>
+         <property name="scac.application.home" value="${basedir}"/>
+         <property name="compositeName" value="${compositename}"/>
+         <property name="revision" value="${composite.revision}"/>
+         <property name="java.passed.home" value="${java.home}"/>
+      </ant>
+   </target>
+   <property name="process.dir" value="${basedir}"/>
+   <target name="customise">
+      <echo> -------------------------------------------------------------- | Customising Composite.xml | --------------------------------------------------------------</echo>
+      <replaceregexp match="http\://[a-zA-Z0-9\-\.]+\:[0-9]{1,5}" replace="http://${fp.server.soaserverhostname}:${fp.server.soaserverport}" flags="g" byline="true">
+         <fileset dir="${compositeDir}" includes="composite.xml"/>
+      </replaceregexp>
+   </target>
+   <target name="CustomizeMDS" description="Customize MDS configuration files">
+      <echo>---------------------------------------------------------- | Customizing MDS Configuration files | ------------------------------------------------------</echo>
+      <copy file="${compositeDir}/SCA-INF/classes/META-INF/adf-config.xml.seed.server" tofile="${mds.config.file}" overwrite="true"/>
+      <replace file="${mds.config.file}" token="@mds.source.rootdir" value="${mds.source.rootdir}"/>
+      <replace file="${mds.config.file}" token="@mds.jdbc.userid" value="${fp.db.mds.username}"/>
+      <replace file="${mds.config.file}" token="@mds.jdbc.password" value="${mds.jdbc.password}"/>
+      <replace file="${mds.config.file}" token="@jdbc-url" value="${fp.db.mds.jdbc-url}"/>
+   </target>
+   <target name="deploy">
+      <condition property="deploymentplan.name" value="null">
+         <not>
+            <isset property="${deploymentplan.name}"/>
+         </not>
+      </condition>
+      <echo> ----- | Deploying to http://${fp.server.soaserverhostname}:${fp.server.soaserverport}/soa-infra/deployer | ----- </echo>
+      <ant antfile="${oracle.home}/bin/ant-sca-deploy.xml" target="deploy" inheritall="false">
+         <property name="user" value="${fp.server.username}"/>
+         <property name="password" value="${server.password}"/>
+         <property name="serverURL" value="http://${fp.server.soaserverhostname}:${fp.server.soaserverport}/soa-infra/deployer"/>
+         <property name="sarLocation" location="${deploy.dir}/sca_${compositename}_rev${composite.revision}.jar"/>
+         <property name="overwrite" value="true"/>
+         <property name="configplan" value="${deploymentplan.name}"/>
+         <property name="partition" value="${partition}"/>
+      </ant>
+   </target>
+   <target name="buildAndDeploy" depends="customise,CustomizeMDS,compile-package,deploy"/>
+</project>

@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<componentType xmlns="http://xmlns.oracle.com/sca/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ui="http://xmlns.oracle.com/soa/designer/">
+   <service name="createadjustmentebf_client" ui:wsdlLocation="CreateAdjustmentEBF.wsdl">
+      <interface.wsdl interface="http://xmlns.oracle.com/VFQA_FL/CreateAdjustmentEBF/CreateAdjustmentEBF#wsdl.interface(CreateAdjustmentEBF)"/>
+   </service>
+   <reference name="CreateAccountBalanceAdjustmentBRMCommsProvABCSImpl" ui:wsdlLocation="oramds:/apps/AIAMetaData/AIAComponents/ApplicationConnectorServiceLibrary/BRM/V1/ProviderABCS/CreateAccountBalanceAdjustmentBRMCommsProvABCSImpl.wsdl">
+      <interface.wsdl interface="http://xmlns.oracle.com/ABCSImpl/BRM/Industry/Comms/CreateAccountBalanceAdjustmentBRMCommsProvABCSImpl/V1#wsdl.interface(CreateAccountBalanceAdjustmentBRMCommsProvABCSImpl)"/>
+   </reference>
+   <reference name="UpdateAccountBalanceAdjustmentRespSiebelCommsProvABCSImpl" ui:wsdlLocation="oramds:/apps/AIAMetaData/AIAComponents/ApplicationConnectorServiceLibrary/Siebel/V1/ProviderABCS/UpdateAccountBalanceAdjustmentRespSiebelCommsProvABCSImpl.wsdl">
+      <interface.wsdl interface="http://xmlns.oracle.com/ABCSImpl/Siebel/Industry/Comms/UpdateAccountBalanceAdjustmentRespSiebelCommsProvABCSImpl#wsdl.interface(UpdateAccountBalanceAdjustmentRespSiebelCommsProvABCSImplService)"/>
+   </reference>
+   <reference name="AIAAsyncErrorHandlingBPELProcess" ui:wsdlLocation="oramds:/apps/AIAMetaData/AIAComponents/InfrastructureServiceLibrary/V1/wsdls/AIAAsyncErrorHandlingBPELProcess.wsdl">
+      <interface.wsdl interface="http://xmlns.oracle.com/AIAAsyncErrorHandlingBPELProcess#wsdl.interface(AIAAsyncErrorHandlingBPELProcess)"/>
+   </reference>
+   <reference name="ProcessAccountBalanceAdjustmentAsapProvABCSImpl" ui:wsdlLocation="oramds:/deployed-composites/vfqamrgdomain/ProcessAccountBalanceAdjustmentAsapProvABCSImpl_rev1.0/ProcessAccountBalanceAdjustmentAsapProvABCSImpl.wsdl">
+      <interface.wsdl interface="http://xmlns.oracle.com/ABCSImpl/Asap/Industry/Telco/ProcessAccountBalanceAdjustmentAsapProvABCSImpl/V1#wsdl.interface(ProcessAccountBalanceAdjustmentAsapProvABCSImpl)" callbackInterface="http://xmlns.oracle.com/ABCSImpl/Asap/Industry/Telco/ProcessAccountBalanceAdjustmentAsapProvABCSImpl/V1#wsdl.interface(ProcessAccountBalanceAdjustmentAsapProvABCSImplCallback)"/>
+   </reference>
+   <reference name="VFQ_UPDATE_PROVISIONINGSTATUS_AIA_QUEUE" ui:wsdlLocation="VFQ_UPDATE_PROVISIONINGSTATUS_AIA_QUEUE.wsdl">
+      <interface.wsdl interface="http://xmlns.oracle.com/pcbpel/adapter/jms/Campaign_Application/CreateAdjustmentEBF/VFQ_UPDATE_PROVISIONINGSTATUS_AIA_QUEUE#wsdl.interface(Produce_Message_ptt)"/>
+   </reference>
+</componentType>
