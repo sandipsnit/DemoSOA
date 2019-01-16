@@ -106,7 +106,7 @@
                 PACKAGE COMPOSITE #${processCount}: ${composite.name} ${composite.revision}
              ===================================================================================
             </echo>
-			<echo>
+	<!--		<echo>
    allprocesses="${allprocesses}"
  
     </echo>
@@ -124,7 +124,7 @@
             </echo>
 			 <echo>
              WL home = "${wl_home}"
-            </echo>
+            </echo>   -->
 			
          <!--   <copy todir="${project.loctaion}/SCA-INF/classes/META-INF/" file="C:/Oracle/Middleware/oepe7/plugins/oracle.eclipse.tools.webtier.adf_3.2.0.201101271036/resources/facet/adf-config.xml" overwrite="true"/>  -->
              
