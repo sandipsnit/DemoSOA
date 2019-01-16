@@ -30,11 +30,11 @@
     <!-- composite name and path -->
     <property name="deploy.composite.name" value="${deploy.dir}/sca_${compositeName}_rev${revision}.jar"/>
 
-   <!-- <taskdef name="replaceRevision" classname="oracle.integration.platform.blocks.deploy.servlet.client.ant.ReplaceRevisionTask">
+    <taskdef name="replaceRevision" classname="oracle.integration.platform.blocks.deploy.servlet.client.ant.ReplaceRevisionTask">
         <classpath>
             <pathelement path="${scac.tasks.class.path}"/>
         </classpath>
-    </taskdef> -->
+    </taskdef> 
 
     <target name="init" depends="clean">
         <tstamp/>
